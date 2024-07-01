@@ -61,8 +61,8 @@ namespace AnyConfig
 
 	template<class T, class O>
 	struct CSaveJSON_t : public CSaveFrom_t<T>, 
-	                    public CError_t, 
-	                    public COutput_t<O>
+	                     public CError_t, 
+	                     public COutput_t<O>
 	{
 	}; // CSaveJSON_t<T, O>
 
