@@ -29,9 +29,9 @@
 namespace AnyConfig
 {
 	template<class T, class I>
-	struct CLoadFromJSON_t : public CLoadTo_t<KeyValues3 *>, 
+	struct CLoadFromJSON_t : public CLoadTo_t<T>, 
 	                         public CError_t, 
-	                         public CInput_t<const char *>, 
+	                         public CInput_t<I>, 
 	                         public CLoadRoot_t
 	{
 	}; // CLoadFromJSON_t<T, I>
