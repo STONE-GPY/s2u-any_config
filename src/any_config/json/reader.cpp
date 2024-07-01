@@ -38,3 +38,19 @@ bool AnyConfig::CJSONReader::_LoadFromJSONFile(const LoadFromJSONFile_t &aParams
 	                           aParams.pszFilename, 
 	                           aParams.pszPathID);
 }
+
+bool AnyConfig::CJSONReader::LoadFromJSON(const LoadFromJSONNoContext_t &aParams)
+{
+	return LoadKV3FromJSON(Get(), 
+	                       aParams.psMessage, 
+	                       aParams.aData, 
+	                       aParams.pszName);
+}
+
+bool AnyConfig::CJSONReader::LoadFromJSONFile(const LoadFromJSONFileNoContext_t &aParams)
+{
+	return LoadKV3FromJSONFile(Get(), 
+	                           aParams.psMessage, 
+	                           aParams.pszFilename, 
+	                           aParams.pszPathID);
+}

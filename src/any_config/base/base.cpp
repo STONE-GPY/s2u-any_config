@@ -28,6 +28,11 @@ KeyValues3 *AnyConfig::CBase::Get()
 	return m_pRoot;
 }
 
+const KeyValues3 *AnyConfig::CBase::Get() const
+{
+	return m_pRoot;
+}
+
 AnyConfig::CBase::CBase()
  :  m_pRoot(new KeyValues3(KV3_TYPEEX_INVALID, KV3_SUBTYPE_INVALID))
 {

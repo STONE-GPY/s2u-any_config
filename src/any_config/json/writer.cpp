@@ -36,3 +36,17 @@ bool AnyConfig::CJSONWriter::_SaveJSON(const SaveJSON2_t &aParams)
 	                     aParams.psMessage, 
 	                     aParams.COutput_t<CUtlString *>::aData);
 }
+
+bool AnyConfig::CJSONWriter::SaveJSON(const SaveJSONNoContext_t &aParams) const
+{
+	return SaveKV3AsJSON(Get(), 
+	                     aParams.psMessage, 
+	                     aParams.COutput_t<CUtlBuffer *>::aData);
+}
+
+bool AnyConfig::CJSONWriter::SaveJSON(const SaveJSON2NoContext_t &aParams) const
+{
+	return SaveKV3AsJSON(Get(), 
+	                     aParams.psMessage, 
+	                     aParams.COutput_t<CUtlString *>::aData);
+}

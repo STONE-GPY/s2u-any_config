@@ -43,3 +43,24 @@ bool AnyConfig::CBaseWriter::_SaveToFile(const SaveToFile_t &aParams)
 	                     aParams.pszPathID, 
 	                     aParams.uFlags);
 }
+
+bool AnyConfig::CBaseWriter::Save(const SaveNoContext_t &aParams) const
+{
+	return SaveKV3(aParams.aEncoding, 
+	               aParams.aFormat, 
+	               Get(),
+	               aParams.psMessage,
+	               aParams.COutput_t<CUtlBuffer *>::aData,
+	               aParams.uFlags);
+}
+
+bool AnyConfig::CBaseWriter::SaveToFile(const SaveToFileNoContext_t &aParams) const
+{
+	return SaveKV3ToFile(aParams.aEncoding, 
+	                     aParams.aFormat, 
+	                     Get(), 
+	                     aParams.psMessage,
+	                     aParams.pszFilename,
+	                     aParams.pszPathID, 
+	                     aParams.uFlags);
+}

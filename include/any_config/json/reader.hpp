@@ -34,10 +34,17 @@ namespace AnyConfig
 	{
 	public:
 		//
-		// Load ones.
+		// Load ones (globals).
 		//
 		static bool _LoadFromJSON(const LoadFromJSON_t &aParams);
 		static bool _LoadFromJSONFile(const LoadFromJSONFile_t &aParams);
+
+	public:
+		//
+		// Load ones (members).
+		//
+		bool LoadFromJSON(const LoadFromJSONNoContext_t &aParams);
+		bool LoadFromJSONFile(const LoadFromJSONFileNoContext_t &aParams);
 	}; // CJSONReader
 }; // AnyConfig
 
