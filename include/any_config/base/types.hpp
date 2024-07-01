@@ -32,6 +32,10 @@ class KeyValues3;
 
 namespace AnyConfig
 {
+	struct CEmpty_t
+	{
+	};
+
 	template<class T>
 	struct CLoadTo_t
 	{
@@ -59,29 +63,38 @@ namespace AnyConfig
 		const KV3ID_t &aFormat; // = g_KV3Format_Generic;
 	}; // CFormat_t
 
-	struct Load_t : public CLoadTo_t<CKeyValues3Context *>, 
-	                public CError_t, 
-	                public CInput_t<CUtlBuffer *>, 
-	                public CFormat_t, 
-	                public CLoadRoot_t
+	template<class T, typename I>
+	struct CLoadBase_t : public CLoadTo_t<T>, 
+	                     public CError_t, 
+	                     public CInput_t<I>, 
+	                     public CFormat_t, 
+	                     public CLoadRoot_t
+	{
+	}; // CLoadBase_t<T, I>
+
+	struct Load_t : public CLoadBase_t<CKeyValues3Context *, CUtlBuffer *>
 	{
 	}; // Load_t
 
-	struct Load2_t : public CLoadTo_t<KeyValues3 *>, 
-	                 public CError_t, 
-	                 public CInput_t<CUtlBuffer *>, 
-	                 public CFormat_t,
-	                 public CLoadRoot_t
+	struct Load2_t : public CLoadBase_t<KeyValues3 *, CUtlBuffer *>
 	{
 	}; // Load2_t
 
-	struct Load3_t : public CLoadTo_t<KeyValues3 *>, 
-	                 public CError_t, 
-	                 public CInput_t<const char *>, 
-	                 public CFormat_t,
-	                 public CLoadRoot_t
+	struct Load3_t : public CLoadBase_t<KeyValues3 *, const char *>
 	{
 	}; // Load3_t
+
+	struct LoadNoContext_t : public CLoadBase_t<CEmpty_t, CUtlBuffer *>
+	{
+	}; // LoadNoContext_t
+
+	struct Load2NoContext_t : public CLoadBase_t<CEmpty_t, CUtlBuffer *>
+	{
+	}; // Load2NoContext_t
+
+	struct Load3NoContext_t : public CLoadBase_t<CEmpty_t, const char *>
+	{
+	}; // Load3NoContext_t
 
 	struct CFileSystemPath_t
 	{
@@ -89,27 +102,46 @@ namespace AnyConfig
 		const char *pszPathID;
 	}; // CFileSystemPath_t
 
-	struct LoadFromFile_t : public CLoadTo_t<CKeyValues3Context *>, 
-	                        public CError_t, 
-	                        public CFileSystemPath_t, 
-	                        public CFormat_t
-	{
-	}; // LoadFromFile_t
-
-	struct LoadFromFile2_t : public CLoadTo_t<KeyValues3 *>, 
+	template<class T = CKeyValues3Context *>
+	struct CLoadFromFile_t : public CLoadTo_t<T>, 
 	                         public CError_t, 
 	                         public CFileSystemPath_t, 
 	                         public CFormat_t
 	{
+	}; // CLoadFromFile_t<T>
+
+	struct LoadFromFile_t : public CLoadFromFile_t<CKeyValues3Context *>
+	{
+	}; // LoadFromFile_t
+
+	struct LoadFromFile2_t : public CLoadFromFile_t<KeyValues3 *>
+	{
 	}; // LoadFromFile2_t
 
-	struct LoadNoHeader_t : public CLoadTo_t<KeyValues3 *>, 
-	                        public CError_t, 
-	                        public CInput_t<const char *>, 
-	                        public CFormat_t, 
-	                        public CLoadRoot_t
+	struct LoadFromFileNoContext_t : public CLoadFromFile_t<CEmpty_t>
+	{
+	}; // LoadFromFileNoContext_t
+
+	struct LoadFromFile2NoContext_t : public CLoadFromFile_t<CEmpty_t>
+	{
+	}; // LoadFromFile2NoContext_t
+
+	template<class T, class I>
+	struct CLoadNoHeader_t : public CLoadTo_t<T>, 
+	                         public CError_t, 
+	                         public CInput_t<I>, 
+	                         public CFormat_t, 
+	                         public CLoadRoot_t
+	{
+	}; // CLoadNoHeader_t<T, I>
+
+	struct LoadNoHeader_t : CLoadNoHeader_t<KeyValues3 *, const char *>
 	{
 	}; // LoadNoHeader_t
+
+	struct LoadNoHeaderAndContext_t : CLoadNoHeader_t<CEmpty_t, const char *>
+	{
+	}; // LoadNoHeaderAndContext_t
 
 	struct CEncode_t
 	{
@@ -133,23 +165,41 @@ namespace AnyConfig
 		unsigned int uFlags; // KV3_SAVE_TEXT_NONE;
 	}; // CSaveText_t
 
-	struct Save_t : public CEncode_t, 
-	                public CFormat_t, 
-	                public CSaveFrom_t<KeyValues3 *>, 
-	                public CError_t, 
-	                public COutput_t<CUtlBuffer *>, 
-	                public CSaveText_t
+	template<class T = KeyValues3 *, class O = CUtlBuffer *>
+	struct CSave_t : public CEncode_t, 
+	                 public CFormat_t, 
+	                 public CSaveFrom_t<T>, 
+	                 public CError_t, 
+	                 public COutput_t<O>, 
+	                 public CSaveText_t
+	{
+	}; // CSave_t<T, O>
+
+	struct Save_t : public CSave_t<KeyValues3 *, CUtlBuffer *>
 	{
 	}; // Save_t
 
-	struct SaveToFile_t : public CEncode_t, 
-	                      public CFormat_t, 
-	                      public CSaveFrom_t<KeyValues3 *>, 
-	                      public CError_t, 
-	                      public CFileSystemPath_t, 
-	                      public CSaveText_t
+	struct SaveNoContext_t : public CSave_t<CEmpty_t, CUtlBuffer *>
+	{
+	}; // SaveNoContext_t
+
+	template<class T>
+	struct CSaveToFile_t : public CEncode_t, 
+	                       public CFormat_t, 
+	                       public CSaveFrom_t<T>, 
+	                       public CError_t, 
+	                       public CFileSystemPath_t, 
+	                       public CSaveText_t
+	{
+	}; // CSaveToFile_t
+
+	struct SaveToFile_t : public CSaveToFile_t<KeyValues3 *>
 	{
 	}; // SaveToFile_t
+
+	struct SaveToFileNoContext_t : public CSaveToFile_t<CEmpty_t>
+	{
+	}; // SaveToFileNoContext_t
 }; // AnyConfig
 
 #endif // _INCLUDE_ANY_CONFIG_BASE_TYPES_HPP_

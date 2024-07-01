@@ -23,7 +23,7 @@
 
 #include <tier0/keyvalues3.h>
 
-bool AnyConfig::CBaseReader::Load(const Load_t &aParams)
+bool AnyConfig::CBaseReader::_Load(const Load_t &aParams)
 {
 	return LoadKV3(aParams.aContext, 
 	               aParams.psMessage, 
@@ -32,7 +32,7 @@ bool AnyConfig::CBaseReader::Load(const Load_t &aParams)
 	               aParams.pszName);
 }
 
-bool AnyConfig::CBaseReader::Load(const Load2_t &aParams)
+bool AnyConfig::CBaseReader::_Load(const Load2_t &aParams)
 {
 	return LoadKV3(aParams.aContext, 
 	               aParams.psMessage, 
@@ -41,7 +41,7 @@ bool AnyConfig::CBaseReader::Load(const Load2_t &aParams)
 	               aParams.pszName);
 }
 
-bool AnyConfig::CBaseReader::Load(const Load3_t &aParams)
+bool AnyConfig::CBaseReader::_Load(const Load3_t &aParams)
 {
 	return LoadKV3(aParams.aContext,
 	               aParams.psMessage, 
@@ -50,7 +50,7 @@ bool AnyConfig::CBaseReader::Load(const Load3_t &aParams)
 	               aParams.pszName);
 }
 
-bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFile_t &aParams)
+bool AnyConfig::CBaseReader::_LoadFromFile(const LoadFromFile_t &aParams)
 {
 	return LoadKV3FromFile(aParams.aContext, 
 	                       aParams.psMessage, 
@@ -59,7 +59,7 @@ bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFile_t &aParams)
 	                       aParams.aFormat);
 }
 
-bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFile2_t &aParams)
+bool AnyConfig::CBaseReader::_LoadFromFile(const LoadFromFile2_t &aParams)
 {
 	return LoadKV3FromFile(aParams.aContext, 
 	                       aParams.psMessage, 
@@ -68,9 +68,63 @@ bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFile2_t &aParams)
 	                       aParams.aFormat);
 }
 
-bool AnyConfig::CBaseReader::LoadNoHeader(const LoadNoHeader_t &aParams)
+bool AnyConfig::CBaseReader::_LoadNoHeader(const LoadNoHeader_t &aParams)
 {
 	return LoadKV3Text_NoHeader(aParams.aContext, 
+	                            aParams.psMessage, 
+	                            aParams.aData, 
+	                            aParams.aFormat, 
+	                            aParams.pszName);
+}
+
+bool AnyConfig::CBaseReader::Load(const LoadNoContext_t &aParams)
+{
+	return LoadKV3(Get(), 
+	               aParams.psMessage, 
+	               aParams.aData, 
+	               aParams.aFormat, 
+	               aParams.pszName);
+}
+
+bool AnyConfig::CBaseReader::Load(const Load2NoContext_t &aParams)
+{
+	return LoadKV3(Get(), 
+	               aParams.psMessage, 
+	               aParams.aData, 
+	               aParams.aFormat, 
+	               aParams.pszName);
+}
+
+bool AnyConfig::CBaseReader::Load(const Load3NoContext_t &aParams)
+{
+	return LoadKV3(Get(), 
+	               aParams.psMessage, 
+	               aParams.aData, 
+	               aParams.aFormat, 
+	               aParams.pszName);
+}
+
+bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFileNoContext_t &aParams)
+{
+	return LoadKV3FromFile(Get(), 
+	                       aParams.psMessage, 
+	                       aParams.pszFilename, 
+	                       aParams.pszPathID, 
+	                       aParams.aFormat);
+}
+
+bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFile2NoContext_t &aParams)
+{
+	return LoadKV3FromFile(Get(), 
+	                       aParams.psMessage, 
+	                       aParams.pszFilename, 
+	                       aParams.pszPathID, 
+	                       aParams.aFormat);
+}
+
+bool AnyConfig::CBaseReader::LoadNoHeader(const LoadNoHeaderAndContext_t &aParams)
+{
+	return LoadKV3Text_NoHeader(Get(), 
 	                            aParams.psMessage, 
 	                            aParams.aData, 
 	                            aParams.aFormat, 

@@ -34,10 +34,17 @@ namespace AnyConfig
 	{
 	public:
 		//
-		// Save ones.
+		// Save ones (globals).
 		//
-		static bool SaveJSON(const SaveJSON_t &aParams);
-		static bool SaveJSON(const SaveJSON2_t &aParams);
+		static bool _SaveJSON(const SaveJSON_t &aParams);
+		static bool _SaveJSON(const SaveJSON2_t &aParams);
+
+	public:
+		//
+		// Save ones (members).
+		//
+		bool SaveJSON(const SaveJSONNoContext_t &aParams) const;
+		bool SaveJSON(const SaveJSON2NoContext_t &aParams) const;
 	}; // CJSONWriter
 }; // AnyConfig
 

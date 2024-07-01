@@ -33,10 +33,17 @@ namespace AnyConfig
 	{
 	public:
 		//
-		// Save ones.
+		// Save ones (globals).
 		//
-		static bool Save(const Save_t &aParams);
-		static bool SaveToFile(const SaveToFile_t &aParams);
+		static bool _Save(const Save_t &aParams);
+		static bool _SaveToFile(const SaveToFile_t &aParams);
+
+	public:
+		//
+		// Save ones (members).
+		//
+		bool Save(const SaveNoContext_t &aParams) const;
+		bool SaveToFile(const SaveToFileNoContext_t &aParams) const;
 	}; // CBaseWriter
 }; // AnyConfig
 

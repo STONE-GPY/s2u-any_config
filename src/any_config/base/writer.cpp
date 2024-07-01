@@ -23,7 +23,7 @@
 
 #include <tier0/keyvalues3.h>
 
-bool AnyConfig::CBaseWriter::Save(const Save_t &aParams)
+bool AnyConfig::CBaseWriter::_Save(const Save_t &aParams)
 {
 	return SaveKV3(aParams.aEncoding, 
 	               aParams.aFormat, 
@@ -33,11 +33,32 @@ bool AnyConfig::CBaseWriter::Save(const Save_t &aParams)
 	               aParams.uFlags);
 }
 
-bool AnyConfig::CBaseWriter::SaveToFile(const SaveToFile_t &aParams)
+bool AnyConfig::CBaseWriter::_SaveToFile(const SaveToFile_t &aParams)
 {
 	return SaveKV3ToFile(aParams.aEncoding, 
 	                     aParams.aFormat, 
 	                     aParams.aData, 
+	                     aParams.psMessage,
+	                     aParams.pszFilename,
+	                     aParams.pszPathID, 
+	                     aParams.uFlags);
+}
+
+bool AnyConfig::CBaseWriter::Save(const SaveNoContext_t &aParams) const
+{
+	return SaveKV3(aParams.aEncoding, 
+	               aParams.aFormat, 
+	               Get(),
+	               aParams.psMessage,
+	               aParams.COutput_t<CUtlBuffer *>::aData,
+	               aParams.uFlags);
+}
+
+bool AnyConfig::CBaseWriter::SaveToFile(const SaveToFileNoContext_t &aParams) const
+{
+	return SaveKV3ToFile(aParams.aEncoding, 
+	                     aParams.aFormat, 
+	                     Get(), 
 	                     aParams.psMessage,
 	                     aParams.pszFilename,
 	                     aParams.pszPathID, 

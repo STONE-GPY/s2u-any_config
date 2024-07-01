@@ -35,6 +35,7 @@ namespace AnyConfig
 
 	protected:
 		KeyValues3 *Get();
+		const KeyValues3 *Get() const;
 
 	public:
 		explicit CBase();
