@@ -35,8 +35,8 @@ namespace AnyConfig
 		//
 		// Save ones.
 		//
-		bool Save(const Save_t &aParams);
-		bool SaveToFile(const SaveToFile_t &aParams);
+		static bool Save(const Save_t &aParams);
+		static bool SaveToFile(const SaveToFile_t &aParams);
 	}; // CBaseWriter
 }; // AnyConfig
 
