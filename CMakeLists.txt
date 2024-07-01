@@ -9,7 +9,7 @@ if(POLICY CMP0092)
 endif()
 
 project(any_config
-	VERSION 1.0.1
+	VERSION 1.0.2
 	DESCRIPTION "Any Config"
 	HOMEPAGE_URL "https://github.com/Wend4r/s2u-any_config"
 	LANGUAGES C CXX
