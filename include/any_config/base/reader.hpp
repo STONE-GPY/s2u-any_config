@@ -35,14 +35,14 @@ namespace AnyConfig
 		//
 		// Load ones.
 		//
-		static bool Load(const Load_t &aParams);
-		static bool Load(const Load2_t &aParams);
-		static bool Load(const Load3_t &aParams);
+		static bool _Load(const Load_t &aParams);
+		static bool _Load(const Load2_t &aParams);
+		static bool _Load(const Load3_t &aParams);
 
-		static bool LoadFromFile(const LoadFromFile_t &aParams);
-		static bool LoadFromFile(const LoadFromFile2_t &aParams);
+		static bool _LoadFromFile(const LoadFromFile_t &aParams);
+		static bool _LoadFromFile(const LoadFromFile2_t &aParams);
 
-		static bool LoadNoHeader(const LoadNoHeader_t &aParams);
+		static bool _LoadNoHeader(const LoadNoHeader_t &aParams);
 	}; // CBaseReader
 }; // AnyConfig
 

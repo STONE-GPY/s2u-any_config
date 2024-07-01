@@ -36,8 +36,8 @@ namespace AnyConfig
 		//
 		// Load ones.
 		//
-		static bool LoadFromJSON(const LoadFromJSON_t &aParams);
-		static bool LoadFromJSONFile(const LoadFromJSONFile_t &aParams);
+		static bool _LoadFromJSON(const LoadFromJSON_t &aParams);
+		static bool _LoadFromJSONFile(const LoadFromJSONFile_t &aParams);
 	}; // CJSONReader
 }; // AnyConfig
 

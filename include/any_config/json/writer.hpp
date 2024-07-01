@@ -36,8 +36,8 @@ namespace AnyConfig
 		//
 		// Save ones.
 		//
-		static bool SaveJSON(const SaveJSON_t &aParams);
-		static bool SaveJSON(const SaveJSON2_t &aParams);
+		static bool _SaveJSON(const SaveJSON_t &aParams);
+		static bool _SaveJSON(const SaveJSON2_t &aParams);
 	}; // CJSONWriter
 }; // AnyConfig
 

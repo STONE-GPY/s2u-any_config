@@ -23,14 +23,14 @@
 
 #include <tier0/keyvalues3.h>
 
-bool AnyConfig::CJSONWriter::SaveJSON(const SaveJSON_t &aParams)
+bool AnyConfig::CJSONWriter::_SaveJSON(const SaveJSON_t &aParams)
 {
 	return SaveKV3AsJSON(aParams.CSaveFrom_t<KeyValues3 *>::aData, 
 	                     aParams.psMessage, 
 	                     aParams.COutput_t<CUtlBuffer *>::aData);
 }
 
-bool AnyConfig::CJSONWriter::SaveJSON(const SaveJSON2_t &aParams)
+bool AnyConfig::CJSONWriter::_SaveJSON(const SaveJSON2_t &aParams)
 {
 	return SaveKV3AsJSON(aParams.CSaveFrom_t<KeyValues3 *>::aData, 
 	                     aParams.psMessage, 
