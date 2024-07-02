@@ -26,9 +26,7 @@
 
 #include <any_config/base/types.hpp>
 
-enum KV1TextEscapeBehavior_t;
-struct KV1ToKV3Translation_t;
-struct KV3ToKV1Translation_t;
+#include <tier0/keyvalues3.h>
 
 namespace AnyConfig
 {
