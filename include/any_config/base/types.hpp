@@ -53,9 +53,14 @@ namespace AnyConfig
 	}; // CLoadRoot_t
 
 	template<class T>
-	struct CInput_t
+	struct CIO_t
 	{
 		T aData;
+	}; // CIO_t<T>
+
+	template<class T>
+	struct CInput_t : public CIO_t<T>
+	{
 	}; // CInput_t<T>
 
 	struct CFormat_t
@@ -149,15 +154,13 @@ namespace AnyConfig
 	}; // CEncode_t
 
 	template<class T>
-	struct CSaveFrom_t
+	struct CSaveFrom_t : CIO_t<const T>
 	{
-		const T aData;
 	}; // CSaveFrom_t<T>
 
 	template<class T>
-	struct COutput_t
+	struct COutput_t : public CIO_t<T>
 	{
-		T aData;
 	}; // COutput_t<T>
 
 	struct CSaveText_t
