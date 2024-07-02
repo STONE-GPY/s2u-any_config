@@ -36,7 +36,7 @@ bool AnyConfig::CKeyValuesWriter::_SaveAsKV1Text_Translated(const SaveAsKV1Text_
 	return SaveKV3AsKV1Text_Translated(aParams.aContext, 
 	                                   aParams.psMessage, 
 	                                   aParams.COutput_t<CUtlBuffer *>::aData, 
-	                                   aParams.eBehavior,
+	                                   aParams.eBehavior, 
 	                                   aParams.CKV1Proccessor_t<KV3ToKV1Translation_t *>::aData, 
 	                                   aParams.aValue);
 }
@@ -54,7 +54,7 @@ bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text_Translated(const SaveAsKV1Text_T
 	return SaveKV3AsKV1Text_Translated(Get(), 
 	                                   aParams.psMessage, 
 	                                   aParams.COutput_t<CUtlBuffer *>::aData, 
-	                                   aParams.eBehavior,
+	                                   aParams.eBehavior, 
 	                                   aParams.CKV1Proccessor_t<KV3ToKV1Translation_t *>::aData, 
 	                                   aParams.aValue);
 }
