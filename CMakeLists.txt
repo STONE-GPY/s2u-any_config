@@ -40,6 +40,9 @@ set(SOURCE_FILES
 
 	${SOURCE_DIR}/any_config/json/reader.cpp
 	${SOURCE_DIR}/any_config/json/writer.cpp
+
+	${SOURCE_DIR}/any_config/keyvalues/reader.cpp
+	${SOURCE_DIR}/any_config/keyvalues/writer.cpp
 )
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
