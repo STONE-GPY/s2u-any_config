@@ -34,7 +34,7 @@ namespace AnyConfig
 {
 	struct CEmpty_t
 	{
-	};
+	}; // CEmpty_t
 
 	template<class T>
 	struct CLoadTo_t

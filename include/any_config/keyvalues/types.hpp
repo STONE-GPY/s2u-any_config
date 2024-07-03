@@ -125,11 +125,11 @@ namespace AnyConfig
 
 	struct SaveAsKV1Text_Translated_t : public CSaveAsKV1Text_Translated_t<KeyValues3 *, CUtlBuffer *, KV3ToKV1Translation_t *>
 	{
-	}; // SaveAsKV1Text_t
+	}; // SaveAsKV1Text_Translated_t
 
 	struct SaveAsKV1Text_TranslatedNoContext_t : public CSaveAsKV1Text_Translated_t<CEmpty_t, CUtlBuffer *, KV3ToKV1Translation_t *>
 	{
-	}; // SaveAsKV1TextNoContext_t
+	}; // SaveAsKV1Text_TranslatedNoContext_t
 
 }; // AnyConfig
 
