@@ -29,6 +29,42 @@
 
 namespace AnyConfig
 {
+	template<class T, class O>
+	struct CSave_t : public CEncode_t, 
+	                 public CFormat_t, 
+	                 public CSaveFrom_t<T>, 
+	                 public CError_t, 
+	                 public COutput_t<O>, 
+	                 public CSaveText_t
+	{
+	}; // CSave_t<T, O>
+
+	template<class T>
+	struct CSaveToFile_t : public CEncode_t, 
+	                       public CFormat_t, 
+	                       public CSaveFrom_t<T>, 
+	                       public CError_t, 
+	                       public CFileSystemPath_t, 
+	                       public CSaveText_t
+	{
+	}; // CSaveToFile_t
+
+	struct Save_t : public CSave_t<KeyValues3 *, CUtlBuffer *>
+	{
+	}; // Save_t
+
+	struct SaveNoContext_t : public CSave_t<CEmpty_t, CUtlBuffer *>
+	{
+	}; // SaveNoContext_t
+
+	struct SaveToFile_t : public CSaveToFile_t<KeyValues3 *>
+	{
+	}; // SaveToFile_t
+
+	struct SaveToFileNoContext_t : public CSaveToFile_t<CEmpty_t>
+	{
+	}; // SaveToFileNoContext_t
+
 	class CBaseWriter : public CBase
 	{
 	public:

@@ -29,6 +29,85 @@
 
 namespace AnyConfig
 {
+	template<class T, typename I>
+	struct CLoadBase_t : public CLoadTo_t<T>, 
+	                     public CError_t, 
+	                     public CInput_t<I>, 
+	                     public CFormat_t, 
+	                     public CLoadRoot_t
+	{
+	}; // CLoadBase_t<T, I>
+
+	struct Load_t : public CLoadBase_t<CKeyValues3Context *, CUtlBuffer *>
+	{
+	}; // Load_t
+
+	struct Load2_t : public CLoadBase_t<KeyValues3 *, CUtlBuffer *>
+	{
+	}; // Load2_t
+
+	struct Load3_t : public CLoadBase_t<KeyValues3 *, const char *>
+	{
+	}; // Load3_t
+
+	struct LoadNoContext_t : public CLoadBase_t<CEmpty_t, CUtlBuffer *>
+	{
+	}; // LoadNoContext_t
+
+	struct Load2NoContext_t : public CLoadBase_t<CEmpty_t, CUtlBuffer *>
+	{
+	}; // Load2NoContext_t
+
+	struct Load3NoContext_t : public CLoadBase_t<CEmpty_t, const char *>
+	{
+	}; // Load3NoContext_t
+
+	template<class T>
+	struct CLoadFromFileBase_t : public CLoadTo_t<T>, 
+	                             public CError_t, 
+	                             public CFileSystemPath_t
+	{
+	}; // CLoadFromFileBase_t<T>
+
+	template<class T>
+	struct CLoadFromFile_t : public CLoadFromFileBase_t<T>, 
+	                         public CFormat_t
+	{
+	}; // CLoadFromFile_t<T>
+
+	template<class T, class I>
+	struct CLoadNoHeader_t : public CLoadTo_t<T>, 
+	                         public CError_t, 
+	                         public CInput_t<I>, 
+	                         public CFormat_t, 
+	                         public CLoadRoot_t
+	{
+	}; // CLoadNoHeader_t<T, I>
+
+	struct LoadFromFile_t : public CLoadFromFile_t<CKeyValues3Context *>
+	{
+	}; // LoadFromFile_t
+
+	struct LoadFromFile2_t : public CLoadFromFile_t<KeyValues3 *>
+	{
+	}; // LoadFromFile2_t
+
+	struct LoadFromFileNoContext_t : public CLoadFromFile_t<CEmpty_t>
+	{
+	}; // LoadFromFileNoContext_t
+
+	struct LoadFromFile2NoContext_t : public CLoadFromFile_t<CEmpty_t>
+	{
+	}; // LoadFromFile2NoContext_t
+
+	struct LoadNoHeader_t : CLoadNoHeader_t<KeyValues3 *, const char *>
+	{
+	}; // LoadNoHeader_t
+
+	struct LoadNoHeaderAndContext_t : CLoadNoHeader_t<CEmpty_t, const char *>
+	{
+	}; // LoadNoHeaderAndContext_t
+
 	class CBaseReader : public CBase
 	{
 	public:

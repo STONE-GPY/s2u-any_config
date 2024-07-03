@@ -30,6 +30,37 @@
 
 namespace AnyConfig
 {
+	template<class T, class O>
+	struct CSaveAsKV1Text_t : public CLoadTo_t<T>, 
+	                          public CError_t, 
+	                          public COutput_t<O>, 
+	                          public CKV1TextEscape_t
+	{
+	}; // CSaveAsKV1Text_t<T, O>
+
+	struct SaveAsKV1Text_t : public CSaveAsKV1Text_t<KeyValues3 *, CUtlBuffer *>
+	{
+	}; // SaveAsKV1Text_t
+
+	struct SaveAsKV1TextNoContext_t : public CSaveAsKV1Text_t<CEmpty_t, CUtlBuffer *>
+	{
+	}; // SaveAsKV1TextNoContext_t
+
+	template<class T, class O, class P>
+	struct CSaveAsKV1Text_Translated_t : public CSaveAsKV1Text_t<T, O>, 
+	                                     public CKV1Unk_t<bool>, 
+	                                     public CKV1Proccessor_t<P>
+	{
+	}; // CSaveAsKV1Text_Translated_t<T, O, P>
+
+	struct SaveAsKV1Text_Translated_t : public CSaveAsKV1Text_Translated_t<KeyValues3 *, CUtlBuffer *, KV3ToKV1Translation_t *>
+	{
+	}; // SaveAsKV1Text_Translated_t
+
+	struct SaveAsKV1Text_TranslatedNoContext_t : public CSaveAsKV1Text_Translated_t<CEmpty_t, CUtlBuffer *, KV3ToKV1Translation_t *>
+	{
+	}; // SaveAsKV1Text_TranslatedNoContext_t
+
 	class CKeyValuesWriter : public CBaseWriter
 	{
 	public:

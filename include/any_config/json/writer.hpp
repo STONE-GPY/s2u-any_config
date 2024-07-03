@@ -30,6 +30,29 @@
 
 namespace AnyConfig
 {
+	template<class T, class O>
+	struct CSaveJSON_t : public CSaveFrom_t<T>, 
+	                     public CError_t, 
+	                     public COutput_t<O>
+	{
+	}; // CSaveJSON_t<T, O>
+
+	struct SaveJSON_t : public CSaveJSON_t<KeyValues3 *, CUtlBuffer *>
+	{
+	}; // SaveJSON_t
+
+	struct SaveJSON2_t : public CSaveJSON_t<KeyValues3 *, CUtlString *>
+	{
+	}; // SaveJSON2_t
+
+	struct SaveJSONNoContext_t : public CSaveJSON_t<KeyValues3 *, CUtlBuffer *>
+	{
+	}; // SaveJSONNoContext_t
+
+	struct SaveJSON2NoContext_t : public CSaveJSON_t<KeyValues3 *, CUtlString *>
+	{
+	}; // SaveJSON2NoContext_t
+
 	class CJSONWriter : public CBaseWriter
 	{
 	public:

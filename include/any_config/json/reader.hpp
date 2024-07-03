@@ -30,6 +30,37 @@
 
 namespace AnyConfig
 {
+	template<class T, class I>
+	struct CLoadFromJSON_t : public CLoadTo_t<T>, 
+	                         public CError_t, 
+	                         public CInput_t<I>, 
+	                         public CLoadRoot_t
+	{
+	}; // CLoadFromJSON_t<T, I>
+
+	struct LoadFromJSON_t : public CLoadFromJSON_t<KeyValues3 *, const char *>
+	{
+	}; // LoadFromJSON_t
+
+	struct LoadFromJSONNoContext_t : public CLoadFromJSON_t<CEmpty_t, const char *>
+	{
+	}; // LoadFromJSONNoContext_t
+
+	template<class T>
+	struct CLoadFromJSONFile_t : public CLoadTo_t<T>, 
+	                             public CError_t, 
+	                             public CFileSystemPath_t
+	{
+	}; // CLoadFromJSONFile_t<T>
+
+	struct LoadFromJSONFile_t : public CLoadFromJSONFile_t<KeyValues3 *>
+	{
+	}; // LoadFromJSONFile_t
+
+	struct LoadFromJSONFileNoContext_t : public CLoadFromJSONFile_t<CEmpty_t>
+	{
+	}; // LoadFromJSONFileNoContext_t
+
 	class CJSONReader : public CBaseReader
 	{
 	public:
