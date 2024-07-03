@@ -26,11 +26,11 @@
 
 #include "types.hpp"
 
-#include <any_config/base/base.hpp>
+#include <any_config/base/writer.hpp>
 
 namespace AnyConfig
 {
-	class CKeyValuesWriter : public CBase
+	class CKeyValuesWriter : public CBaseWriter
 	{
 	public:
 		//

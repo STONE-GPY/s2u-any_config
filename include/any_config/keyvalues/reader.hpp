@@ -26,11 +26,11 @@
 
 #include "types.hpp"
 
-#include <any_config/base/base.hpp>
+#include <any_config/base/reader.hpp>
 
 namespace AnyConfig
 {
-	class CKeyValuesReader : public CBase
+	class CKeyValuesReader : public CBaseReader
 	{
 	public:
 		//

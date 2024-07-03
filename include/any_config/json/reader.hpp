@@ -26,11 +26,11 @@
 
 #include "types.hpp"
 
-#include <any_config/base/base.hpp>
+#include <any_config/base/reader.hpp>
 
 namespace AnyConfig
 {
-	class CJSONReader : public CBase
+	class CJSONReader : public CBaseReader
 	{
 	public:
 		//
