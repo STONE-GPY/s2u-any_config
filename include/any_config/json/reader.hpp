@@ -19,8 +19,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef _INCLUDE_ANY_CONFIG_BASE_READER_HPP_
-#define _INCLUDE_ANY_CONFIG_BASE_READER_HPP_
+#ifndef _INCLUDE_ANY_CONFIG_JSON_READER_HPP_
+#define _INCLUDE_ANY_CONFIG_JSON_READER_HPP_
 
 #pragma once
 
@@ -48,4 +48,4 @@ namespace AnyConfig
 	}; // CJSONReader
 }; // AnyConfig
 
-#endif //_INCLUDE_ANY_CONFIG_BASE_READER_HPP_
+#endif //_INCLUDE_ANY_CONFIG_JSON_READER_HPP_
