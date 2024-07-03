@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <any_config/base.hpp>
+#include <any_config/base/base.hpp>
 
 #include <tier1/keyvalues3.h>
 
