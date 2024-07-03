@@ -30,22 +30,6 @@
 
 namespace AnyConfig
 {
-	struct CKV1TextEscape_t
-	{
-		KV1TextEscapeBehavior_t eBehavior;
-	}; // CKV1TextEscape_t
-
-	template<typename T>
-	struct CKV1Unk_t
-	{
-		T aValue;
-	}; // CKV1Unk_t<T>
-
-	template<class T>
-	struct CKV1Proccessor_t : public CIO_t<const T>
-	{
-	}; // CKV1Proccessor_t<T>
-
 	template<class T>
 	struct CLoadFromKV1File_t : public CLoadTo_t<T>, 
 	                            public CError_t, 
