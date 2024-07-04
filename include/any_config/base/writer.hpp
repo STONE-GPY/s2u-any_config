@@ -55,6 +55,7 @@ namespace AnyConfig
 
 	struct Save_General_t : public Save_NoContext_t
 	{
+		using Base = Save_NoContext_t;
 	}; // Save_General_t
 
 	template<class T>
@@ -77,6 +78,7 @@ namespace AnyConfig
 
 	struct SaveToFile_General_t : public SaveToFile_NoContext_t
 	{
+		using Base = SaveToFile_NoContext_t;
 	}; // SaveToFile_General_t
 
 	class CBaseWriter : public CBase, 

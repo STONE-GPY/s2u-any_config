@@ -47,12 +47,12 @@ bool AnyConfig::CBaseWriter::_SaveToFile(const SaveToFile_t &aParams)
 
 bool AnyConfig::CBaseWriter::Save(const Save_General_t &aParams)
 {
-	return Save(aParams);
+	return Save(reinterpret_cast<const Save_General_t::Base &>(aParams));
 }
 
 bool AnyConfig::CBaseWriter::Save(const SaveToFile_General_t &aParams)
 {
-	return SaveToFile(aParams);
+	return SaveToFile(reinterpret_cast<const SaveToFile_General_t::Base &>(aParams));
 }
 
 bool AnyConfig::CBaseWriter::Save(const Save_NoContext_t &aParams) const

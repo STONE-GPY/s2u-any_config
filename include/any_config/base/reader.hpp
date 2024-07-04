@@ -70,6 +70,7 @@ namespace AnyConfig
 
 	struct Load_Generic_t : public Load2_NoContext_t
 	{
+		using Base = Load2_NoContext_t;
 	}; // Load_Generic_t
 
 	template<class T>
@@ -107,6 +108,7 @@ namespace AnyConfig
 
 	struct LoadFromFile_Generic_t : public LoadFromFile2_NoContext_t
 	{
+		using Base = LoadFromFile2_NoContext_t;
 	}; // LoadFromFile_Generic_t
 
 	template<class T, class I>
@@ -160,7 +162,7 @@ namespace AnyConfig
 		bool LoadFromFile(const LoadFromFile_NoContext_t &aParams);
 		bool LoadFromFile(const LoadFromFile2_NoContext_t &aParams);
 
-		bool LoadNoHeader(const LoadNoHeaderAndContext_t &aParams);
+		bool LoadNoHeader(const LoadNoHeader_NoContext_t &aParams);
 	}; // CBaseReader
 }; // AnyConfig
 

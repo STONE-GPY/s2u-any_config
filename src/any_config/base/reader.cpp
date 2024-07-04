@@ -79,12 +79,12 @@ bool AnyConfig::CBaseReader::_LoadNoHeader(const LoadNoHeader_t &aParams)
 
 bool AnyConfig::CBaseReader::Load(const Load_Generic_t &aParams)
 {
-	return Load(aParams);
+	return Load(reinterpret_cast<const Load_Generic_t::Base &>(aParams));
 }
 
 bool AnyConfig::CBaseReader::Load(const LoadFromFile_Generic_t &aParams)
 {
-	return LoadFromFile(aParams);
+	return LoadFromFile(reinterpret_cast<const LoadFromFile_Generic_t::Base &>(aParams));
 }
 
 bool AnyConfig::CBaseReader::Load(const Load_NoContext_t &aParams)
