@@ -42,9 +42,9 @@ namespace AnyConfig
 	{
 	}; // LoadFromKV1File_t
 
-	struct LoadFromKV1FileNoContext_t : public CLoadFromKV1File_t<CEmpty_t>
+	struct LoadFromKV1File_NoContext_t : public CLoadFromKV1File_t<CEmpty_t>
 	{
-	}; // LoadFromKV1FileNoContext_t
+	}; // LoadFromKV1File_NoContext_t
 
 	template<class T, class I>
 	struct CLoadFromKV1Text_t : public CLoadTo_t<T>, 
@@ -60,9 +60,9 @@ namespace AnyConfig
 	{
 	}; // LoadFromKV1Text_t
 
-	struct LoadFromKV1TextNoContext_t : public CLoadFromKV1Text_t<CEmpty_t, const char *>
+	struct LoadFromKV1Text_NoContext_t : public CLoadFromKV1Text_t<CEmpty_t, const char *>
 	{
-	}; // LoadFromKV1TextNoContext_t
+	}; // LoadFromKV1Text_NoContext_t
 
 	template<class T, class I, class P>
 	struct CLoadFromKV1Text_Translated_t : public CLoadTo_t<T>, 
@@ -80,9 +80,9 @@ namespace AnyConfig
 	{
 	}; // LoadFromKV1Text_Translated_t
 
-	struct LoadFromKV1Text_TranslatedNoContext_t : public CLoadFromKV1Text_Translated_t<CEmpty_t, const char *, KV1ToKV3Translation_t *>
+	struct LoadFromKV1Text_Translated_NoContext_t : public CLoadFromKV1Text_Translated_t<CEmpty_t, const char *, KV1ToKV3Translation_t *>
 	{
-	}; // LoadFromKV1Text_TranslatedNoContext_t
+	}; // LoadFromKV1Text_Translated_NoContext_t
 
 	class CKeyValuesReader : public CBaseReader
 	{
@@ -98,9 +98,9 @@ namespace AnyConfig
 		//
 		// Load ones (members).
 		//
-		bool LoadFromKV1File(const LoadFromKV1FileNoContext_t &aParams);
-		bool LoadFromKV1Text(const LoadFromKV1TextNoContext_t &aParams);
-		bool LoadFromKV1Text_Translated(const LoadFromKV1Text_TranslatedNoContext_t &aParams);
+		bool LoadFromKV1File(const LoadFromKV1File_NoContext_t &aParams);
+		bool LoadFromKV1Text(const LoadFromKV1Text_NoContext_t &aParams);
+		bool LoadFromKV1Text_Translated(const LoadFromKV1Text_Translated_NoContext_t &aParams);
 	}; // CKeyValuesReader
 }; // AnyConfig
 

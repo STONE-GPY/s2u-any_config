@@ -56,19 +56,19 @@ namespace AnyConfig
 	{
 	}; // Load3_t
 
-	struct LoadNoContext_t : public CLoad_t<CEmpty_t, CUtlBuffer *>
+	struct Load_NoContext_t : public CLoad_t<CEmpty_t, CUtlBuffer *>
 	{
-	}; // LoadNoContext_t
+	}; // Load_NoContext_t
 
-	struct Load2NoContext_t : public CLoad_t<CEmpty_t, CUtlBuffer *>
+	struct Load2_NoContext_t : public CLoad_t<CEmpty_t, CUtlBuffer *>
 	{
-	}; // Load2NoContext_t
+	}; // Load2_NoContext_t
 
-	struct Load3NoContext_t : public CLoad_t<CEmpty_t, const char *>
+	struct Load3_NoContext_t : public CLoad_t<CEmpty_t, const char *>
 	{
-	}; // Load3NoContext_t
+	}; // Load3_NoContext_t
 
-	struct Load_Generic_t : public Load2NoContext_t
+	struct Load_Generic_t : public Load2_NoContext_t
 	{
 	}; // Load_Generic_t
 
@@ -97,15 +97,15 @@ namespace AnyConfig
 	{
 	}; // LoadFromFile2_t
 
-	struct LoadFromFileNoContext_t : public CLoadFromFile_t<CEmpty_t>
+	struct LoadFromFile_NoContext_t : public CLoadFromFile_t<CEmpty_t>
 	{
-	}; // LoadFromFileNoContext_t
+	}; // LoadFromFile_NoContext_t
 
-	struct LoadFromFile2NoContext_t : public CLoadFromFile_t<CEmpty_t>
+	struct LoadFromFile2_NoContext_t : public CLoadFromFile_t<CEmpty_t>
 	{
-	}; // LoadFromFile2NoContext_t
+	}; // LoadFromFile2_NoContext_t
 
-	struct LoadFromFile_Generic_t : public LoadFromFile2NoContext_t
+	struct LoadFromFile_Generic_t : public LoadFromFile2_NoContext_t
 	{
 	}; // LoadFromFile_Generic_t
 
@@ -122,9 +122,9 @@ namespace AnyConfig
 	{
 	}; // LoadNoHeader_t
 
-	struct LoadNoHeaderAndContext_t : CLoadNoHeader_t<CEmpty_t, const char *>
+	struct LoadNoHeader_NoContext_t : CLoadNoHeader_t<CEmpty_t, const char *>
 	{
-	}; // LoadNoHeaderAndContext_t
+	}; // LoadNoHeader_NoContext_t
 
 	class CBaseReader : public CBase, 
 	                    public IBaseReader<Load_Generic_t>, 
@@ -153,12 +153,12 @@ namespace AnyConfig
 		//
 		// Load ones (members).
 		//
-		bool Load(const LoadNoContext_t &aParams);
-		bool Load(const Load2NoContext_t &aParams);
-		bool Load(const Load3NoContext_t &aParams);
+		bool Load(const Load_NoContext_t &aParams);
+		bool Load(const Load2_NoContext_t &aParams);
+		bool Load(const Load3_NoContext_t &aParams);
 
-		bool LoadFromFile(const LoadFromFileNoContext_t &aParams);
-		bool LoadFromFile(const LoadFromFile2NoContext_t &aParams);
+		bool LoadFromFile(const LoadFromFile_NoContext_t &aParams);
+		bool LoadFromFile(const LoadFromFile2_NoContext_t &aParams);
 
 		bool LoadNoHeader(const LoadNoHeaderAndContext_t &aParams);
 	}; // CBaseReader

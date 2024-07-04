@@ -54,7 +54,7 @@ bool AnyConfig::CKeyValuesReader::_LoadFromKV1Text_Translated(const LoadFromKV1T
 	                                     aParams.CKV1Unk_t<bool>::aValue);
 }
 
-bool AnyConfig::CKeyValuesReader::LoadFromKV1File(const LoadFromKV1FileNoContext_t &aParams)
+bool AnyConfig::CKeyValuesReader::LoadFromKV1File(const LoadFromKV1File_NoContext_t &aParams)
 {
 	return LoadKV3FromKV1File(Get(), 
 	                          aParams.psMessage, 
@@ -63,7 +63,7 @@ bool AnyConfig::CKeyValuesReader::LoadFromKV1File(const LoadFromKV1FileNoContext
 	                          aParams.eBehavior);
 }
 
-bool AnyConfig::CKeyValuesReader::LoadFromKV1Text(const LoadFromKV1TextNoContext_t &aParams)
+bool AnyConfig::CKeyValuesReader::LoadFromKV1Text(const LoadFromKV1Text_NoContext_t &aParams)
 {
 	return LoadKV3FromKV1Text(Get(), 
 	                          aParams.psMessage, 
@@ -73,7 +73,7 @@ bool AnyConfig::CKeyValuesReader::LoadFromKV1Text(const LoadFromKV1TextNoContext
 	                          aParams.aValue);
 }
 
-bool AnyConfig::CKeyValuesReader::LoadFromKV1Text_Translated(const LoadFromKV1Text_TranslatedNoContext_t &aParams)
+bool AnyConfig::CKeyValuesReader::LoadFromKV1Text_Translated(const LoadFromKV1Text_Translated_NoContext_t &aParams)
 {
 	return LoadKV3FromKV1Text_Translated(Get(), 
 	                                     aParams.psMessage, 

@@ -55,7 +55,7 @@ bool AnyConfig::CBaseWriter::Save(const SaveToFile_General_t &aParams)
 	return SaveToFile(aParams);
 }
 
-bool AnyConfig::CBaseWriter::Save(const SaveNoContext_t &aParams) const
+bool AnyConfig::CBaseWriter::Save(const Save_NoContext_t &aParams) const
 {
 	return SaveKV3(aParams.aEncoding, 
 	               aParams.aFormat, 
@@ -65,7 +65,7 @@ bool AnyConfig::CBaseWriter::Save(const SaveNoContext_t &aParams) const
 	               aParams.uFlags);
 }
 
-bool AnyConfig::CBaseWriter::SaveToFile(const SaveToFileNoContext_t &aParams) const
+bool AnyConfig::CBaseWriter::SaveToFile(const SaveToFile_NoContext_t &aParams) const
 {
 	return SaveKV3ToFile(aParams.aEncoding, 
 	                     aParams.aFormat, 

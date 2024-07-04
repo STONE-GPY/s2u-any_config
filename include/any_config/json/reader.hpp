@@ -42,9 +42,9 @@ namespace AnyConfig
 	{
 	}; // LoadFromJSON_t
 
-	struct LoadFromJSONNoContext_t : public CLoadFromJSON_t<CEmpty_t, const char *>
+	struct LoadFromJSON_NoContext_t : public CLoadFromJSON_t<CEmpty_t, const char *>
 	{
-	}; // LoadFromJSONNoContext_t
+	}; // LoadFromJSON_NoContext_t
 
 	template<class T>
 	struct CLoadFromJSONFile_t : public CLoadTo_t<T>, 
@@ -57,9 +57,9 @@ namespace AnyConfig
 	{
 	}; // LoadFromJSONFile_t
 
-	struct LoadFromJSONFileNoContext_t : public CLoadFromJSONFile_t<CEmpty_t>
+	struct LoadFromJSONFile_NoContext_t : public CLoadFromJSONFile_t<CEmpty_t>
 	{
-	}; // LoadFromJSONFileNoContext_t
+	}; // LoadFromJSONFile_NoContext_t
 
 	class CJSONReader : public CBaseReader
 	{
@@ -74,8 +74,8 @@ namespace AnyConfig
 		//
 		// Load ones (members).
 		//
-		bool LoadFromJSON(const LoadFromJSONNoContext_t &aParams);
-		bool LoadFromJSONFile(const LoadFromJSONFileNoContext_t &aParams);
+		bool LoadFromJSON(const LoadFromJSON_NoContext_t &aParams);
+		bool LoadFromJSONFile(const LoadFromJSONFile_NoContext_t &aParams);
 	}; // CJSONReader
 }; // AnyConfig
 

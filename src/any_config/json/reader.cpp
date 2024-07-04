@@ -39,7 +39,7 @@ bool AnyConfig::CJSONReader::_LoadFromJSONFile(const LoadFromJSONFile_t &aParams
 	                           aParams.pszPathID);
 }
 
-bool AnyConfig::CJSONReader::LoadFromJSON(const LoadFromJSONNoContext_t &aParams)
+bool AnyConfig::CJSONReader::LoadFromJSON(const LoadFromJSON_NoContext_t &aParams)
 {
 	return LoadKV3FromJSON(Get(), 
 	                       aParams.psMessage, 
@@ -47,7 +47,7 @@ bool AnyConfig::CJSONReader::LoadFromJSON(const LoadFromJSONNoContext_t &aParams
 	                       aParams.pszName);
 }
 
-bool AnyConfig::CJSONReader::LoadFromJSONFile(const LoadFromJSONFileNoContext_t &aParams)
+bool AnyConfig::CJSONReader::LoadFromJSONFile(const LoadFromJSONFile_NoContext_t &aParams)
 {
 	return LoadKV3FromJSONFile(Get(), 
 	                           aParams.psMessage, 

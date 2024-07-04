@@ -41,7 +41,7 @@ bool AnyConfig::CKeyValuesWriter::_SaveAsKV1Text_Translated(const SaveAsKV1Text_
 	                                   aParams.aValue);
 }
 
-bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text(const SaveAsKV1TextNoContext_t &aParams)
+bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text(const SaveAsKV1Text_NoContext_t &aParams)
 {
 	return SaveKV3AsKV1Text(Get(), 
 	                        aParams.psMessage, 
@@ -49,7 +49,7 @@ bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text(const SaveAsKV1TextNoContext_t &
 	                        aParams.eBehavior);
 }
 
-bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text_Translated(const SaveAsKV1Text_TranslatedNoContext_t &aParams)
+bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text_Translated(const SaveAsKV1Text_Translated_NoContext_t &aParams)
 {
 	return SaveKV3AsKV1Text_Translated(Get(), 
 	                                   aParams.psMessage, 

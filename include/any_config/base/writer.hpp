@@ -49,11 +49,11 @@ namespace AnyConfig
 	{
 	}; // Save_t
 
-	struct SaveNoContext_t : public CSave_t<CEmpty_t, CUtlBuffer *>
+	struct Save_NoContext_t : public CSave_t<CEmpty_t, CUtlBuffer *>
 	{
-	}; // SaveNoContext_t
+	}; // Save_NoContext_t
 
-	struct Save_General_t : public SaveNoContext_t
+	struct Save_General_t : public Save_NoContext_t
 	{
 	}; // Save_General_t
 
@@ -71,11 +71,11 @@ namespace AnyConfig
 	{
 	}; // SaveToFile_t
 
-	struct SaveToFileNoContext_t : public CSaveToFile_t<CEmpty_t>
+	struct SaveToFile_NoContext_t : public CSaveToFile_t<CEmpty_t>
 	{
-	}; // SaveToFileNoContext_t
+	}; // SaveToFile_NoContext_t
 
-	struct SaveToFile_General_t : public SaveToFileNoContext_t
+	struct SaveToFile_General_t : public SaveToFile_NoContext_t
 	{
 	}; // SaveToFile_General_t
 
@@ -100,8 +100,8 @@ namespace AnyConfig
 		//
 		// Save ones (members).
 		//
-		bool Save(const SaveNoContext_t &aParams) const;
-		bool SaveToFile(const SaveToFileNoContext_t &aParams) const;
+		bool Save(const Save_NoContext_t &aParams) const;
+		bool SaveToFile(const SaveToFile_NoContext_t &aParams) const;
 	}; // CBaseWriter
 }; // AnyConfig
 

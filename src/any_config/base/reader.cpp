@@ -87,7 +87,7 @@ bool AnyConfig::CBaseReader::Load(const LoadFromFile_Generic_t &aParams)
 	return LoadFromFile(aParams);
 }
 
-bool AnyConfig::CBaseReader::Load(const LoadNoContext_t &aParams)
+bool AnyConfig::CBaseReader::Load(const Load_NoContext_t &aParams)
 {
 	return LoadKV3(Get(), 
 	               aParams.psMessage, 
@@ -96,7 +96,7 @@ bool AnyConfig::CBaseReader::Load(const LoadNoContext_t &aParams)
 	               aParams.pszName);
 }
 
-bool AnyConfig::CBaseReader::Load(const Load2NoContext_t &aParams)
+bool AnyConfig::CBaseReader::Load(const Load2_NoContext_t &aParams)
 {
 	return LoadKV3(Get(), 
 	               aParams.psMessage, 
@@ -105,7 +105,7 @@ bool AnyConfig::CBaseReader::Load(const Load2NoContext_t &aParams)
 	               aParams.pszName);
 }
 
-bool AnyConfig::CBaseReader::Load(const Load3NoContext_t &aParams)
+bool AnyConfig::CBaseReader::Load(const Load3_NoContext_t &aParams)
 {
 	return LoadKV3(Get(), 
 	               aParams.psMessage, 
@@ -114,7 +114,7 @@ bool AnyConfig::CBaseReader::Load(const Load3NoContext_t &aParams)
 	               aParams.pszName);
 }
 
-bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFileNoContext_t &aParams)
+bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFile_NoContext_t &aParams)
 {
 	return LoadKV3FromFile(Get(), 
 	                       aParams.psMessage, 
@@ -123,7 +123,7 @@ bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFileNoContext_t &aParams
 	                       aParams.aFormat);
 }
 
-bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFile2NoContext_t &aParams)
+bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFile2_NoContext_t &aParams)
 {
 	return LoadKV3FromFile(Get(), 
 	                       aParams.psMessage, 
@@ -132,7 +132,7 @@ bool AnyConfig::CBaseReader::LoadFromFile(const LoadFromFile2NoContext_t &aParam
 	                       aParams.aFormat);
 }
 
-bool AnyConfig::CBaseReader::LoadNoHeader(const LoadNoHeaderAndContext_t &aParams)
+bool AnyConfig::CBaseReader::LoadNoHeader(const LoadNoHeader_NoContext_t &aParams)
 {
 	return LoadKV3Text_NoHeader(Get(), 
 	                            aParams.psMessage, 

@@ -45,13 +45,13 @@ namespace AnyConfig
 	{
 	}; // SaveJSON2_t
 
-	struct SaveJSONNoContext_t : public CSaveJSON_t<KeyValues3 *, CUtlBuffer *>
+	struct SaveJSON_NoContext_t : public CSaveJSON_t<KeyValues3 *, CUtlBuffer *>
 	{
-	}; // SaveJSONNoContext_t
+	}; // SaveJSON_NoContext_t
 
-	struct SaveJSON2NoContext_t : public CSaveJSON_t<KeyValues3 *, CUtlString *>
+	struct SaveJSON2_NoContext_t : public CSaveJSON_t<KeyValues3 *, CUtlString *>
 	{
-	}; // SaveJSON2NoContext_t
+	}; // SaveJSON2_NoContext_t
 
 	class CJSONWriter : public CBaseWriter
 	{
@@ -66,8 +66,8 @@ namespace AnyConfig
 		//
 		// Save ones (members).
 		//
-		bool SaveJSON(const SaveJSONNoContext_t &aParams) const;
-		bool SaveJSON(const SaveJSON2NoContext_t &aParams) const;
+		bool SaveJSON(const SaveJSON_NoContext_t &aParams) const;
+		bool SaveJSON(const SaveJSON2_NoContext_t &aParams) const;
 	}; // CJSONWriter
 }; // AnyConfig
 
