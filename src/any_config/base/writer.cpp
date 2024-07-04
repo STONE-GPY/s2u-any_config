@@ -44,6 +44,17 @@ bool AnyConfig::CBaseWriter::_SaveToFile(const SaveToFile_t &aParams)
 	                     aParams.uFlags);
 }
 
+
+bool AnyConfig::CBaseWriter::Save(const Save_General_t &aParams)
+{
+	return Save(aParams);
+}
+
+bool AnyConfig::CBaseWriter::Save(const SaveToFile_General_t &aParams)
+{
+	return SaveToFile(aParams);
+}
+
 bool AnyConfig::CBaseWriter::Save(const SaveNoContext_t &aParams) const
 {
 	return SaveKV3(aParams.aEncoding, 

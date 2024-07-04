@@ -77,6 +77,16 @@ bool AnyConfig::CBaseReader::_LoadNoHeader(const LoadNoHeader_t &aParams)
 	                            aParams.pszName);
 }
 
+bool AnyConfig::CBaseReader::Load(const Load_Generic_t &aParams)
+{
+	return Load(aParams);
+}
+
+bool AnyConfig::CBaseReader::Load(const LoadFromFile_Generic_t &aParams)
+{
+	return LoadFromFile(aParams);
+}
+
 bool AnyConfig::CBaseReader::Load(const LoadNoContext_t &aParams)
 {
 	return LoadKV3(Get(), 

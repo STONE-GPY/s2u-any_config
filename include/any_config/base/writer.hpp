@@ -25,29 +25,25 @@
 #pragma once
 
 #include "base.hpp"
+#include "iwriter.hpp"
 #include "types.hpp"
 
 namespace AnyConfig
 {
 	template<class T, class O>
+	struct CSaveBase_t : public CSaveFrom_t<T>, 
+	                     public CError_t, 
+	                     public COutput_t<O>
+	{
+	}; // CSaveBase_t<T, O>
+
+	template<class T, class O>
 	struct CSave_t : public CEncode_t, 
 	                 public CFormat_t, 
-	                 public CSaveFrom_t<T>, 
-	                 public CError_t, 
-	                 public COutput_t<O>, 
+	                 public CSaveBase_t<T, O>, 
 	                 public CSaveText_t
 	{
 	}; // CSave_t<T, O>
-
-	template<class T>
-	struct CSaveToFile_t : public CEncode_t, 
-	                       public CFormat_t, 
-	                       public CSaveFrom_t<T>, 
-	                       public CError_t, 
-	                       public CFileSystemPath_t, 
-	                       public CSaveText_t
-	{
-	}; // CSaveToFile_t
 
 	struct Save_t : public CSave_t<KeyValues3 *, CUtlBuffer *>
 	{
@@ -57,6 +53,20 @@ namespace AnyConfig
 	{
 	}; // SaveNoContext_t
 
+	struct Save_General_t : public SaveNoContext_t
+	{
+	}; // Save_General_t
+
+	template<class T>
+	struct CSaveToFile_t : public CEncode_t, 
+	                       public CFormat_t, 
+	                       public CSaveFrom_t<T>, 
+	                       public CError_t, 
+	                       public CFileSystemPath_t, 
+	                       public CSaveText_t
+	{
+	}; // CSaveToFile_t<T>
+
 	struct SaveToFile_t : public CSaveToFile_t<KeyValues3 *>
 	{
 	}; // SaveToFile_t
@@ -65,7 +75,13 @@ namespace AnyConfig
 	{
 	}; // SaveToFileNoContext_t
 
-	class CBaseWriter : public CBase
+	struct SaveToFile_General_t : public SaveToFileNoContext_t
+	{
+	}; // SaveToFile_General_t
+
+	class CBaseWriter : public CBase, 
+	                    public IBaseWriter<Save_General_t>, 
+	                    public IBaseWriter<SaveToFile_General_t>
 	{
 	public:
 		//
@@ -73,6 +89,12 @@ namespace AnyConfig
 		//
 		static bool _Save(const Save_t &aParams);
 		static bool _SaveToFile(const SaveToFile_t &aParams);
+
+	public: // IBaseWriter<Save_General_t>
+		bool Save(const Save_General_t &aParams);
+
+	public: // IBaseWriter<SaveToFile_General_t>
+		bool Save(const SaveToFile_General_t &aParams);
 
 	public:
 		//

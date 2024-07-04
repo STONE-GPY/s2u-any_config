@@ -25,6 +25,7 @@
 #pragma once
 
 #include "base.hpp"
+#include "ireader.hpp"
 #include "types.hpp"
 
 namespace AnyConfig
@@ -32,35 +33,44 @@ namespace AnyConfig
 	template<class T, typename I>
 	struct CLoadBase_t : public CLoadTo_t<T>, 
 	                     public CError_t, 
-	                     public CInput_t<I>, 
-	                     public CFormat_t, 
-	                     public CLoadRoot_t
+	                     public CInput_t<I>
 	{
 	}; // CLoadBase_t<T, I>
 
-	struct Load_t : public CLoadBase_t<CKeyValues3Context *, CUtlBuffer *>
+	template<class T, typename I>
+	struct CLoad_t : public CLoadBase_t<T, I>, 
+	                 public CFormat_t, 
+	                 public CLoadRoot_t
+	{
+	}; // CLoadBase_t<T, I>
+
+	struct Load_t : public CLoad_t<CKeyValues3Context *, CUtlBuffer *>
 	{
 	}; // Load_t
 
-	struct Load2_t : public CLoadBase_t<KeyValues3 *, CUtlBuffer *>
+	struct Load2_t : public CLoad_t<KeyValues3 *, CUtlBuffer *>
 	{
 	}; // Load2_t
 
-	struct Load3_t : public CLoadBase_t<KeyValues3 *, const char *>
+	struct Load3_t : public CLoad_t<KeyValues3 *, const char *>
 	{
 	}; // Load3_t
 
-	struct LoadNoContext_t : public CLoadBase_t<CEmpty_t, CUtlBuffer *>
+	struct LoadNoContext_t : public CLoad_t<CEmpty_t, CUtlBuffer *>
 	{
 	}; // LoadNoContext_t
 
-	struct Load2NoContext_t : public CLoadBase_t<CEmpty_t, CUtlBuffer *>
+	struct Load2NoContext_t : public CLoad_t<CEmpty_t, CUtlBuffer *>
 	{
 	}; // Load2NoContext_t
 
-	struct Load3NoContext_t : public CLoadBase_t<CEmpty_t, const char *>
+	struct Load3NoContext_t : public CLoad_t<CEmpty_t, const char *>
 	{
 	}; // Load3NoContext_t
+
+	struct Load_Generic_t : public Load2NoContext_t
+	{
+	}; // Load_Generic_t
 
 	template<class T>
 	struct CLoadFromFileBase_t : public CLoadTo_t<T>, 
@@ -75,14 +85,9 @@ namespace AnyConfig
 	{
 	}; // CLoadFromFile_t<T>
 
-	template<class T, class I>
-	struct CLoadNoHeader_t : public CLoadTo_t<T>, 
-	                         public CError_t, 
-	                         public CInput_t<I>, 
-	                         public CFormat_t, 
-	                         public CLoadRoot_t
+	struct LoadFromFileBase_t : public CLoadFromFileBase_t<KeyValues3 *>
 	{
-	}; // CLoadNoHeader_t<T, I>
+	}; // LoadFromFile_t
 
 	struct LoadFromFile_t : public CLoadFromFile_t<CKeyValues3Context *>
 	{
@@ -100,6 +105,19 @@ namespace AnyConfig
 	{
 	}; // LoadFromFile2NoContext_t
 
+	struct LoadFromFile_Generic_t : public LoadFromFile2NoContext_t
+	{
+	}; // LoadFromFile_Generic_t
+
+	template<class T, class I>
+	struct CLoadNoHeader_t : public CLoadTo_t<T>, 
+	                         public CError_t, 
+	                         public CInput_t<I>, 
+	                         public CFormat_t, 
+	                         public CLoadRoot_t
+	{
+	}; // CLoadNoHeader_t<T, I>
+
 	struct LoadNoHeader_t : CLoadNoHeader_t<KeyValues3 *, const char *>
 	{
 	}; // LoadNoHeader_t
@@ -108,7 +126,9 @@ namespace AnyConfig
 	{
 	}; // LoadNoHeaderAndContext_t
 
-	class CBaseReader : public CBase
+	class CBaseReader : public CBase, 
+	                    public IBaseReader<Load_Generic_t>, 
+	                    public IBaseReader<LoadFromFile_Generic_t>
 	{
 	public:
 		//
@@ -122,6 +142,12 @@ namespace AnyConfig
 		static bool _LoadFromFile(const LoadFromFile2_t &aParams);
 
 		static bool _LoadNoHeader(const LoadNoHeader_t &aParams);
+
+	public: // IBaseReader<Load_Generic_t>
+		bool Load(const Load_Generic_t &aParams);
+
+	public: // IBaseReader<LoadFromFile_Generic_t>
+		bool Load(const LoadFromFile_Generic_t &aParams);
 
 	public:
 		//
