@@ -93,6 +93,41 @@ namespace AnyConfig
 	{
 		unsigned int uFlags; // KV3_SAVE_TEXT_NONE;
 	}; // CSaveText_t
+
+	template<class T>
+	class INoContext
+	{
+	public:
+		virtual ~INoContext() = 0;
+	}; // INoContext<T>
+
+	template<class T, typename... Args>
+	class CNoContextBase : public T, 
+	                       public INoContext<T>
+	{
+	public:
+		using Base_t = T;
+	}; // CNoContextBase<T>
+
+	template<class T>
+	class IGeneric
+	{
+	public:
+		virtual T ToBase() const = 0;
+	}; // IGeneric<T>
+
+	template<class T>
+	class CGenericBase : public T, 
+	                     public IGeneric<T>
+	{
+	public:
+		using Base_t = T;
+
+		T ToBase() const
+		{
+			return static_cast<T>(*this);
+		}
+	}; // CGenericBase<T>
 }; // AnyConfig
 
 #endif // _INCLUDE_ANY_CONFIG_BASE_TYPES_HPP_

@@ -49,13 +49,12 @@ namespace AnyConfig
 	{
 	}; // Save_t
 
-	struct Save_NoContext_t : public CSave_t<CEmpty_t, CUtlBuffer *>
+	struct Save_NoContext_t : public CNoContextBase<CSave_t<CEmpty_t, CUtlBuffer *>>
 	{
 	}; // Save_NoContext_t
 
-	struct Save_General_t : public Save_NoContext_t
+	struct Save_General_t : public CGenericBase<Save_NoContext_t>
 	{
-		using Base = Save_NoContext_t;
 	}; // Save_General_t
 
 	template<class T>
@@ -72,13 +71,12 @@ namespace AnyConfig
 	{
 	}; // SaveToFile_t
 
-	struct SaveToFile_NoContext_t : public CSaveToFile_t<CEmpty_t>
+	struct SaveToFile_NoContext_t : public CNoContextBase<CSaveToFile_t<CEmpty_t>>
 	{
 	}; // SaveToFile_NoContext_t
 
-	struct SaveToFile_General_t : public SaveToFile_NoContext_t
+	struct SaveToFile_General_t : public CGenericBase<SaveToFile_NoContext_t>
 	{
-		using Base = SaveToFile_NoContext_t;
 	}; // SaveToFile_General_t
 
 	class CBaseWriter : public CBase, 

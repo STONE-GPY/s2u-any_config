@@ -56,21 +56,20 @@ namespace AnyConfig
 	{
 	}; // Load3_t
 
-	struct Load_NoContext_t : public CLoad_t<CEmpty_t, CUtlBuffer *>
+	struct Load_NoContext_t : public CNoContextBase<CLoad_t<CEmpty_t, CUtlBuffer *>>
 	{
 	}; // Load_NoContext_t
 
-	struct Load2_NoContext_t : public CLoad_t<CEmpty_t, CUtlBuffer *>
+	struct Load2_NoContext_t : public CNoContextBase<CLoad_t<CEmpty_t, CUtlBuffer *>>
 	{
 	}; // Load2_NoContext_t
 
-	struct Load3_NoContext_t : public CLoad_t<CEmpty_t, const char *>
+	struct Load3_NoContext_t : public CNoContextBase<CLoad_t<CEmpty_t, const char *>>
 	{
 	}; // Load3_NoContext_t
 
-	struct Load_Generic_t : public Load2_NoContext_t
+	struct Load_Generic_t : public CGenericBase<Load2_NoContext_t>
 	{
-		using Base = Load2_NoContext_t;
 	}; // Load_Generic_t
 
 	template<class T>
@@ -98,17 +97,16 @@ namespace AnyConfig
 	{
 	}; // LoadFromFile2_t
 
-	struct LoadFromFile_NoContext_t : public CLoadFromFile_t<CEmpty_t>
+	struct LoadFromFile_NoContext_t : public CNoContextBase<CLoadFromFile_t<CEmpty_t>>
 	{
 	}; // LoadFromFile_NoContext_t
 
-	struct LoadFromFile2_NoContext_t : public CLoadFromFile_t<CEmpty_t>
+	struct LoadFromFile2_NoContext_t : public CNoContextBase<CLoadFromFile_t<CEmpty_t>>
 	{
 	}; // LoadFromFile2_NoContext_t
 
-	struct LoadFromFile_Generic_t : public LoadFromFile2_NoContext_t
+	struct LoadFromFile_Generic_t : public CGenericBase<LoadFromFile2_NoContext_t>
 	{
-		using Base = LoadFromFile2_NoContext_t;
 	}; // LoadFromFile_Generic_t
 
 	template<class T, class I>
@@ -124,7 +122,7 @@ namespace AnyConfig
 	{
 	}; // LoadNoHeader_t
 
-	struct LoadNoHeader_NoContext_t : CLoadNoHeader_t<CEmpty_t, const char *>
+	struct LoadNoHeader_NoContext_t : CNoContextBase<CLoadNoHeader_t<CEmpty_t, const char *>>
 	{
 	}; // LoadNoHeader_NoContext_t
 
