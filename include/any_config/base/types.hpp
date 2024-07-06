@@ -101,7 +101,7 @@ namespace AnyConfig
 		virtual ~INoContext() = 0;
 	}; // INoContext<T>
 
-	template<class T, typename... Args>
+	template<class T>
 	class CNoContextBase : public T, 
 	                       public INoContext<T>
 	{
