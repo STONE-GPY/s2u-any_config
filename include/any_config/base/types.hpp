@@ -131,7 +131,7 @@ namespace AnyConfig
 
 		T ToBase() const
 		{
-			return To<T>(*this);
+			return To<T>();
 		}
 	}; // CGenericBase<T>
 }; // AnyConfig
