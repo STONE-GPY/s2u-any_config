@@ -123,9 +123,15 @@ namespace AnyConfig
 	public:
 		using Base_t = T;
 
+		template<typename P>
+		P To() const
+		{
+			return static_cast<P>(*this);
+		}
+
 		T ToBase() const
 		{
-			return static_cast<T>(*this);
+			return To<T>(*this);
 		}
 	}; // CGenericBase<T>
 }; // AnyConfig

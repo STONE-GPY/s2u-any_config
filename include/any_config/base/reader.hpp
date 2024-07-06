@@ -97,15 +97,15 @@ namespace AnyConfig
 	{
 	}; // LoadFromFile2_t
 
-	struct LoadFromFile_NoContext_t : public CNoContextBase<CLoadFromFile_t<CEmpty_t>>
+	class LoadFromFile_NoContext_t : public CNoContextBase<CLoadFromFile_t<CEmpty_t>>
 	{
 	}; // LoadFromFile_NoContext_t
 
-	struct LoadFromFile2_NoContext_t : public CNoContextBase<CLoadFromFile_t<CEmpty_t>>
+	class LoadFromFile2_NoContext_t : public CNoContextBase<CLoadFromFile_t<CEmpty_t>>
 	{
 	}; // LoadFromFile2_NoContext_t
 
-	struct LoadFromFile_Generic_t : public CGenericBase<LoadFromFile2_NoContext_t>
+	class LoadFromFile_Generic_t : public CGenericBase<LoadFromFile2_NoContext_t>
 	{
 	}; // LoadFromFile_Generic_t
 

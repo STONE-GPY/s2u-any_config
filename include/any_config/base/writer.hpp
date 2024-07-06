@@ -71,11 +71,11 @@ namespace AnyConfig
 	{
 	}; // SaveToFile_t
 
-	struct SaveToFile_NoContext_t : public CNoContextBase<CSaveToFile_t<CEmpty_t>>
+	class SaveToFile_NoContext_t : public CNoContextBase<CSaveToFile_t<CEmpty_t>>
 	{
 	}; // SaveToFile_NoContext_t
 
-	struct SaveToFile_General_t : public CGenericBase<SaveToFile_NoContext_t>
+	class SaveToFile_General_t : public CGenericBase<SaveToFile_NoContext_t>
 	{
 	}; // SaveToFile_General_t
 
