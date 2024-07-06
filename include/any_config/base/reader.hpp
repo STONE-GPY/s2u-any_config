@@ -122,7 +122,7 @@ namespace AnyConfig
 	{
 	}; // LoadNoHeader_t
 
-	struct LoadNoHeader_NoContext_t : CNoContextBase<CLoadNoHeader_t<CEmpty_t, const char *>>
+	class LoadNoHeader_NoContext_t : public CNoContextBase<LoadNoHeader_t>
 	{
 	}; // LoadNoHeader_NoContext_t
 
