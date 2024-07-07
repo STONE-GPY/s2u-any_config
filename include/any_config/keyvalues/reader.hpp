@@ -38,12 +38,14 @@ namespace AnyConfig
 	{
 	}; // CLoadFromKV1File_t<T>
 
-	struct LoadFromKV1File_t : public CLoadFromKV1File_t<KeyValues3 *>
+	class LoadFromKV1File_t : public CLoadFromKV1File_t<KeyValues3 *>
 	{
+	public:
 	}; // LoadFromKV1File_t
 
-	struct LoadFromKV1File_NoContext_t : public CLoadFromKV1File_t<CEmpty_t>
+	class LoadFromKV1File_NoContext_t : public CLoadFromKV1File_t<CEmpty_t>
 	{
+	public:
 	}; // LoadFromKV1File_NoContext_t
 
 	template<class T, class I>
@@ -56,12 +58,14 @@ namespace AnyConfig
 	{
 	}; // CLoadFromKV1Text_t<T>
 
-	struct LoadFromKV1Text_t : public CLoadFromKV1Text_t<KeyValues3 *, const char *>
+	class LoadFromKV1Text_t : public CLoadFromKV1Text_t<KeyValues3 *, const char *>
 	{
+	public:
 	}; // LoadFromKV1Text_t
 
-	struct LoadFromKV1Text_NoContext_t : public CLoadFromKV1Text_t<CEmpty_t, const char *>
+	class LoadFromKV1Text_NoContext_t : public CLoadFromKV1Text_t<CEmpty_t, const char *>
 	{
+	public:
 	}; // LoadFromKV1Text_NoContext_t
 
 	template<class T, class I, class P>
@@ -76,12 +80,14 @@ namespace AnyConfig
 	{
 	}; // CLoadFromKV1Text_Translated_t<T, I, P>
 
-	struct LoadFromKV1Text_Translated_t : public CLoadFromKV1Text_Translated_t<KeyValues3 *, const char *, KV1ToKV3Translation_t *>
+	class LoadFromKV1Text_Translated_t : public CLoadFromKV1Text_Translated_t<KeyValues3 *, const char *, KV1ToKV3Translation_t *>
 	{
+	public:
 	}; // LoadFromKV1Text_Translated_t
 
-	struct LoadFromKV1Text_Translated_NoContext_t : public CLoadFromKV1Text_Translated_t<CEmpty_t, const char *, KV1ToKV3Translation_t *>
+	class LoadFromKV1Text_Translated_NoContext_t : public CLoadFromKV1Text_Translated_t<CEmpty_t, const char *, KV1ToKV3Translation_t *>
 	{
+	public:
 	}; // LoadFromKV1Text_Translated_NoContext_t
 
 	class CKeyValuesReader : public CBaseReader

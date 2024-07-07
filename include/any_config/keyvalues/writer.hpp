@@ -38,12 +38,14 @@ namespace AnyConfig
 	{
 	}; // CSaveAsKV1Text_t<T, O>
 
-	struct SaveAsKV1Text_t : public CSaveAsKV1Text_t<KeyValues3 *, CUtlBuffer *>
+	class SaveAsKV1Text_t : public CSaveAsKV1Text_t<KeyValues3 *, CUtlBuffer *>
 	{
+	public:
 	}; // SaveAsKV1Text_t
 
-	struct SaveAsKV1Text_NoContext_t : public CSaveAsKV1Text_t<CEmpty_t, CUtlBuffer *>
+	class SaveAsKV1Text_NoContext_t : public CNoContextBase<CSaveAsKV1Text_t<CEmpty_t, CUtlBuffer *>>
 	{
+	public:
 	}; // SaveAsKV1Text_NoContext_t
 
 	template<class T, class O, class P>
@@ -53,12 +55,14 @@ namespace AnyConfig
 	{
 	}; // CSaveAsKV1Text_Translated_t<T, O, P>
 
-	struct SaveAsKV1Text_Translated_t : public CSaveAsKV1Text_Translated_t<KeyValues3 *, CUtlBuffer *, KV3ToKV1Translation_t *>
+	class SaveAsKV1Text_Translated_t : public CSaveAsKV1Text_Translated_t<KeyValues3 *, CUtlBuffer *, KV3ToKV1Translation_t *>
 	{
+	public:
 	}; // SaveAsKV1Text_Translated_t
 
-	struct SaveAsKV1Text_Translated_NoContext_t : public CSaveAsKV1Text_Translated_t<CEmpty_t, CUtlBuffer *, KV3ToKV1Translation_t *>
+	class SaveAsKV1Text_Translated_NoContext_t : public CNoContextBase<CSaveAsKV1Text_Translated_t<CEmpty_t, CUtlBuffer *, KV3ToKV1Translation_t *>>
 	{
+	public:
 	}; // SaveAsKV1Text_Translated_NoContext_t
 
 	class CKeyValuesWriter : public CBaseWriter
