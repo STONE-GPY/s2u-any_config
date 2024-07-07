@@ -46,6 +46,7 @@ namespace AnyConfig
 	class SaveAsKV1Text_NoContext_t : public CNoContextBase<CSaveAsKV1Text_t<CEmpty_t, CUtlBuffer *>>
 	{
 	public:
+		SaveAsKV1Text_NoContext_t(const Save_General_t::Base_t &aInit);
 	}; // SaveAsKV1Text_NoContext_t
 
 	template<class T, class O, class P>
@@ -73,6 +74,12 @@ namespace AnyConfig
 		//
 		static bool _SaveAsKV1Text(const SaveAsKV1Text_t &aParams);
 		static bool _SaveAsKV1Text_Translated(const SaveAsKV1Text_Translated_t &aParams);
+
+	public: // IBaseWriter<Save_General_t>
+		bool Save(const Save_General_t &aParams);
+
+	public: // IBaseWriter<SaveToFile_General_t>
+		bool Save(const SaveToFile_General_t &aParams);
 
 	public:
 		//

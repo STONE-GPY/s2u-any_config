@@ -46,6 +46,7 @@ namespace AnyConfig
 	class LoadFromKV1File_NoContext_t : public CLoadFromKV1File_t<CEmpty_t>
 	{
 	public:
+		LoadFromKV1File_NoContext_t(const LoadFromFile_Generic_t::Base_t &aInit);
 	}; // LoadFromKV1File_NoContext_t
 
 	template<class T, class I>
@@ -66,6 +67,7 @@ namespace AnyConfig
 	class LoadFromKV1Text_NoContext_t : public CLoadFromKV1Text_t<CEmpty_t, const char *>
 	{
 	public:
+		LoadFromKV1Text_NoContext_t(const Load_Generic_t::Base_t &aInit);
 	}; // LoadFromKV1Text_NoContext_t
 
 	template<class T, class I, class P>
@@ -99,6 +101,12 @@ namespace AnyConfig
 		static bool _LoadFromKV1File(const LoadFromKV1File_t &aParams);
 		static bool _LoadFromKV1Text(const LoadFromKV1Text_t &aParams);
 		static bool _LoadFromKV1Text_Translated(const LoadFromKV1Text_Translated_t &aParams);
+
+	public: // IBaseReader<Load_Generic_t>
+		bool Load(const Load_Generic_t &aParams);
+
+	public: // IBaseReader<LoadFromFile_Generic_t>
+		bool Load(const LoadFromFile_Generic_t &aParams);
 
 	public:
 		//

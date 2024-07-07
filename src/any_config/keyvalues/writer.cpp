@@ -22,6 +22,14 @@
 #include <any_config/keyvalues/writer.hpp>
 
 #include <tier0/keyvalues3.h>
+#include <tier0/utlstring.h>
+
+AnyConfig::SaveAsKV1Text_NoContext_t::SaveAsKV1Text_NoContext_t(const Save_General_t::Base_t &aInit)
+{
+	m_psMessage = aInit.m_psMessage;
+	m_aData = aInit.COutput_t<CUtlBuffer *>::m_aData;
+	m_eBehavior = KV1TEXT_ESC_BEHAVIOR_UNK1;
+}
 
 bool AnyConfig::CKeyValuesWriter::_SaveAsKV1Text(const SaveAsKV1Text_t &aParams)
 {
@@ -39,6 +47,28 @@ bool AnyConfig::CKeyValuesWriter::_SaveAsKV1Text_Translated(const SaveAsKV1Text_
 	                                   aParams.m_eBehavior, 
 	                                   aParams.CKV1Proccessor_t<KV3ToKV1Translation_t *>::m_aData, 
 	                                   aParams.m_aValue);
+}
+
+bool AnyConfig::CKeyValuesWriter::Save(const Save_General_t &aParams)
+{
+	return SaveAsKV1Text(aParams.To<SaveAsKV1Text_NoContext_t>());
+}
+
+bool AnyConfig::CKeyValuesWriter::Save(const SaveToFile_General_t &aParams)
+{
+	CUtlString sError;
+
+	sError = "<";
+	sError += "Save";
+	sError += " KeyValues";
+	sError += " to file";
+	sError += ": ";
+	sError += "not supported now";
+	sError += ">";
+
+	aParams.m_psMessage->Set(sError.Get());
+
+	return false;
 }
 
 bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text(const SaveAsKV1Text_NoContext_t &aParams)

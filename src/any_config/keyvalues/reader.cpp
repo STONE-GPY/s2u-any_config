@@ -23,6 +23,18 @@
 
 #include <tier0/keyvalues3.h>
 
+AnyConfig::LoadFromKV1File_NoContext_t::LoadFromKV1File_NoContext_t(const LoadFromFile_Generic_t::Base_t& aInit)
+{
+	m_psMessage = aInit.m_psMessage;
+	m_pszFilename = aInit.m_pszFilename;
+	m_pszPathID = aInit.m_pszPathID;
+	m_eBehavior = KV1TEXT_ESC_BEHAVIOR_UNK1;
+}
+
+AnyConfig::LoadFromKV1Text_NoContext_t::LoadFromKV1Text_NoContext_t(const Load_Generic_t::Base_t &aInit)
+{
+}
+
 bool AnyConfig::CKeyValuesReader::_LoadFromKV1File(const LoadFromKV1File_t &aParams)
 {
 	return LoadKV3FromKV1File(aParams.m_aContext, 
@@ -52,6 +64,16 @@ bool AnyConfig::CKeyValuesReader::_LoadFromKV1Text_Translated(const LoadFromKV1T
 	                                     aParams.CKV1Unk_t<int>::m_aValue, 
 	                                     aParams.m_pszName, 
 	                                     aParams.CKV1Unk_t<bool>::m_aValue);
+}
+
+bool AnyConfig::CKeyValuesReader::Load(const Load_Generic_t &aParams)
+{
+	return LoadFromKV1Text(aParams.To<LoadFromKV1Text_NoContext_t>());
+}
+
+bool AnyConfig::CKeyValuesReader::Load(const LoadFromFile_Generic_t &aParams)
+{
+	return LoadFromKV1File(aParams.To<LoadFromKV1File_NoContext_t>());
 }
 
 bool AnyConfig::CKeyValuesReader::LoadFromKV1File(const LoadFromKV1File_NoContext_t &aParams)
