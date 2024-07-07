@@ -37,19 +37,21 @@ namespace AnyConfig
 	{
 	}; // CSaveJSON_t<T, O>
 
-	struct SaveJSON_t : public CSaveJSON_t<KeyValues3 *, CUtlBuffer *>
+	class SaveJSON_t : public CNoContextBase<CSaveJSON_t<KeyValues3 *, CUtlBuffer *>>
 	{
 	}; // SaveJSON_t
 
-	struct SaveJSON2_t : public CSaveJSON_t<KeyValues3 *, CUtlString *>
+	class SaveJSON2_t : public CNoContextBase<CSaveJSON_t<KeyValues3 *, CUtlString *>>
 	{
 	}; // SaveJSON2_t
 
-	struct SaveJSON_NoContext_t : public CSaveJSON_t<KeyValues3 *, CUtlBuffer *>
+	class SaveJSON_NoContext_t : public CNoContextBase<CSaveJSON_t<CEmpty_t, CUtlBuffer *>>
 	{
+	public:
+		SaveJSON_NoContext_t(const Save_General_t::Base_t &aInit);
 	}; // SaveJSON_NoContext_t
 
-	struct SaveJSON2_NoContext_t : public CSaveJSON_t<KeyValues3 *, CUtlString *>
+	struct SaveJSON2_NoContext_t : public CSaveJSON_t<CEmpty_t, CUtlString *>
 	{
 	}; // SaveJSON2_NoContext_t
 
@@ -61,6 +63,12 @@ namespace AnyConfig
 		//
 		static bool _SaveJSON(const SaveJSON_t &aParams);
 		static bool _SaveJSON(const SaveJSON2_t &aParams);
+
+	public: // IBaseWriter<Save_General_t>
+		bool Save(const Save_General_t &aParams);
+
+	public: // IBaseWriter<SaveToFile_General_t>
+		bool Save(const SaveToFile_General_t &aParams);
 
 	public:
 		//

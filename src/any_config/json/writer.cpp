@@ -22,6 +22,13 @@
 #include <any_config/json/writer.hpp>
 
 #include <tier0/keyvalues3.h>
+#include <tier0/utlstring.h>
+
+AnyConfig::SaveJSON_NoContext_t::SaveJSON_NoContext_t(const Save_General_t::Base_t &aInit)
+{
+	m_psMessage = aInit.m_psMessage;
+	COutput_t<CUtlBuffer *>::m_aData = aInit.COutput_t<CUtlBuffer *>::m_aData;
+}
 
 bool AnyConfig::CJSONWriter::_SaveJSON(const SaveJSON_t &aParams)
 {
@@ -35,6 +42,28 @@ bool AnyConfig::CJSONWriter::_SaveJSON(const SaveJSON2_t &aParams)
 	return SaveKV3AsJSON(aParams.CSaveFrom_t<KeyValues3 *>::m_aData, 
 	                     aParams.m_psMessage, 
 	                     aParams.COutput_t<CUtlString *>::m_aData);
+}
+
+bool AnyConfig::CJSONWriter::Save(const Save_General_t &aParams)
+{
+	return SaveJSON(aParams.To<SaveJSON_NoContext_t>());
+}
+
+bool AnyConfig::CJSONWriter::Save(const SaveToFile_General_t &aParams)
+{
+	CUtlString sError;
+
+	sError = "<";
+	sError += "Save";
+	sError += " JSON";
+	sError += " from file";
+	sError += ": ";
+	sError += "not supported now";
+	sError += ">";
+
+	aParams.m_psMessage->Set(sError.Get());
+
+	return false;
 }
 
 bool AnyConfig::CJSONWriter::SaveJSON(const SaveJSON_NoContext_t &aParams) const

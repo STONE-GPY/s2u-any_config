@@ -28,6 +28,8 @@
 
 #include <any_config/base/reader.hpp>
 
+#include <tier0/utlbuffer.h>
+
 namespace AnyConfig
 {
 	template<class T, class I>
@@ -42,8 +44,10 @@ namespace AnyConfig
 	{
 	}; // LoadFromJSON_t
 
-	struct LoadFromJSON_NoContext_t : public CLoadFromJSON_t<CEmpty_t, const char *>
+	class LoadFromJSON_NoContext_t : public CNoContextBase<CLoadFromJSON_t<CEmpty_t, const char *>>
 	{
+	public:
+		LoadFromJSON_NoContext_t(const Load_Generic_t::Base_t &aInit);
 	}; // LoadFromJSON_NoContext_t
 
 	template<class T>
@@ -57,7 +61,7 @@ namespace AnyConfig
 	{
 	}; // LoadFromJSONFile_t
 
-	struct LoadFromJSONFile_NoContext_t : public CLoadFromJSONFile_t<CEmpty_t>
+	class LoadFromJSONFile_NoContext_t : public CNoContextBase<CLoadFromJSONFile_t<CEmpty_t>>
 	{
 	}; // LoadFromJSONFile_NoContext_t
 
@@ -69,6 +73,12 @@ namespace AnyConfig
 		//
 		static bool _LoadFromJSON(const LoadFromJSON_t &aParams);
 		static bool _LoadFromJSONFile(const LoadFromJSONFile_t &aParams);
+
+	public: // IBaseReader<Load_Generic_t>
+		bool Load(const Load_Generic_t &aParams);
+
+	public: // IBaseReader<LoadFromFile_Generic_t>
+		bool Load(const LoadFromFile_Generic_t &aParams);
 
 	public:
 		//

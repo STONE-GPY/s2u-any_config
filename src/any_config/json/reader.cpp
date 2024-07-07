@@ -22,6 +22,15 @@
 #include <any_config/json/reader.hpp>
 
 #include <tier0/keyvalues3.h>
+#include <tier0/utlbuffer.h>
+#include <tier0/utlstring.h>
+
+AnyConfig::LoadFromJSON_NoContext_t::LoadFromJSON_NoContext_t(const Load_Generic_t::Base_t &aInit)
+{
+	m_psMessage = aInit.m_psMessage;
+	m_aData = (const char *)aInit.m_aData->Base();
+	m_pszName = aInit.m_pszName;
+}
 
 bool AnyConfig::CJSONReader::_LoadFromJSON(const LoadFromJSON_t &aParams)
 {
@@ -37,6 +46,28 @@ bool AnyConfig::CJSONReader::_LoadFromJSONFile(const LoadFromJSONFile_t &aParams
 	                           aParams.m_psMessage, 
 	                           aParams.m_pszFilename, 
 	                           aParams.m_pszPathID);
+}
+
+bool AnyConfig::CJSONReader::Load(const Load_Generic_t &aParams)
+{
+	return LoadFromJSON(aParams.To<LoadFromJSON_NoContext_t>());
+}
+
+bool AnyConfig::CJSONReader::Load(const LoadFromFile_Generic_t &aParams)
+{
+	CUtlString sError;
+
+	sError = "<";
+	sError += "Load";
+	sError += " JSON";
+	sError += " from file";
+	sError += ": ";
+	sError += "not supported now";
+	sError += ">";
+
+	aParams.m_psMessage->Set(sError.Get());
+
+	return false;
 }
 
 bool AnyConfig::CJSONReader::LoadFromJSON(const LoadFromJSON_NoContext_t &aParams)
