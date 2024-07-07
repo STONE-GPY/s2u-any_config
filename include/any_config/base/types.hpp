@@ -39,23 +39,23 @@ namespace AnyConfig
 	template<class T>
 	struct CLoadTo_t
 	{
-		T aContext;
+		T m_aContext;
 	}; // CLoadTo_t<T>
 
 	struct CError_t
 	{
-		CUtlString *psMessage;
+		CUtlString *m_psMessage;
 	}; // CError_t
 
 	struct CLoadRoot_t
 	{
-		const char *pszName;
+		const char *m_pszName;
 	}; // CLoadRoot_t
 
 	template<class T>
 	struct CIO_t
 	{
-		T aData;
+		T m_aData;
 	}; // CIO_t<T>
 
 	template<class T>
@@ -65,18 +65,18 @@ namespace AnyConfig
 
 	struct CFormat_t
 	{
-		const KV3ID_t &aFormat; // = g_KV3Format_Generic;
+		const KV3ID_t &m_aFormat; // = g_KV3Format_Generic;
 	}; // CFormat_t
 
 	struct CFileSystemPath_t
 	{
-		const char *pszFilename;
-		const char *pszPathID;
+		const char *m_pszFilename;
+		const char *m_pszPathID;
 	}; // CFileSystemPath_t
 
 	struct CEncode_t
 	{
-		const KV3ID_t &aEncoding; // = g_KV3Encoding_Text;
+		const KV3ID_t &m_aEncoding; // = g_KV3Encoding_Text;
 	}; // CEncode_t
 
 	template<class T>
@@ -91,7 +91,7 @@ namespace AnyConfig
 
 	struct CSaveText_t
 	{
-		unsigned int uFlags; // KV3_SAVE_TEXT_NONE;
+		unsigned int m_uFlags; // KV3_SAVE_TEXT_NONE;
 	}; // CSaveText_t
 
 	template<class T>

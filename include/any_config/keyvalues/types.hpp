@@ -32,13 +32,13 @@ namespace AnyConfig
 {
 	struct CKV1TextEscape_t
 	{
-		KV1TextEscapeBehavior_t eBehavior;
+		KV1TextEscapeBehavior_t m_eBehavior;
 	}; // CKV1TextEscape_t
 
 	template<typename T>
 	struct CKV1Unk_t
 	{
-		T aValue;
+		T m_aValue;
 	}; // CKV1Unk_t<T>
 
 	template<class T>

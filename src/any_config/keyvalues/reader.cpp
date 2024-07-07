@@ -25,62 +25,62 @@
 
 bool AnyConfig::CKeyValuesReader::_LoadFromKV1File(const LoadFromKV1File_t &aParams)
 {
-	return LoadKV3FromKV1File(aParams.aContext, 
-	                          aParams.psMessage, 
-	                          aParams.pszFilename, 
-	                          aParams.pszPathID, 
-	                          aParams.eBehavior);
+	return LoadKV3FromKV1File(aParams.m_aContext, 
+	                          aParams.m_psMessage, 
+	                          aParams.m_pszFilename, 
+	                          aParams.m_pszPathID, 
+	                          aParams.m_eBehavior);
 }
 
 bool AnyConfig::CKeyValuesReader::_LoadFromKV1Text(const LoadFromKV1Text_t &aParams)
 {
-	return LoadKV3FromKV1Text(aParams.aContext, 
-	                          aParams.psMessage, 
-	                          aParams.aData, 
-	                          aParams.eBehavior, 
-	                          aParams.pszName, 
-	                          aParams.aValue);
+	return LoadKV3FromKV1Text(aParams.m_aContext, 
+	                          aParams.m_psMessage, 
+	                          aParams.m_aData, 
+	                          aParams.m_eBehavior, 
+	                          aParams.m_pszName, 
+	                          aParams.m_aValue);
 }
 
 bool AnyConfig::CKeyValuesReader::_LoadFromKV1Text_Translated(const LoadFromKV1Text_Translated_t &aParams)
 {
-	return LoadKV3FromKV1Text_Translated(aParams.aContext, 
-	                                     aParams.psMessage, 
-	                                     aParams.CInput_t<const char *>::aData, 
-	                                     aParams.eBehavior, 
-	                                     aParams.CKV1Proccessor_t<KV1ToKV3Translation_t *>::aData, 
-	                                     aParams.CKV1Unk_t<int>::aValue, 
-	                                     aParams.pszName, 
-	                                     aParams.CKV1Unk_t<bool>::aValue);
+	return LoadKV3FromKV1Text_Translated(aParams.m_aContext, 
+	                                     aParams.m_psMessage, 
+	                                     aParams.CInput_t<const char *>::m_aData, 
+	                                     aParams.m_eBehavior, 
+	                                     aParams.CKV1Proccessor_t<KV1ToKV3Translation_t *>::m_aData, 
+	                                     aParams.CKV1Unk_t<int>::m_aValue, 
+	                                     aParams.m_pszName, 
+	                                     aParams.CKV1Unk_t<bool>::m_aValue);
 }
 
 bool AnyConfig::CKeyValuesReader::LoadFromKV1File(const LoadFromKV1File_NoContext_t &aParams)
 {
 	return LoadKV3FromKV1File(Get(), 
-	                          aParams.psMessage, 
-	                          aParams.pszFilename, 
-	                          aParams.pszPathID, 
-	                          aParams.eBehavior);
+	                          aParams.m_psMessage, 
+	                          aParams.m_pszFilename, 
+	                          aParams.m_pszPathID, 
+	                          aParams.m_eBehavior);
 }
 
 bool AnyConfig::CKeyValuesReader::LoadFromKV1Text(const LoadFromKV1Text_NoContext_t &aParams)
 {
 	return LoadKV3FromKV1Text(Get(), 
-	                          aParams.psMessage, 
-	                          aParams.aData, 
-	                          aParams.eBehavior, 
-	                          aParams.pszName, 
-	                          aParams.aValue);
+	                          aParams.m_psMessage, 
+	                          aParams.m_aData, 
+	                          aParams.m_eBehavior, 
+	                          aParams.m_pszName, 
+	                          aParams.m_aValue);
 }
 
 bool AnyConfig::CKeyValuesReader::LoadFromKV1Text_Translated(const LoadFromKV1Text_Translated_NoContext_t &aParams)
 {
 	return LoadKV3FromKV1Text_Translated(Get(), 
-	                                     aParams.psMessage, 
-	                                     aParams.CInput_t<const char *>::aData, 
-	                                     aParams.eBehavior, 
-	                                     aParams.CKV1Proccessor_t<KV1ToKV3Translation_t *>::aData, 
-	                                     aParams.CKV1Unk_t<int>::aValue, 
-	                                     aParams.pszName, 
-	                                     aParams.CKV1Unk_t<bool>::aValue);
+	                                     aParams.m_psMessage, 
+	                                     aParams.CInput_t<const char *>::m_aData, 
+	                                     aParams.m_eBehavior, 
+	                                     aParams.CKV1Proccessor_t<KV1ToKV3Translation_t *>::m_aData, 
+	                                     aParams.CKV1Unk_t<int>::m_aValue, 
+	                                     aParams.m_pszName, 
+	                                     aParams.CKV1Unk_t<bool>::m_aValue);
 }

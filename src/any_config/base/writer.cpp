@@ -25,23 +25,23 @@
 
 bool AnyConfig::CBaseWriter::_Save(const Save_t &aParams)
 {
-	return SaveKV3(aParams.aEncoding, 
-	               aParams.aFormat, 
-	               aParams.CSaveFrom_t<KeyValues3 *>::aData, 
-	               aParams.psMessage, 
-	               aParams.COutput_t<CUtlBuffer *>::aData, 
-	               aParams.uFlags);
+	return SaveKV3(aParams.m_aEncoding, 
+	               aParams.m_aFormat, 
+	               aParams.CSaveFrom_t<KeyValues3 *>::m_aData, 
+	               aParams.m_psMessage, 
+	               aParams.COutput_t<CUtlBuffer *>::m_aData, 
+	               aParams.m_uFlags);
 }
 
 bool AnyConfig::CBaseWriter::_SaveToFile(const SaveToFile_t &aParams)
 {
-	return SaveKV3ToFile(aParams.aEncoding, 
-	                     aParams.aFormat, 
-	                     aParams.aData, 
-	                     aParams.psMessage, 
-	                     aParams.pszFilename,
-	                     aParams.pszPathID, 
-	                     aParams.uFlags);
+	return SaveKV3ToFile(aParams.m_aEncoding, 
+	                     aParams.m_aFormat, 
+	                     aParams.m_aData, 
+	                     aParams.m_psMessage, 
+	                     aParams.m_pszFilename,
+	                     aParams.m_pszPathID, 
+	                     aParams.m_uFlags);
 }
 
 
@@ -57,21 +57,21 @@ bool AnyConfig::CBaseWriter::Save(const SaveToFile_General_t &aParams)
 
 bool AnyConfig::CBaseWriter::Save(const Save_NoContext_t &aParams) const
 {
-	return SaveKV3(aParams.aEncoding, 
-	               aParams.aFormat, 
+	return SaveKV3(aParams.m_aEncoding, 
+	               aParams.m_aFormat, 
 	               Get(), 
-	               aParams.psMessage, 
-	               aParams.COutput_t<CUtlBuffer *>::aData, 
-	               aParams.uFlags);
+	               aParams.m_psMessage, 
+	               aParams.COutput_t<CUtlBuffer *>::m_aData, 
+	               aParams.m_uFlags);
 }
 
 bool AnyConfig::CBaseWriter::SaveToFile(const SaveToFile_NoContext_t &aParams) const
 {
-	return SaveKV3ToFile(aParams.aEncoding, 
-	                     aParams.aFormat, 
+	return SaveKV3ToFile(aParams.m_aEncoding, 
+	                     aParams.m_aFormat, 
 	                     Get(), 
-	                     aParams.psMessage, 
-	                     aParams.pszFilename, 
-	                     aParams.pszPathID, 
-	                     aParams.uFlags);
+	                     aParams.m_psMessage, 
+	                     aParams.m_pszFilename, 
+	                     aParams.m_pszPathID, 
+	                     aParams.m_uFlags);
 }

@@ -25,32 +25,32 @@
 
 bool AnyConfig::CJSONReader::_LoadFromJSON(const LoadFromJSON_t &aParams)
 {
-	return LoadKV3FromJSON(aParams.aContext, 
-	                       aParams.psMessage, 
-	                       aParams.aData, 
-	                       aParams.pszName);
+	return LoadKV3FromJSON(aParams.m_aContext, 
+	                       aParams.m_psMessage, 
+	                       aParams.m_aData, 
+	                       aParams.m_pszName);
 }
 
 bool AnyConfig::CJSONReader::_LoadFromJSONFile(const LoadFromJSONFile_t &aParams)
 {
-	return LoadKV3FromJSONFile(aParams.aContext, 
-	                           aParams.psMessage, 
-	                           aParams.pszFilename, 
-	                           aParams.pszPathID);
+	return LoadKV3FromJSONFile(aParams.m_aContext, 
+	                           aParams.m_psMessage, 
+	                           aParams.m_pszFilename, 
+	                           aParams.m_pszPathID);
 }
 
 bool AnyConfig::CJSONReader::LoadFromJSON(const LoadFromJSON_NoContext_t &aParams)
 {
 	return LoadKV3FromJSON(Get(), 
-	                       aParams.psMessage, 
-	                       aParams.aData, 
-	                       aParams.pszName);
+	                       aParams.m_psMessage, 
+	                       aParams.m_aData, 
+	                       aParams.m_pszName);
 }
 
 bool AnyConfig::CJSONReader::LoadFromJSONFile(const LoadFromJSONFile_NoContext_t &aParams)
 {
 	return LoadKV3FromJSONFile(Get(), 
-	                           aParams.psMessage, 
-	                           aParams.pszFilename, 
-	                           aParams.pszPathID);
+	                           aParams.m_psMessage, 
+	                           aParams.m_pszFilename, 
+	                           aParams.m_pszPathID);
 }

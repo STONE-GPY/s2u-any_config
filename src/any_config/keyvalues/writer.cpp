@@ -25,36 +25,36 @@
 
 bool AnyConfig::CKeyValuesWriter::_SaveAsKV1Text(const SaveAsKV1Text_t &aParams)
 {
-	return SaveKV3AsKV1Text(aParams.aContext, 
-	                        aParams.psMessage, 
-	                        aParams.aData, 
-	                        aParams.eBehavior);
+	return SaveKV3AsKV1Text(aParams.m_aContext, 
+	                        aParams.m_psMessage, 
+	                        aParams.m_aData, 
+	                        aParams.m_eBehavior);
 }
 
 bool AnyConfig::CKeyValuesWriter::_SaveAsKV1Text_Translated(const SaveAsKV1Text_Translated_t &aParams)
 {
-	return SaveKV3AsKV1Text_Translated(aParams.aContext, 
-	                                   aParams.psMessage, 
-	                                   aParams.COutput_t<CUtlBuffer *>::aData, 
-	                                   aParams.eBehavior, 
-	                                   aParams.CKV1Proccessor_t<KV3ToKV1Translation_t *>::aData, 
-	                                   aParams.aValue);
+	return SaveKV3AsKV1Text_Translated(aParams.m_aContext, 
+	                                   aParams.m_psMessage, 
+	                                   aParams.COutput_t<CUtlBuffer *>::m_aData, 
+	                                   aParams.m_eBehavior, 
+	                                   aParams.CKV1Proccessor_t<KV3ToKV1Translation_t *>::m_aData, 
+	                                   aParams.m_aValue);
 }
 
 bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text(const SaveAsKV1Text_NoContext_t &aParams)
 {
 	return SaveKV3AsKV1Text(Get(), 
-	                        aParams.psMessage, 
-	                        aParams.aData, 
-	                        aParams.eBehavior);
+	                        aParams.m_psMessage, 
+	                        aParams.m_aData, 
+	                        aParams.m_eBehavior);
 }
 
 bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text_Translated(const SaveAsKV1Text_Translated_NoContext_t &aParams)
 {
 	return SaveKV3AsKV1Text_Translated(Get(), 
-	                                   aParams.psMessage, 
-	                                   aParams.COutput_t<CUtlBuffer *>::aData, 
-	                                   aParams.eBehavior, 
-	                                   aParams.CKV1Proccessor_t<KV3ToKV1Translation_t *>::aData, 
-	                                   aParams.aValue);
+	                                   aParams.m_psMessage, 
+	                                   aParams.COutput_t<CUtlBuffer *>::m_aData, 
+	                                   aParams.m_eBehavior, 
+	                                   aParams.CKV1Proccessor_t<KV3ToKV1Translation_t *>::m_aData, 
+	                                   aParams.m_aValue);
 }
