@@ -34,6 +34,7 @@ namespace AnyConfig
 {
 	struct CEmpty_t
 	{
+		CEmpty_t() {};
 	}; // CEmpty_t
 
 	template<class T>
@@ -80,7 +81,7 @@ namespace AnyConfig
 	}; // CEncode_t
 
 	template<class T>
-	struct CSaveFrom_t : CIO_t<const T>
+	struct CSaveFrom_t : public CIO_t<const T>
 	{
 	}; // CSaveFrom_t<T>
 
