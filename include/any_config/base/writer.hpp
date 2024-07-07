@@ -45,16 +45,19 @@ namespace AnyConfig
 	{
 	}; // CSave_t<T, O>
 
-	struct Save_t : public CSave_t<KeyValues3 *, CUtlBuffer *>
+	class Save_t : public CSave_t<KeyValues3 *, CUtlBuffer *>
 	{
+	public:
 	}; // Save_t
 
-	struct Save_NoContext_t : public CNoContextBase<CSave_t<CEmpty_t, CUtlBuffer *>>
+	class Save_NoContext_t : public CNoContextBase<CSave_t<CEmpty_t, CUtlBuffer *>>
 	{
+	public:
 	}; // Save_NoContext_t
 
-	struct Save_General_t : public CGenericBase<Save_NoContext_t>
+	class Save_General_t : public CGenericBase<Save_NoContext_t>
 	{
+	public:
 	}; // Save_General_t
 
 	template<class T>
@@ -67,8 +70,9 @@ namespace AnyConfig
 	{
 	}; // CSaveToFile_t<T>
 
-	struct SaveToFile_t : public CSaveToFile_t<KeyValues3 *>
+	class SaveToFile_t : public CSaveToFile_t<KeyValues3 *>
 	{
+	public:
 	}; // SaveToFile_t
 
 	class SaveToFile_NoContext_t : public CNoContextBase<CSaveToFile_t<CEmpty_t>>

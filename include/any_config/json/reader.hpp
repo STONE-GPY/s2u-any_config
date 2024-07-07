@@ -40,8 +40,9 @@ namespace AnyConfig
 	{
 	}; // CLoadFromJSON_t<T, I>
 
-	struct LoadFromJSON_t : public CLoadFromJSON_t<KeyValues3 *, const char *>
+	class LoadFromJSON_t : public CLoadFromJSON_t<KeyValues3 *, const char *>
 	{
+	public:
 	}; // LoadFromJSON_t
 
 	class LoadFromJSON_NoContext_t : public CNoContextBase<CLoadFromJSON_t<CEmpty_t, const char *>>
@@ -57,12 +58,14 @@ namespace AnyConfig
 	{
 	}; // CLoadFromJSONFile_t<T>
 
-	struct LoadFromJSONFile_t : public CLoadFromJSONFile_t<KeyValues3 *>
+	class LoadFromJSONFile_t : public CLoadFromJSONFile_t<KeyValues3 *>
 	{
+	public:
 	}; // LoadFromJSONFile_t
 
 	class LoadFromJSONFile_NoContext_t : public CNoContextBase<CLoadFromJSONFile_t<CEmpty_t>>
 	{
+	public:
 	}; // LoadFromJSONFile_NoContext_t
 
 	class CJSONReader : public CBaseReader
