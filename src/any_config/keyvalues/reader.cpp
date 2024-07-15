@@ -22,6 +22,8 @@
 #include <any_config/keyvalues/reader.hpp>
 
 #include <tier0/keyvalues3.h>
+#include <tier0/utlbuffer.h>
+#include <tier0/strtools.h>
 
 AnyConfig::LoadFromKV1File_NoContext_t::LoadFromKV1File_NoContext_t(const LoadFromFile_Generic_t::Base_t& aInit)
 {
@@ -33,6 +35,11 @@ AnyConfig::LoadFromKV1File_NoContext_t::LoadFromKV1File_NoContext_t(const LoadFr
 
 AnyConfig::LoadFromKV1Text_NoContext_t::LoadFromKV1Text_NoContext_t(const Load_Generic_t::Base_t &aInit)
 {
+	m_psMessage = aInit.m_psMessage;
+	m_aData = (const char *)aInit.m_aData->Base();
+	m_eBehavior = KV1TEXT_ESC_BEHAVIOR_UNK1;
+	m_pszName = aInit.m_pszName;
+	m_aValue = false;
 }
 
 bool AnyConfig::CKeyValuesReader::_LoadFromKV1File(const LoadFromKV1File_t &aParams)
