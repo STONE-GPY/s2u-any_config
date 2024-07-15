@@ -69,7 +69,7 @@ jobs:
       run: >
         cmake --preset ${{ env.CMAKE_RELEASE_PRESET_NAME }}
         -DCMAKE_C_COMPILER=${{ env.CL_CC }}
-        -DCMAKE_CXX_COMPILER=${{ env.CL_CXX }
+        -DCMAKE_CXX_COMPILER=${{ env.CL_CXX }}
 
     - name: Release - Build
       run: cmake --build --preset ${{ env.CMAKE_RELEASE_PRESET_NAME }} --parallel --config ${{ env.CMAKE_RELEASE_CONFIG_NAME }}
