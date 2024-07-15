@@ -99,7 +99,7 @@ namespace AnyConfig
 	class INoContext
 	{
 	public:
-		virtual ~INoContext() = 0;
+		virtual ~INoContext() = default;
 	}; // INoContext<T>
 
 	template<class T>
