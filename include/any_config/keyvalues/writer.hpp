@@ -38,9 +38,17 @@ namespace AnyConfig
 	{
 	}; // CSaveAsKV1Text_t<T, O>
 
-	class SaveAsKV1Text_t : public CSaveAsKV1Text_t<KeyValues3 *, CUtlBuffer *>
+	class ISaveAsKV1Text
 	{
 	public:
+		virtual bool SaveAsKV1Text() = 0;
+	}; // ISaveAsKV1Text
+
+	class SaveAsKV1Text_t : public CSaveAsKV1Text_t<KeyValues3 *, CUtlBuffer *>, 
+	                        public ISaveAsKV1Text
+	{
+	public: // ISaveAsKV1Text
+		bool SaveAsKV1Text();
 	}; // SaveAsKV1Text_t
 
 	class SaveAsKV1Text_NoContext_t : public CNoContextBase<CSaveAsKV1Text_t<CEmpty_t, CUtlBuffer *>>
@@ -56,9 +64,17 @@ namespace AnyConfig
 	{
 	}; // CSaveAsKV1Text_Translated_t<T, O, P>
 
-	class SaveAsKV1Text_Translated_t : public CSaveAsKV1Text_Translated_t<KeyValues3 *, CUtlBuffer *, KV3ToKV1Translation_t *>
+	class ISaveAsKV1Text_Translated
 	{
 	public:
+		virtual bool SaveAsKV1Text_Translated() = 0;
+	}; // ISaveAsKV1Text_Translated
+
+	class SaveAsKV1Text_Translated_t : public CSaveAsKV1Text_Translated_t<KeyValues3 *, CUtlBuffer *, KV3ToKV1Translation_t *>, 
+	                                   public ISaveAsKV1Text_Translated
+	{
+	public:
+		bool SaveAsKV1Text_Translated();
 	}; // SaveAsKV1Text_Translated_t
 
 	class SaveAsKV1Text_Translated_NoContext_t : public CNoContextBase<CSaveAsKV1Text_Translated_t<CEmpty_t, CUtlBuffer *, KV3ToKV1Translation_t *>>
@@ -68,13 +84,6 @@ namespace AnyConfig
 
 	class CKeyValuesWriter : public CBaseWriter
 	{
-	public:
-		//
-		// Save ones (globals).
-		//
-		static bool _SaveAsKV1Text(const SaveAsKV1Text_t &aParams);
-		static bool _SaveAsKV1Text_Translated(const SaveAsKV1Text_Translated_t &aParams);
-
 	public: // IBaseWriter<Save_General_t>
 		bool Save(const Save_General_t &aParams);
 

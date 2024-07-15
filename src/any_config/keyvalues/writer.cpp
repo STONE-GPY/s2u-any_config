@@ -24,6 +24,14 @@
 #include <tier0/keyvalues3.h>
 #include <tier0/utlstring.h>
 
+bool AnyConfig::SaveAsKV1Text_t::SaveAsKV1Text()
+{
+	return SaveKV3AsKV1Text(m_aContext, 
+	                        m_psMessage, 
+	                        m_aData, 
+	                        m_eBehavior);
+}
+
 AnyConfig::SaveAsKV1Text_NoContext_t::SaveAsKV1Text_NoContext_t(const Save_General_t::Base_t &aInit)
 {
 	m_psMessage = aInit.m_psMessage;
@@ -31,22 +39,14 @@ AnyConfig::SaveAsKV1Text_NoContext_t::SaveAsKV1Text_NoContext_t(const Save_Gener
 	m_eBehavior = KV1TEXT_ESC_BEHAVIOR_UNK1;
 }
 
-bool AnyConfig::CKeyValuesWriter::_SaveAsKV1Text(const SaveAsKV1Text_t &aParams)
+bool AnyConfig::SaveAsKV1Text_Translated_t::SaveAsKV1Text_Translated()
 {
-	return SaveKV3AsKV1Text(aParams.m_aContext, 
-	                        aParams.m_psMessage, 
-	                        aParams.m_aData, 
-	                        aParams.m_eBehavior);
-}
-
-bool AnyConfig::CKeyValuesWriter::_SaveAsKV1Text_Translated(const SaveAsKV1Text_Translated_t &aParams)
-{
-	return SaveKV3AsKV1Text_Translated(aParams.m_aContext, 
-	                                   aParams.m_psMessage, 
-	                                   aParams.COutput_t<CUtlBuffer *>::m_aData, 
-	                                   aParams.m_eBehavior, 
-	                                   aParams.CKV1Proccessor_t<KV3ToKV1Translation_t *>::m_aData, 
-	                                   aParams.m_aValue);
+	return SaveKV3AsKV1Text_Translated(m_aContext, 
+	                                   m_psMessage, 
+	                                   COutput_t<CUtlBuffer *>::m_aData, 
+	                                   m_eBehavior, 
+	                                   CKV1Proccessor_t<KV3ToKV1Translation_t *>::m_aData, 
+	                                   m_aValue);
 }
 
 bool AnyConfig::CKeyValuesWriter::Save(const Save_General_t &aParams)

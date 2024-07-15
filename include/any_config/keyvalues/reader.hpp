@@ -38,9 +38,17 @@ namespace AnyConfig
 	{
 	}; // CLoadFromKV1File_t<T>
 
-	class LoadFromKV1File_t : public CLoadFromKV1File_t<KeyValues3 *>
+	class ILoadFromKV1File
 	{
 	public:
+		virtual bool LoadFromKV1File() = 0;
+	}; // ILoadFromKV1File
+
+	class LoadFromKV1File_t : public CLoadFromKV1File_t<KeyValues3 *>, 
+	                          public ILoadFromKV1File
+	{
+	public: // ILoadFromKV1File
+		bool LoadFromKV1File();
 	}; // LoadFromKV1File_t
 
 	class LoadFromKV1File_NoContext_t : public CLoadFromKV1File_t<CEmpty_t>
@@ -59,9 +67,17 @@ namespace AnyConfig
 	{
 	}; // CLoadFromKV1Text_t<T>
 
-	class LoadFromKV1Text_t : public CLoadFromKV1Text_t<KeyValues3 *, const char *>
+	class ILoadFromKV1Text
 	{
 	public:
+		virtual bool LoadFromKV1Text() = 0;
+	}; // ILoadFromKV1Text
+
+	class LoadFromKV1Text_t : public CLoadFromKV1Text_t<KeyValues3 *, const char *>, 
+	                          public ILoadFromKV1Text
+	{
+	public: // ILoadFromKV1Text
+		bool LoadFromKV1Text();
 	}; // LoadFromKV1Text_t
 
 	class LoadFromKV1Text_NoContext_t : public CLoadFromKV1Text_t<CEmpty_t, const char *>
@@ -82,9 +98,17 @@ namespace AnyConfig
 	{
 	}; // CLoadFromKV1Text_Translated_t<T, I, P>
 
-	class LoadFromKV1Text_Translated_t : public CLoadFromKV1Text_Translated_t<KeyValues3 *, const char *, KV1ToKV3Translation_t *>
+	class ILoadFromKV1Text_Translated
 	{
 	public:
+		virtual bool LoadFromKV1Text_Translated() = 0;
+	}; // ILoadFromKV1Text_Translated
+
+	class LoadFromKV1Text_Translated_t : public CLoadFromKV1Text_Translated_t<KeyValues3 *, const char *, KV1ToKV3Translation_t *>, 
+	                                     public ILoadFromKV1Text_Translated
+	{
+	public: // ILoadFromKV1Text_Translated
+		bool LoadFromKV1Text_Translated();
 	}; // LoadFromKV1Text_Translated_t
 
 	class LoadFromKV1Text_Translated_NoContext_t : public CLoadFromKV1Text_Translated_t<CEmpty_t, const char *, KV1ToKV3Translation_t *>
@@ -94,14 +118,6 @@ namespace AnyConfig
 
 	class CKeyValuesReader : public CBaseReader
 	{
-	public:
-		//
-		// Load ones (globals).
-		//
-		static bool _LoadFromKV1File(const LoadFromKV1File_t &aParams);
-		static bool _LoadFromKV1Text(const LoadFromKV1Text_t &aParams);
-		static bool _LoadFromKV1Text_Translated(const LoadFromKV1Text_Translated_t &aParams);
-
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);
 
