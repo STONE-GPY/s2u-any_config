@@ -56,7 +56,7 @@ bool AnyConfig::CJSONWriter::Save(const SaveToFile_General_t &aParams)
 	sError = "<";
 	sError += "Save";
 	sError += " JSON";
-	sError += " from file";
+	sError += " to file";
 	sError += ": ";
 	sError += "not supported now";
 	sError += ">";
