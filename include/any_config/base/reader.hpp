@@ -44,19 +44,30 @@ namespace AnyConfig
 	{
 	}; // CLoadBase_t<T, I>
 
-	class Load_t : public CLoad_t<CKeyValues3Context *, CUtlBuffer *>
+	class ILoad
 	{
 	public:
+		virtual bool Load() = 0;
+	}; // ILoad
+
+	class Load_t : public CLoad_t<CKeyValues3Context *, CUtlBuffer *>, 
+	               public ILoad
+	{
+	public: // ILoad
+		bool Load();
 	}; // Load_t
 
-	class Load2_t : public CLoad_t<KeyValues3 *, CUtlBuffer *>
+	class Load2_t : public CLoad_t<KeyValues3 *, CUtlBuffer *>, 
+	                public ILoad
 	{
-	public:
+	public: // ILoad
+		bool Load();
 	}; // Load2_t
 
 	class Load3_t : public CLoad_t<KeyValues3 *, const char *>
 	{
-	public:
+	public: // ILoad
+		bool Load();
 	}; // Load3_t
 
 	class Load_NoContext_t : public CNoContextBase<CLoad_t<CEmpty_t, CUtlBuffer *>>
@@ -97,14 +108,24 @@ namespace AnyConfig
 	public:
 	}; // LoadFromFileBase_t
 
-	class LoadFromFile_t : public CLoadFromFile_t<CKeyValues3Context *>
+	class ILoadFromFile
 	{
 	public:
+		virtual bool LoadFromFile() = 0;
+	};
+
+	class LoadFromFile_t : public CLoadFromFile_t<CKeyValues3Context *>, 
+	                       public ILoadFromFile
+	{
+	public: // ILoadFromFile
+		bool LoadFromFile();
 	}; // LoadFromFile_t
 
-	class LoadFromFile2_t : public CLoadFromFile_t<KeyValues3 *>
+	class LoadFromFile2_t : public CLoadFromFile_t<KeyValues3 *>, 
+	                        public ILoadFromFile
 	{
-	public:
+	public: // ILoadFromFile
+		bool LoadFromFile();
 	}; // LoadFromFile2_t
 
 	class LoadFromFile_NoContext_t : public CNoContextBase<CLoadFromFile_t<CEmpty_t>>
@@ -131,9 +152,17 @@ namespace AnyConfig
 	{
 	}; // CLoadNoHeader_t<T, I>
 
-	class LoadNoHeader_t : public CLoadNoHeader_t<KeyValues3 *, const char *>
+	class ILoadNoHeader
 	{
 	public:
+		virtual bool LoadNoHeader() = 0;
+	}; // ILoadNoHeader
+
+	class LoadNoHeader_t : public CLoadNoHeader_t<KeyValues3 *, const char *>, 
+	                       public ILoadNoHeader
+	{
+	public: // ILoadNoHeader
+		bool LoadNoHeader();
 	}; // LoadNoHeader_t
 
 	class LoadNoHeader_NoContext_t : public CNoContextBase<LoadNoHeader_t>
@@ -145,19 +174,6 @@ namespace AnyConfig
 	                    public IBaseReader<Load_Generic_t>, 
 	                    public IBaseReader<LoadFromFile_Generic_t>
 	{
-	public:
-		//
-		// Load ones (globals).
-		//
-		static bool _Load(const Load_t &aParams);
-		static bool _Load(const Load2_t &aParams);
-		static bool _Load(const Load3_t &aParams);
-
-		static bool _LoadFromFile(const LoadFromFile_t &aParams);
-		static bool _LoadFromFile(const LoadFromFile2_t &aParams);
-
-		static bool _LoadNoHeader(const LoadNoHeader_t &aParams);
-
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);
 

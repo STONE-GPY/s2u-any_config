@@ -45,9 +45,17 @@ namespace AnyConfig
 	{
 	}; // CSave_t<T, O>
 
-	class Save_t : public CSave_t<KeyValues3 *, CUtlBuffer *>
+	class ISave
 	{
 	public:
+		virtual bool Save() = 0;
+	}; // ISave
+
+	class Save_t : public CSave_t<KeyValues3 *, CUtlBuffer *>, 
+	               public ISave
+	{
+	public: // ISave
+		bool Save();
 	}; // Save_t
 
 	class Save_NoContext_t : public CNoContextBase<CSave_t<CEmpty_t, CUtlBuffer *>>
@@ -70,9 +78,17 @@ namespace AnyConfig
 	{
 	}; // CSaveToFile_t<T>
 
-	class SaveToFile_t : public CSaveToFile_t<KeyValues3 *>
+	class ISaveToFile
 	{
 	public:
+		virtual bool SaveToFile() = 0;
+	};
+
+	class SaveToFile_t : public CSaveToFile_t<KeyValues3 *>, 
+	                     public ISaveToFile
+	{
+	public: // ISaveToFile
+		bool SaveToFile();
 	}; // SaveToFile_t
 
 	class SaveToFile_NoContext_t : public CNoContextBase<CSaveToFile_t<CEmpty_t>>
@@ -87,13 +103,6 @@ namespace AnyConfig
 	                    public IBaseWriter<Save_General_t>, 
 	                    public IBaseWriter<SaveToFile_General_t>
 	{
-	public:
-		//
-		// Save ones (globals).
-		//
-		static bool _Save(const Save_t &aParams);
-		static bool _SaveToFile(const SaveToFile_t &aParams);
-
 	public: // IBaseWriter<Save_General_t>
 		bool Save(const Save_General_t &aParams);
 

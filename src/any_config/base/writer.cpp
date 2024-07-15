@@ -23,27 +23,26 @@
 
 #include <tier0/keyvalues3.h>
 
-bool AnyConfig::CBaseWriter::_Save(const Save_t &aParams)
+bool AnyConfig::Save_t::Save()
 {
-	return SaveKV3(aParams.m_aEncoding, 
-	               aParams.m_aFormat, 
-	               aParams.CSaveFrom_t<KeyValues3 *>::m_aData, 
-	               aParams.m_psMessage, 
-	               aParams.COutput_t<CUtlBuffer *>::m_aData, 
-	               aParams.m_uFlags);
+	return SaveKV3(m_aEncoding, 
+	               m_aFormat, 
+	               CSaveFrom_t<KeyValues3 *>::m_aData, 
+	               m_psMessage, 
+	               COutput_t<CUtlBuffer *>::m_aData, 
+	               m_uFlags);
 }
 
-bool AnyConfig::CBaseWriter::_SaveToFile(const SaveToFile_t &aParams)
+bool AnyConfig::SaveToFile_t::SaveToFile()
 {
-	return SaveKV3ToFile(aParams.m_aEncoding, 
-	                     aParams.m_aFormat, 
-	                     aParams.m_aData, 
-	                     aParams.m_psMessage, 
-	                     aParams.m_pszFilename,
-	                     aParams.m_pszPathID, 
-	                     aParams.m_uFlags);
+	return SaveKV3ToFile(m_aEncoding, 
+	                     m_aFormat, 
+	                     m_aData, 
+	                     m_psMessage, 
+	                     m_pszFilename,
+	                     m_pszPathID, 
+	                     m_uFlags);
 }
-
 
 bool AnyConfig::CBaseWriter::Save(const Save_General_t &aParams)
 {
