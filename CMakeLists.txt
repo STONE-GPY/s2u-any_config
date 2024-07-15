@@ -18,7 +18,7 @@ project(any_config
 if(SOURCESDK_DIR)
 	file(TO_CMAKE_PATH "${SOURCESDK_DIR}" SOURCESDK_DIR)
 else()
-	set(SOURCESDK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/hl2sdk)
+	set(SOURCESDK_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/hl2sdk")
 endif()
 
 set(INCLUDE_DIR "include")
