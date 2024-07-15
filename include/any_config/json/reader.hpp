@@ -40,9 +40,17 @@ namespace AnyConfig
 	{
 	}; // CLoadFromJSON_t<T, I>
 
-	class LoadFromJSON_t : public CLoadFromJSON_t<KeyValues3 *, const char *>
+	class ILoadFromJSON
 	{
 	public:
+		virtual bool LoadFromJSON() = 0;
+	}; // ILoadFromJSON
+
+	class LoadFromJSON_t : public CLoadFromJSON_t<KeyValues3 *, const char *>, 
+	                       public ILoadFromJSON
+	{
+	public: // ILoadFromJSON
+		bool LoadFromJSON();
 	}; // LoadFromJSON_t
 
 	class LoadFromJSON_NoContext_t : public CNoContextBase<CLoadFromJSON_t<CEmpty_t, const char *>>
@@ -58,9 +66,17 @@ namespace AnyConfig
 	{
 	}; // CLoadFromJSONFile_t<T>
 
-	class LoadFromJSONFile_t : public CLoadFromJSONFile_t<KeyValues3 *>
+	class ILoadFromJSONFile
 	{
 	public:
+		virtual bool LoadFromJSONFile() = 0;
+	}; // ILoadFromJSONFile
+
+	class LoadFromJSONFile_t : public CLoadFromJSONFile_t<KeyValues3 *>, 
+	                           public ILoadFromJSONFile
+	{
+	public: // ILoadFromJSONFile
+		bool LoadFromJSONFile();
 	}; // LoadFromJSONFile_t
 
 	class LoadFromJSONFile_NoContext_t : public CNoContextBase<CLoadFromJSONFile_t<CEmpty_t>>
@@ -70,13 +86,6 @@ namespace AnyConfig
 
 	class CJSONReader : public CBaseReader
 	{
-	public:
-		//
-		// Load ones (globals).
-		//
-		static bool _LoadFromJSON(const LoadFromJSON_t &aParams);
-		static bool _LoadFromJSONFile(const LoadFromJSONFile_t &aParams);
-
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);
 

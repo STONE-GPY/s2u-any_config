@@ -37,14 +37,29 @@ namespace AnyConfig
 	{
 	}; // CSaveJSON_t<T, O>
 
-	class SaveJSON_t : public CSaveJSON_t<KeyValues3 *, CUtlBuffer *>
+	class ISaveJSON
 	{
 	public:
+		virtual bool SaveJSON() = 0;
+	}; // ISaveJSON
+
+	class SaveJSON_t : public CSaveJSON_t<KeyValues3 *, CUtlBuffer *>, 
+	                   public ISaveJSON
+	{
+	public: // ISaveJSON
+		bool SaveJSON();
 	}; // SaveJSON_t
+
+	class ISaveJSON2
+	{
+	public:
+		virtual bool SaveJSON2() = 0;
+	}; // ISaveJSON2
 
 	class SaveJSON2_t : public CSaveJSON_t<KeyValues3 *, CUtlString *>
 	{
-	public:
+	public: // ISaveJSON2
+		bool SaveJSON2();
 	}; // SaveJSON2_t
 
 	class SaveJSON_NoContext_t : public CNoContextBase<CSaveJSON_t<CEmpty_t, CUtlBuffer *>>

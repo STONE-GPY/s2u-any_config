@@ -25,6 +25,14 @@
 #include <tier0/utlbuffer.h>
 #include <tier0/utlstring.h>
 
+bool AnyConfig::LoadFromJSON_t::LoadFromJSON()
+{
+	return LoadKV3FromJSON(m_aContext, 
+	                       m_psMessage, 
+	                       m_aData, 
+	                       m_pszName);
+}
+
 AnyConfig::LoadFromJSON_NoContext_t::LoadFromJSON_NoContext_t(const Load_Generic_t::Base_t &aInit)
 {
 	m_psMessage = aInit.m_psMessage;
@@ -32,20 +40,12 @@ AnyConfig::LoadFromJSON_NoContext_t::LoadFromJSON_NoContext_t(const Load_Generic
 	m_pszName = aInit.m_pszName;
 }
 
-bool AnyConfig::CJSONReader::_LoadFromJSON(const LoadFromJSON_t &aParams)
+bool AnyConfig::LoadFromJSONFile_t::LoadFromJSONFile()
 {
-	return LoadKV3FromJSON(aParams.m_aContext, 
-	                       aParams.m_psMessage, 
-	                       aParams.m_aData, 
-	                       aParams.m_pszName);
-}
-
-bool AnyConfig::CJSONReader::_LoadFromJSONFile(const LoadFromJSONFile_t &aParams)
-{
-	return LoadKV3FromJSONFile(aParams.m_aContext, 
-	                           aParams.m_psMessage, 
-	                           aParams.m_pszFilename, 
-	                           aParams.m_pszPathID);
+	return LoadKV3FromJSONFile(m_aContext, 
+	                           m_psMessage, 
+	                           m_pszFilename, 
+	                           m_pszPathID);
 }
 
 bool AnyConfig::CJSONReader::Load(const Load_Generic_t &aParams)

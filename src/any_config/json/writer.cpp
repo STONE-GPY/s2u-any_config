@@ -30,18 +30,18 @@ AnyConfig::SaveJSON_NoContext_t::SaveJSON_NoContext_t(const Save_General_t::Base
 	COutput_t<CUtlBuffer *>::m_aData = aInit.COutput_t<CUtlBuffer *>::m_aData;
 }
 
-bool AnyConfig::CJSONWriter::_SaveJSON(const SaveJSON_t &aParams)
+bool AnyConfig::SaveJSON_t::SaveJSON()
 {
-	return SaveKV3AsJSON(aParams.CSaveFrom_t<KeyValues3 *>::m_aData, 
-	                     aParams.m_psMessage, 
-	                     aParams.COutput_t<CUtlBuffer *>::m_aData);
+	return SaveKV3AsJSON(CSaveFrom_t<KeyValues3 *>::m_aData, 
+	                     m_psMessage, 
+	                     COutput_t<CUtlBuffer *>::m_aData);
 }
 
-bool AnyConfig::CJSONWriter::_SaveJSON(const SaveJSON2_t &aParams)
+bool AnyConfig::SaveJSON2_t::SaveJSON2()
 {
-	return SaveKV3AsJSON(aParams.CSaveFrom_t<KeyValues3 *>::m_aData, 
-	                     aParams.m_psMessage, 
-	                     aParams.COutput_t<CUtlString *>::m_aData);
+	return SaveKV3AsJSON(CSaveFrom_t<KeyValues3 *>::m_aData, 
+	                     m_psMessage, 
+	                     COutput_t<CUtlString *>::m_aData);
 }
 
 bool AnyConfig::CJSONWriter::Save(const Save_General_t &aParams)
