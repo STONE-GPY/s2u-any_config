@@ -65,13 +65,6 @@ jobs:
         }
       shell: pwsh
 
-    - name: Checkout HL2SDK
-      uses: actions/checkout@v4
-      with:
-        repository: ${{ env.HL2SDK_REMOTE }}
-        ref: ${{ env.HL2SDK_BRANCH }}
-        fetch-depth: ${{ env.HL2SDK_DEPTH }}
-
     - name: Release - Configure CMake
       run: >
         cmake --preset ${{ env.CMAKE_RELEASE_PRESET_NAME }}
