@@ -52,7 +52,7 @@ bool AnyConfig::CJSONWriter::Save(const Save_General_t &aParams)
 
 bool AnyConfig::CJSONWriter::Save(const SaveToFile_General_t &aParams)
 {
-	static const char *s_pszMessageConcat[] = {"<", "Save", "  JSON", " to file", ": ", "not supported now", ">"};
+	static const char *s_pszMessageConcat[] = {"<", "Save", "  JSON", " to file", ": ", "Not supported now", ">"};
 
 	CBufferStringGrowable<256> sMessage;
 

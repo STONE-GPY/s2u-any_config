@@ -56,7 +56,7 @@ bool AnyConfig::CJSONReader::Load(const Load_Generic_t &aParams)
 
 bool AnyConfig::CJSONReader::Load(const LoadFromFile_Generic_t &aParams)
 {
-	static const char *s_pszMessageConcat[] = {"<", "Load", "  JSON", " from file", ": ", "not supported now", ">"};
+	static const char *s_pszMessageConcat[] = {"<", "Load", "  JSON", " from file", ": ", "Not supported now", ">"};
 
 	CBufferStringGrowable<256> sMessage;
 
