@@ -36,7 +36,7 @@ namespace AnyConfig
 	public:
 		static constexpr const char sm_szFileExtensionJSON[] = ".json";
 
-		FileExtension::CCheck<sm_szFileExtensionJSON> m_aCheckJSONFileExtension;
+		FileExtension::CCheck<sm_szFileExtensionJSON> m_aCheckFileExtension;
 	}; // JSON
 }; // AnyConfig
 

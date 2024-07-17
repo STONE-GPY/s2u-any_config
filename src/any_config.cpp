@@ -40,15 +40,15 @@ bool AnyConfig::Anyone::Load(const LoadFromFile_Generic_t &aParams)
 {
 	const char *pszFilename = aParams.m_pszFilename;
 
-	if(Base::m_aCheckBaseFileExtension.Check(pszFilename))
+	if(Base::m_aCheckFileExtension.Check(pszFilename))
 	{
 		return Base::Load(aParams);
 	}
-	else if(JSON::m_aCheckJSONFileExtension.Check(pszFilename))
+	else if(JSON::m_aCheckFileExtension.Check(pszFilename))
 	{
 		return JSON::Load(aParams);
 	}
-	else if(KeyValues::m_aCheckKeyValuesFileExtension.Check(pszFilename))
+	else if(KeyValues::m_aCheckFileExtension.Check(pszFilename))
 	{
 		return KeyValues::Load(aParams);
 	}
@@ -81,15 +81,15 @@ bool AnyConfig::Anyone::Save(const SaveToFile_General_t &aParams)
 {
 	const char *pszFilename = aParams.m_pszFilename;
 
-	if(Base::m_aCheckBaseFileExtension.Check(pszFilename))
+	if(Base::m_aCheckFileExtension.Check(pszFilename))
 	{
 		return Base::Save(aParams);
 	}
-	else if(JSON::m_aCheckJSONFileExtension.Check(pszFilename))
+	else if(JSON::m_aCheckFileExtension.Check(pszFilename))
 	{
 		return JSON::Save(aParams);
 	}
-	else if(KeyValues::m_aCheckKeyValuesFileExtension.Check(pszFilename))
+	else if(KeyValues::m_aCheckFileExtension.Check(pszFilename))
 	{
 		return KeyValues::Save(aParams);
 	}

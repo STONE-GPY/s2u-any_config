@@ -39,7 +39,7 @@ namespace AnyConfig
 		static constexpr const char sm_szFileExtensionKV[] = ".kv";
 		static constexpr const char sm_szFileExtensionVDF[] = ".vdf";
 
-		FileExtension::CCheck<sm_szFileExtensionPhrasesTXT, sm_szFileExtensionGamesTXT, sm_szFileExtensionKV, sm_szFileExtensionVDF> m_aCheckKeyValuesFileExtension;
+		FileExtension::CCheck<sm_szFileExtensionPhrasesTXT, sm_szFileExtensionGamesTXT, sm_szFileExtensionKV, sm_szFileExtensionVDF> m_aCheckFileExtension;
 	}; // KeyValues
 }; // AnyConfig
 

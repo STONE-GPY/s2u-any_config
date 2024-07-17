@@ -37,7 +37,7 @@ namespace AnyConfig
 		static constexpr const char sm_szFileExtensionKV3[] = ".kv3";
 		static constexpr const char sm_szFileExtensionVData[] = ".vdata";
 
-		FileExtension::CCheck<sm_szFileExtensionKV3, sm_szFileExtensionVData> m_aCheckBaseFileExtension;
+		FileExtension::CCheck<sm_szFileExtensionKV3, sm_szFileExtensionVData> m_aCheckFileExtension;
 	}; // Base
 }; // AnyConfig
 
