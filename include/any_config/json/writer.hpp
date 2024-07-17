@@ -73,7 +73,7 @@ namespace AnyConfig
 	public:
 	}; // SaveJSON2_NoContext_t
 
-	class CJSONWriter : public CBaseWriter
+	class CJSONWriter : public CWriterBase<CBase>
 	{
 	public: // IBaseWriter<Save_General_t>
 		bool Save(const Save_General_t &aParams);

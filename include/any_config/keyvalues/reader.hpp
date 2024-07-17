@@ -116,7 +116,7 @@ namespace AnyConfig
 	public:
 	}; // LoadFromKV1Text_Translated_NoContext_t
 
-	class CKeyValuesReader : public CBaseReader
+	class CKeyValuesReader : public CReaderBase<CBase>
 	{
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);

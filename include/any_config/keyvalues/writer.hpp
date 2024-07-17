@@ -82,7 +82,7 @@ namespace AnyConfig
 	public:
 	}; // SaveAsKV1Text_Translated_NoContext_t
 
-	class CKeyValuesWriter : public CBaseWriter
+	class CKeyValuesWriter : public CWriterBase<CBase>
 	{
 	public: // IBaseWriter<Save_General_t>
 		bool Save(const Save_General_t &aParams);

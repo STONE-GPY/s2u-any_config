@@ -84,7 +84,7 @@ namespace AnyConfig
 	public:
 	}; // LoadFromJSONFile_NoContext_t
 
-	class CJSONReader : public CBaseReader
+	class CJSONReader : public CReaderBase<CBase>
 	{
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);

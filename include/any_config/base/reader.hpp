@@ -170,9 +170,14 @@ namespace AnyConfig
 	public:
 	}; // LoadNoHeader_NoContext_t
 
-	class CBaseReader : public CBase, 
+	template<class T>
+	class CReaderBase : public T, 
 	                    public IBaseReader<Load_Generic_t>, 
 	                    public IBaseReader<LoadFromFile_Generic_t>
+	{
+	}; // CReaderBase<T>
+
+	class CBaseReader : public CReaderBase<CBase>
 	{
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);

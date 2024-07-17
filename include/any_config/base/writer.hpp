@@ -99,9 +99,14 @@ namespace AnyConfig
 	{
 	}; // SaveToFile_General_t
 
-	class CBaseWriter : public CBase, 
+	template<class T>
+	class CWriterBase : public T, 
 	                    public IBaseWriter<Save_General_t>, 
 	                    public IBaseWriter<SaveToFile_General_t>
+	{
+	}; // CWriterBase<T>
+
+	class CBaseWriter : public CWriterBase<CBase>
 	{
 	public: // IBaseWriter<Save_General_t>
 		bool Save(const Save_General_t &aParams);
