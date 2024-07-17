@@ -21,6 +21,7 @@
 
 #include <any_config/json/writer.hpp>
 
+#include <tier0/bufferstring.h>
 #include <tier0/keyvalues3.h>
 #include <tier0/utlstring.h>
 
@@ -51,17 +52,12 @@ bool AnyConfig::CJSONWriter::Save(const Save_General_t &aParams)
 
 bool AnyConfig::CJSONWriter::Save(const SaveToFile_General_t &aParams)
 {
-	CUtlString sError;
+	static const char *s_pszMessageConcat[] = {"<", "Save", "  JSON", " to file", ": ", "not supported now", ">"};
 
-	sError = "<";
-	sError += "Save";
-	sError += " JSON";
-	sError += " to file";
-	sError += ": ";
-	sError += "not supported now";
-	sError += ">";
+	CBufferStringGrowable<256> sMessage;
 
-	*aParams.m_psMessage = sError;
+	sMessage.AppendConcat(sizeof(s_pszMessageConcat) / sizeof(*s_pszMessageConcat), s_pszMessageConcat, NULL);
+	*aParams.m_psMessage = sMessage;
 
 	return false;
 }

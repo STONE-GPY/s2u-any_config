@@ -21,6 +21,7 @@
 
 #include <any_config/json/reader.hpp>
 
+#include <tier0/bufferstring.h>
 #include <tier0/keyvalues3.h>
 #include <tier0/utlbuffer.h>
 #include <tier0/utlstring.h>
@@ -55,17 +56,12 @@ bool AnyConfig::CJSONReader::Load(const Load_Generic_t &aParams)
 
 bool AnyConfig::CJSONReader::Load(const LoadFromFile_Generic_t &aParams)
 {
-	CUtlString sError;
+	static const char *s_pszMessageConcat[] = {"<", "Load", "  JSON", " from file", ": ", "not supported now", ">"};
 
-	sError = "<";
-	sError += "Load";
-	sError += " JSON";
-	sError += " from file";
-	sError += ": ";
-	sError += "not supported now";
-	sError += ">";
+	CBufferStringGrowable<256> sMessage;
 
-	*aParams.m_psMessage = sError;
+	sMessage.AppendConcat(sizeof(s_pszMessageConcat) / sizeof(*s_pszMessageConcat), s_pszMessageConcat, NULL);
+	*aParams.m_psMessage = sMessage;
 
 	return false;
 }
