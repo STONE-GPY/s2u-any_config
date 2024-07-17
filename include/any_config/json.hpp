@@ -27,10 +27,16 @@
 #include "json/reader.hpp"
 #include "json/writer.hpp"
 
+#include "file_extension/check.hpp"
+
 namespace AnyConfig
 {
 	class JSON : virtual public CJSONReader, virtual public CJSONWriter
 	{
+	public:
+		static constexpr const char sm_szFileExtensionJSON[] = ".json";
+
+		FileExtension::CCheck<sm_szFileExtensionJSON> m_aCheckJSONFileExtension;
 	}; // JSON
 }; // AnyConfig
 

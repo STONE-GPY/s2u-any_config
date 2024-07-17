@@ -44,6 +44,8 @@ set(SOURCE_FILES
 
 	${SOURCE_DIR}/any_config/keyvalues/reader.cpp
 	${SOURCE_DIR}/any_config/keyvalues/writer.cpp
+
+	${SOURCE_DIR}/any_config.cpp
 )
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})

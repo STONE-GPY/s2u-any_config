@@ -27,10 +27,17 @@
 #include "base/reader.hpp"
 #include "base/writer.hpp"
 
+#include "file_extension/check.hpp"
+
 namespace AnyConfig
 {
 	class Base : virtual public CBaseReader, virtual public CBaseWriter
 	{
+	public:
+		static constexpr const char sm_szFileExtensionKV3[] = ".kv3";
+		static constexpr const char sm_szFileExtensionVData[] = ".vdata";
+
+		FileExtension::CCheck<sm_szFileExtensionKV3, sm_szFileExtensionVData> m_aCheckBaseFileExtension;
 	}; // Base
 }; // AnyConfig
 

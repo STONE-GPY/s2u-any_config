@@ -19,28 +19,33 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef _INCLUDE_ANY_CONFIG_KEYVALUES_HPP_
-#define _INCLUDE_ANY_CONFIG_KEYVALUES_HPP_
+#ifndef _INCLUDE_ANY_CONFIG_HPP_
+#define _INCLUDE_ANY_CONFIG_HPP_
 
 #pragma once
 
-#include "keyvalues/reader.hpp"
-#include "keyvalues/writer.hpp"
-
-#include "file_extension/check.hpp"
+#include "any_config/base.hpp"
+#include "any_config/json.hpp"
+#include "any_config/keyvalues.hpp"
 
 namespace AnyConfig
 {
-	class KeyValues : virtual public CKeyValuesReader, virtual public CKeyValuesWriter
+	class Anyone : virtual public Base, 
+	               virtual public JSON, 
+	               virtual public KeyValues
 	{
-	public:
-		static constexpr const char sm_szFileExtensionPhrasesTXT[] = ".phrases.txt";
-		static constexpr const char sm_szFileExtensionGamesTXT[] = ".games.txt";
-		static constexpr const char sm_szFileExtensionKV[] = ".kv";
-		static constexpr const char sm_szFileExtensionVDF[] = ".vdf";
+	public: // IBaseReader<Load_Generic_t>
+		bool Load(const Load_Generic_t &aParams);
 
-		FileExtension::CCheck<sm_szFileExtensionPhrasesTXT, sm_szFileExtensionGamesTXT, sm_szFileExtensionKV, sm_szFileExtensionVDF> m_aCheckKeyValuesFileExtension;
-	}; // KeyValues
+	public: // IBaseReader<LoadFromFile_Generic_t>
+		bool Load(const LoadFromFile_Generic_t &aParams);
+
+	public: // IBaseWriter<Save_General_t>
+		bool Save(const Save_General_t &aParams);
+
+	public: // IBaseWriter<SaveToFile_General_t>
+		bool Save(const SaveToFile_General_t &aParams);
+	}; // AnyConfig
 }; // AnyConfig
 
-#endif // _INCLUDE_ANY_CONFIG_KEYVALUES_HPP_
+#endif // _INCLUDE_ANY_CONFIG_HPP_
