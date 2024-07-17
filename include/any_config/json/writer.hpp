@@ -75,13 +75,6 @@ namespace AnyConfig
 
 	class CJSONWriter : public CBaseWriter
 	{
-	public:
-		//
-		// Save ones (globals).
-		//
-		static bool _SaveJSON(const SaveJSON_t &aParams);
-		static bool _SaveJSON(const SaveJSON2_t &aParams);
-
 	public: // IBaseWriter<Save_General_t>
 		bool Save(const Save_General_t &aParams);
 
