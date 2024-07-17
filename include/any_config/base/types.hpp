@@ -55,6 +55,8 @@ namespace AnyConfig
 		}
 	}; // CConstExpr_t<T>
 
+	using CString_t = CConstExpr_t<const char *>;
+
 	template<class T>
 	struct CLoadTo_t
 	{
