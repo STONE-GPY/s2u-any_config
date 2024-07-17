@@ -37,6 +37,24 @@ namespace AnyConfig
 		CEmpty_t() {};
 	}; // CEmpty_t
 
+	template<typename T>
+	struct CConstExpr_t
+	{
+	private:
+		T m_aValue;
+
+	public:
+		constexpr CConstExpr_t(T aInit)
+		 :  m_aValue(aInit)
+		{
+		}
+
+		operator T() const
+		{
+			return m_aValue;
+		}
+	}; // CConstExpr_t<T>
+
 	template<class T>
 	struct CLoadTo_t
 	{
