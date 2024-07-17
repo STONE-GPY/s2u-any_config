@@ -65,7 +65,7 @@ bool AnyConfig::CJSONReader::Load(const LoadFromFile_Generic_t &aParams)
 	sError += "not supported now";
 	sError += ">";
 
-	aParams.m_psMessage->Set(sError.Get());
+	*aParams.m_psMessage = sError;
 
 	return false;
 }

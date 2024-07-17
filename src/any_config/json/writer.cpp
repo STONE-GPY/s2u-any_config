@@ -61,7 +61,7 @@ bool AnyConfig::CJSONWriter::Save(const SaveToFile_General_t &aParams)
 	sError += "not supported now";
 	sError += ">";
 
-	aParams.m_psMessage->Set(sError.Get());
+	*aParams.m_psMessage = sError;
 
 	return false;
 }
