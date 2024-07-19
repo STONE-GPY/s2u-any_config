@@ -26,7 +26,7 @@
 
 bool AnyConfig::Anyone::Load(const Load_Generic_t &aParams)
 {
-	const char *s_pszMessageConcat[] = {"<", "Load", " Anyone", ": ", "Use an explicit conversion", ">"};
+	static const char *s_pszMessageConcat[] = {"<", "Load", " Anyone", ": ", "Use an explicit conversion", ">"};
 
 	CBufferStringGrowable<256> sMessage;
 
@@ -67,7 +67,7 @@ bool AnyConfig::Anyone::Save(const Save_Generic_t &aParams)
 {
 	AssertMsg(false, "Use an explicit conversion");
 
-	const char *s_pszMessageConcat[] = {"<", "Save", "  Anyone", ": ", "Use an explicit conversion", ">"};
+	static const char *s_pszMessageConcat[] = {"<", "Save", "  Anyone", ": ", "Use an explicit conversion", ">"};
 
 	CBufferStringGrowable<256> sMessage;
 
