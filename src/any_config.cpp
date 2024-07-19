@@ -63,7 +63,7 @@ bool AnyConfig::Anyone::Load(const LoadFromFile_Generic_t &aParams)
 	return false;
 }
 
-bool AnyConfig::Anyone::Save(const Save_General_t &aParams)
+bool AnyConfig::Anyone::Save(const Save_Generic_t &aParams)
 {
 	AssertMsg(false, "Use an explicit conversion");
 
@@ -77,7 +77,7 @@ bool AnyConfig::Anyone::Save(const Save_General_t &aParams)
 	return false;
 }
 
-bool AnyConfig::Anyone::Save(const SaveToFile_General_t &aParams)
+bool AnyConfig::Anyone::Save(const SaveToFile_Generic_t &aParams)
 {
 	const char *pszFilename = aParams.m_pszFilename;
 

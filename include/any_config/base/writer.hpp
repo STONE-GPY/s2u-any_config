@@ -63,10 +63,10 @@ namespace AnyConfig
 	public:
 	}; // Save_NoContext_t
 
-	class Save_General_t : public CGenericBase<Save_NoContext_t>
+	class Save_Generic_t : public CGenericBase<Save_NoContext_t>
 	{
 	public:
-	}; // Save_General_t
+	}; // Save_Generic_t
 
 	template<class T>
 	struct CSaveToFile_t : public CEncode_t, 
@@ -95,24 +95,24 @@ namespace AnyConfig
 	{
 	}; // SaveToFile_NoContext_t
 
-	class SaveToFile_General_t : public CGenericBase<SaveToFile_NoContext_t>
+	class SaveToFile_Generic_t : public CGenericBase<SaveToFile_NoContext_t>
 	{
-	}; // SaveToFile_General_t
+	}; // SaveToFile_Generic_t
 
 	template<class T>
 	class CWriterBase : public T, 
-	                    public IBaseWriter<Save_General_t>, 
-	                    public IBaseWriter<SaveToFile_General_t>
+	                    public IBaseWriter<Save_Generic_t>, 
+	                    public IBaseWriter<SaveToFile_Generic_t>
 	{
 	}; // CWriterBase<T>
 
 	class CBaseWriter : public CWriterBase<CBase>
 	{
-	public: // IBaseWriter<Save_General_t>
-		bool Save(const Save_General_t &aParams);
+	public: // IBaseWriter<Save_Generic_t>
+		bool Save(const Save_Generic_t &aParams);
 
-	public: // IBaseWriter<SaveToFile_General_t>
-		bool Save(const SaveToFile_General_t &aParams);
+	public: // IBaseWriter<SaveToFile_Generic_t>
+		bool Save(const SaveToFile_Generic_t &aParams);
 
 	public:
 		//

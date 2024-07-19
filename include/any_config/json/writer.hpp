@@ -65,7 +65,7 @@ namespace AnyConfig
 	class SaveJSON_NoContext_t : public CNoContextBase<CSaveJSON_t<CEmpty_t, CUtlBuffer *>>
 	{
 	public:
-		SaveJSON_NoContext_t(const Save_General_t::Base_t &aInit);
+		SaveJSON_NoContext_t(const Save_Generic_t::Base_t &aInit);
 	}; // SaveJSON_NoContext_t
 
 	class SaveJSON2_NoContext_t : public CNoContextBase<CSaveJSON_t<CEmpty_t, CUtlString *>>
@@ -75,11 +75,11 @@ namespace AnyConfig
 
 	class CJSONWriter : public CWriterBase<CBase>
 	{
-	public: // IBaseWriter<Save_General_t>
-		bool Save(const Save_General_t &aParams);
+	public: // IBaseWriter<Save_Generic_t>
+		bool Save(const Save_Generic_t &aParams);
 
-	public: // IBaseWriter<SaveToFile_General_t>
-		bool Save(const SaveToFile_General_t &aParams);
+	public: // IBaseWriter<SaveToFile_Generic_t>
+		bool Save(const SaveToFile_Generic_t &aParams);
 
 	public:
 		//

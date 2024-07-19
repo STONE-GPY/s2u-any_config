@@ -40,11 +40,11 @@ namespace AnyConfig
 	public: // IBaseReader<LoadFromFile_Generic_t>
 		bool Load(const LoadFromFile_Generic_t &aParams);
 
-	public: // IBaseWriter<Save_General_t>
-		bool Save(const Save_General_t &aParams);
+	public: // IBaseWriter<Save_Generic_t>
+		bool Save(const Save_Generic_t &aParams);
 
-	public: // IBaseWriter<SaveToFile_General_t>
-		bool Save(const SaveToFile_General_t &aParams);
+	public: // IBaseWriter<SaveToFile_Generic_t>
+		bool Save(const SaveToFile_Generic_t &aParams);
 	}; // AnyConfig
 }; // AnyConfig
 

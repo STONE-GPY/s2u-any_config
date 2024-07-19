@@ -33,7 +33,7 @@ bool AnyConfig::SaveAsKV1Text_t::SaveAsKV1Text()
 	                        m_eBehavior);
 }
 
-AnyConfig::SaveAsKV1Text_NoContext_t::SaveAsKV1Text_NoContext_t(const Save_General_t::Base_t &aInit)
+AnyConfig::SaveAsKV1Text_NoContext_t::SaveAsKV1Text_NoContext_t(const Save_Generic_t::Base_t &aInit)
 {
 	m_psMessage = aInit.m_psMessage;
 	m_aData = aInit.COutput_t<CUtlBuffer *>::m_aData;
@@ -50,12 +50,12 @@ bool AnyConfig::SaveAsKV1Text_Translated_t::SaveAsKV1Text_Translated()
 	                                   m_aValue);
 }
 
-bool AnyConfig::CKeyValuesWriter::Save(const Save_General_t &aParams)
+bool AnyConfig::CKeyValuesWriter::Save(const Save_Generic_t &aParams)
 {
 	return SaveAsKV1Text(aParams.To<SaveAsKV1Text_NoContext_t>());
 }
 
-bool AnyConfig::CKeyValuesWriter::Save(const SaveToFile_General_t &aParams)
+bool AnyConfig::CKeyValuesWriter::Save(const SaveToFile_Generic_t &aParams)
 {
 	static const char *s_pszMessageConcat[] = {"<", "Save", " KeyValues", " to file", ": ", "Not supported now", ">"};
 
