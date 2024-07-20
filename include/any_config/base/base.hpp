@@ -33,7 +33,7 @@ namespace AnyConfig
 	private:
 		KeyValues3 *m_pRoot;
 
-	protected:
+	public:
 		KeyValues3 *Get();
 		const KeyValues3 *Get() const;
 
