@@ -100,7 +100,7 @@ namespace AnyConfig
 	}; // SaveToFile_Generic_t
 
 	template<class T>
-	class CWriterBase : public T, 
+	class CWriterBase : virtual public T, 
 	                    public IBaseWriter<Save_Generic_t>, 
 	                    public IBaseWriter<SaveToFile_Generic_t>
 	{

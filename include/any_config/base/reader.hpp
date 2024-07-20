@@ -171,7 +171,7 @@ namespace AnyConfig
 	}; // LoadNoHeader_NoContext_t
 
 	template<class T>
-	class CReaderBase : public T, 
+	class CReaderBase : virtual public T, 
 	                    public IBaseReader<Load_Generic_t>, 
 	                    public IBaseReader<LoadFromFile_Generic_t>
 	{
