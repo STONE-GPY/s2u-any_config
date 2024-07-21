@@ -43,22 +43,23 @@ namespace AnyConfig
 		virtual bool SaveJSON() = 0;
 	}; // ISaveJSON
 
-	class SaveJSON_t : public CSaveJSON_t<KeyValues3 *, CUtlBuffer *>, 
-	                   public ISaveJSON
+	template<class T>
+	class CSaveJSONBase : public T, 
+	                      public ISaveJSON
+	{
+	public:
+		using Base_t = T;
+	}; // CSaveJSONBase<T>
+
+	class SaveJSON_t : public CSaveJSONBase<CSaveJSON_t<KeyValues3 *, CUtlBuffer *>>
 	{
 	public: // ISaveJSON
 		bool SaveJSON();
 	}; // SaveJSON_t
 
-	class ISaveJSON2
+	class SaveJSON2_t : public CSaveJSONBase<CSaveJSON_t<KeyValues3 *, CUtlString *>>
 	{
-	public:
-		virtual bool SaveJSON2() = 0;
-	}; // ISaveJSON2
-
-	class SaveJSON2_t : public CSaveJSON_t<KeyValues3 *, CUtlString *>
-	{
-	public: // ISaveJSON2
+	public: // ISaveJSON
 		bool SaveJSON2();
 	}; // SaveJSON2_t
 

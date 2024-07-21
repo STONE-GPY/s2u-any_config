@@ -51,8 +51,15 @@ namespace AnyConfig
 		virtual bool Save() = 0;
 	}; // ISave
 
-	class Save_t : public CSave_t<KeyValues3 *, CUtlBuffer *>, 
-	               public ISave
+	template<class T>
+	class CSaveBase : public T, 
+	                  public ISave
+	{
+	public:
+		using Base_t = T;
+	}; // CSaveBase<T>
+
+	class Save_t : public CSaveBase<CSave_t<KeyValues3 *, CUtlBuffer *>>
 	{
 	public: // ISave
 		bool Save();
@@ -82,10 +89,17 @@ namespace AnyConfig
 	{
 	public:
 		virtual bool SaveToFile() = 0;
-	};
+	}; // ISaveToFile
 
-	class SaveToFile_t : public CSaveToFile_t<KeyValues3 *>, 
-	                     public ISaveToFile
+	template<class T>
+	class CSaveToFileBase : public T, 
+	                        public ISaveToFile
+	{
+	public:
+		using Base_t = T;
+	}; // CSaveToFileBase<T>
+
+	class SaveToFile_t : public CSaveToFileBase<CSaveToFile_t<KeyValues3 *>>
 	{
 	public: // ISaveToFile
 		bool SaveToFile();

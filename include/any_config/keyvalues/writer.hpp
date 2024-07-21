@@ -44,8 +44,15 @@ namespace AnyConfig
 		virtual bool SaveAsKV1Text() = 0;
 	}; // ISaveAsKV1Text
 
-	class SaveAsKV1Text_t : public CSaveAsKV1Text_t<KeyValues3 *, CUtlBuffer *>, 
-	                        public ISaveAsKV1Text
+	template<class T>
+	class CSaveAsKV1TextBase : public T, 
+	                           public ISaveAsKV1Text
+	{
+	public:
+		using Base_t = T;
+	}; // CSaveAsKV1TextBase<T>
+
+	class SaveAsKV1Text_t : public CSaveAsKV1TextBase<CSaveAsKV1Text_t<KeyValues3 *, CUtlBuffer *>>
 	{
 	public: // ISaveAsKV1Text
 		bool SaveAsKV1Text();
@@ -70,8 +77,15 @@ namespace AnyConfig
 		virtual bool SaveAsKV1Text_Translated() = 0;
 	}; // ISaveAsKV1Text_Translated
 
-	class SaveAsKV1Text_Translated_t : public CSaveAsKV1Text_Translated_t<KeyValues3 *, CUtlBuffer *, KV3ToKV1Translation_t *>, 
-	                                   public ISaveAsKV1Text_Translated
+	template<class T>
+	class CSaveAsKV1TextBase_Translated : public T, 
+	                                      public ISaveAsKV1Text
+	{
+	public:
+		using Base_t = T;
+	}; // CSaveAsKV1TextBase_Translated<T>
+
+	class SaveAsKV1Text_Translated_t : public CSaveAsKV1TextBase_Translated<CSaveAsKV1Text_Translated_t<KeyValues3 *, CUtlBuffer *, KV3ToKV1Translation_t *>>
 	{
 	public:
 		bool SaveAsKV1Text_Translated();

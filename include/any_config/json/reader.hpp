@@ -46,8 +46,15 @@ namespace AnyConfig
 		virtual bool LoadFromJSON() = 0;
 	}; // ILoadFromJSON
 
-	class LoadFromJSON_t : public CLoadFromJSON_t<KeyValues3 *, const char *>, 
-	                       public ILoadFromJSON
+	template<class T>
+	class CLoadFromJSONBase : public T, 
+	                          public ILoadFromJSON
+	{
+	public:
+		using Base_t = T;
+	}; // CLoadFromJSONBase<T>
+
+	class LoadFromJSON_t : public CLoadFromJSONBase<CLoadFromJSON_t<KeyValues3 *, const char *>>
 	{
 	public: // ILoadFromJSON
 		bool LoadFromJSON();
@@ -72,8 +79,15 @@ namespace AnyConfig
 		virtual bool LoadFromJSONFile() = 0;
 	}; // ILoadFromJSONFile
 
-	class LoadFromJSONFile_t : public CLoadFromJSONFile_t<KeyValues3 *>, 
-	                           public ILoadFromJSONFile
+	template<class T>
+	class CLoadFromJSONFileBase : public T, 
+	                              public ILoadFromJSONFile
+	{
+	public:
+		using Base_t = T;
+	}; // CLoadFromJSONFileBase<T>
+
+	class LoadFromJSONFile_t : public CLoadFromJSONFileBase<CLoadFromJSONFile_t<KeyValues3 *>>
 	{
 	public: // ILoadFromJSONFile
 		bool LoadFromJSONFile();

@@ -44,8 +44,16 @@ namespace AnyConfig
 		virtual bool LoadFromKV1File() = 0;
 	}; // ILoadFromKV1File
 
-	class LoadFromKV1File_t : public CLoadFromKV1File_t<KeyValues3 *>, 
-	                          public ILoadFromKV1File
+	
+	template<class T>
+	class CLoadFromKV1FileBase : public T, 
+	                             public ILoadFromKV1File
+	{
+	public:
+		using Base_t = T;
+	}; // CLoadFromKV1FileBase<T>
+
+	class LoadFromKV1File_t : public CLoadFromKV1FileBase<CLoadFromKV1File_t<KeyValues3 *>>
 	{
 	public: // ILoadFromKV1File
 		bool LoadFromKV1File();
@@ -72,6 +80,14 @@ namespace AnyConfig
 	public:
 		virtual bool LoadFromKV1Text() = 0;
 	}; // ILoadFromKV1Text
+
+	template<class T>
+	class CLoadFromKV1TextBase : public T, 
+	                             public ILoadFromKV1Text
+	{
+	public:
+		using Base_t = T;
+	}; // CLoadFromKV1TextBase<T>
 
 	class LoadFromKV1Text_t : public CLoadFromKV1Text_t<KeyValues3 *, const char *>, 
 	                          public ILoadFromKV1Text
@@ -104,14 +120,21 @@ namespace AnyConfig
 		virtual bool LoadFromKV1Text_Translated() = 0;
 	}; // ILoadFromKV1Text_Translated
 
-	class LoadFromKV1Text_Translated_t : public CLoadFromKV1Text_Translated_t<KeyValues3 *, const char *, KV1ToKV3Translation_t *>, 
-	                                     public ILoadFromKV1Text_Translated
+	template<class T>
+	class CLoadFromKV1TextBase_Translated : public T, 
+	                                        public ILoadFromKV1Text_Translated
+	{
+	public:
+		using Base_t = T;
+	}; // CLoadFromKV1TextBase_Translated<T>
+
+	class LoadFromKV1Text_Translated_t : public CLoadFromKV1TextBase_Translated<CLoadFromKV1Text_Translated_t<KeyValues3 *, const char *, KV1ToKV3Translation_t *>>
 	{
 	public: // ILoadFromKV1Text_Translated
 		bool LoadFromKV1Text_Translated();
 	}; // LoadFromKV1Text_Translated_t
 
-	class LoadFromKV1Text_Translated_NoContext_t : public CLoadFromKV1Text_Translated_t<CEmpty_t, const char *, KV1ToKV3Translation_t *>
+	class LoadFromKV1Text_Translated_NoContext_t : public CNoContextBase<CLoadFromKV1Text_Translated_t<CEmpty_t, const char *, KV1ToKV3Translation_t *>>
 	{
 	public:
 	}; // LoadFromKV1Text_Translated_NoContext_t

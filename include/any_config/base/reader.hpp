@@ -50,21 +50,27 @@ namespace AnyConfig
 		virtual bool Load() = 0;
 	}; // ILoad
 
-	class Load_t : public CLoad_t<CKeyValues3Context *, CUtlBuffer *>, 
-	               public ILoad
+	template<class T>
+	class CLoadBase : public T, 
+	                  public ILoad
+	{
+	public:
+		using Base_t = T;
+	};
+
+	class Load_t : public CLoadBase<CLoad_t<CKeyValues3Context *, CUtlBuffer *>>
 	{
 	public: // ILoad
 		bool Load();
 	}; // Load_t
 
-	class Load2_t : public CLoad_t<KeyValues3 *, CUtlBuffer *>, 
-	                public ILoad
+	class Load2_t : public CLoadBase<CLoad_t<KeyValues3 *, CUtlBuffer *>>
 	{
 	public: // ILoad
 		bool Load();
 	}; // Load2_t
 
-	class Load3_t : public CLoad_t<KeyValues3 *, const char *>
+	class Load3_t : public CLoadBase<CLoad_t<KeyValues3 *, const char *>>
 	{
 	public: // ILoad
 		bool Load();
@@ -112,17 +118,23 @@ namespace AnyConfig
 	{
 	public:
 		virtual bool LoadFromFile() = 0;
-	};
+	}; // ILoadFromFile
 
-	class LoadFromFile_t : public CLoadFromFile_t<CKeyValues3Context *>, 
-	                       public ILoadFromFile
+	template<class T>
+	class CLoadFromFileBase : public T, 
+	                          public ILoadFromFile
+	{
+	public:
+		using Base_t = T;
+	}; // CLoadFromFileBase<T>
+
+	class LoadFromFile_t : public CLoadFromFileBase<CLoadFromFile_t<CKeyValues3Context *>>
 	{
 	public: // ILoadFromFile
 		bool LoadFromFile();
 	}; // LoadFromFile_t
 
-	class LoadFromFile2_t : public CLoadFromFile_t<KeyValues3 *>, 
-	                        public ILoadFromFile
+	class LoadFromFile2_t : public CLoadFromFileBase<CLoadFromFile_t<KeyValues3 *>>
 	{
 	public: // ILoadFromFile
 		bool LoadFromFile();
@@ -158,8 +170,15 @@ namespace AnyConfig
 		virtual bool LoadNoHeader() = 0;
 	}; // ILoadNoHeader
 
-	class LoadNoHeader_t : public CLoadNoHeader_t<KeyValues3 *, const char *>, 
-	                       public ILoadNoHeader
+	template<class T>
+	class CLoadNoHeaderBase : public T, 
+	                          public ILoadNoHeader
+	{
+	public:
+		using Base_t = T;
+	}; // CLoadNoHeaderBase<T>
+
+	class LoadNoHeader_t : public CLoadNoHeaderBase<CLoadNoHeader_t<KeyValues3 *, const char *>>
 	{
 	public: // ILoadNoHeader
 		bool LoadNoHeader();
