@@ -187,6 +187,11 @@ namespace AnyConfig
 		 :  Base_t(aInit)
 		{
 		}
+
+		Load_Generic_t(const Base_t::Base_t::Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
 	}; // Load_Generic_t
 
 	template<class T>
@@ -328,6 +333,11 @@ namespace AnyConfig
 		using Base_t = LoadFromFileLegacy_Generic_t;
 
 		LoadFromFile_Generic_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
+		LoadFromFile_Generic_t(const Base_t::Base_t::Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
 		{
 		}

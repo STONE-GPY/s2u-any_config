@@ -126,6 +126,11 @@ namespace AnyConfig
 		 :  Base_t(aInit)
 		{
 		}
+
+		Save_Generic_t(const Base_t::Base_t::Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
 	}; // Save_Generic_t
 
 	template<class T>
@@ -209,6 +214,11 @@ namespace AnyConfig
 		using Base_t = SaveToFileLegacy_Generic_t;
 
 		SaveToFile_Generic_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
+		SaveToFile_Generic_t(const Base_t::Base_t::Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
 		{
 		}
