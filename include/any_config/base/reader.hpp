@@ -212,6 +212,11 @@ namespace AnyConfig
 		{
 		}
 
+		CLoadFromFileBase_t(CUtlString *psInitMessage, const char *pszFilename, const char *pszPathID)
+		 :  CLoadFromFileBase_t({}, psInitMessage, pszFilename, pszPathID)
+		{
+		}
+
 		CLoadFromFileBase_t(const CLoadFromFileBase_t &aInit)
 		 :  CLoadFromFileBase_t{aInit.m_aContext, aInit.m_psMessage, aInit.m_pszFilename, aInit.m_pszPathID}
 		{
