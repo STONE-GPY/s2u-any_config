@@ -42,6 +42,11 @@ namespace AnyConfig
 		    COutput_t<O>{aInitOutput}
 		{
 		}
+
+		CSaveBase_t(CUtlString *psInitMessage, const O &aInitOutput)
+		 :  CSaveBase_t({}, psInitMessage, aInitOutput)
+		{
+		}
 	}; // CSaveBase_t<T, O>
 
 	template<class T, class O>
@@ -139,6 +144,11 @@ namespace AnyConfig
 		    CError_t{psInitMessage}, 
 		    CFileSystemPath_t{pszInitFilename, pszInitPathID}, 
 		    CSaveText_t{uFlags}
+		{
+		}
+
+		CSaveToFile_t(const KV3ID_t &aInitEncode, const KV3ID_t &aInitFormat, CUtlString *psInitMessage, const char *pszInitFilename, const char *pszInitPathID, unsigned int uFlags)
+		 :  CSaveToFile_t(aInitEncode, aInitFormat, {}, psInitMessage, pszInitFilename, pszInitPathID, uFlags)
 		{
 		}
 	}; // CSaveToFile_t<T>

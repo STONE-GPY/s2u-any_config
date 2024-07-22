@@ -42,6 +42,11 @@ namespace AnyConfig
 		    CInput_t<I>{aInitInput}
 		{
 		}
+
+		CLoadBase_t(CUtlString *psInitMessage, const I &aInitInput)
+		 :  CLoadBase_t({}, psInitMessage, aInitInput)
+		{
+		}
 	}; // CLoadBase_t<T, I>
 
 	template<class T, typename I>
@@ -341,6 +346,11 @@ namespace AnyConfig
 		    CInput_t<I>{aInitData}, 
 		    CFormat_t{aInitFormat}, 
 		    CLoadRoot_t{pszInitRoot}
+		{
+		}
+
+		CLoadNoHeader_t(CUtlString *psInitMessage, I aInitData, const KV3ID_t &aInitFormat, const char *pszInitRoot)
+		 :  CLoadNoHeader_t({}, psInitMessage, aInitData, aInitFormat, pszInitRoot)
 		{
 		}
 	}; // CLoadNoHeader_t<T, I>

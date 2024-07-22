@@ -35,7 +35,7 @@ bool AnyConfig::LoadFromJSON_t::LoadFromJSON()
 }
 
 AnyConfig::LoadFromJSON_NoContext_t::LoadFromJSON_NoContext_t(const Load_Generic_t &aInit)
- :  LoadFromJSON_NoContext_t({{}, aInit.m_psMessage, (const char *)aInit.m_aData->Base(), aInit.m_pszName})
+ :  LoadFromJSON_NoContext_t({aInit.m_psMessage, (const char *)aInit.m_aData->Base(), aInit.m_pszName})
 {
 }
 

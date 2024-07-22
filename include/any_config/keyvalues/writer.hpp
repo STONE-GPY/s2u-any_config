@@ -43,6 +43,11 @@ namespace AnyConfig
 		    CKV1TextEscape_t{eInitBehavior}
 		{
 		}
+
+		CSaveAsKV1Text_t(CUtlString *psInitMessage, const O &aInitOutput, KV1TextEscapeBehavior_t eInitBehavior)
+		 :  CSaveAsKV1Text_t({}, psInitMessage, aInitOutput, eInitBehavior)
+		{
+		}
 	}; // CSaveAsKV1Text_t<T, O>
 
 	class ISaveAsKV1Text

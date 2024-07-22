@@ -43,6 +43,11 @@ namespace AnyConfig
 		    CKV1TextEscape_t{eInitBehavior}
 		{
 		}
+
+		CLoadFromKV1File_t(CUtlString *psInitMessage, const char *pszInitFilename, const char *pszInitPathID, KV1TextEscapeBehavior_t eInitBehavior)
+		 :  CLoadFromKV1File_t({}, psInitMessage, pszInitFilename, pszInitPathID, eInitBehavior)
+		{
+		}
 	}; // CLoadFromKV1File_t<T>
 
 	class ILoadFromKV1File
@@ -113,6 +118,11 @@ namespace AnyConfig
 		    CKV1TextEscape_t{eInitBehavior}, 
 		    CLoadRoot_t{pszInitRoot}, 
 		    CKV1Unk_t<bool>{bInitUnk}
+		{
+		}
+
+		CLoadFromKV1Text_t(CUtlString *psInitMessage, const I &aInitInput, KV1TextEscapeBehavior_t eInitBehavior, const char *pszInitRoot, bool bInitUnk)
+		 :  CLoadFromKV1Text_t({}, psInitMessage, aInitInput, eInitBehavior, pszInitRoot, bInitUnk)
 		{
 		}
 	}; // CLoadFromKV1Text_t<T, I>
@@ -186,6 +196,11 @@ namespace AnyConfig
 		    CKV1Unk_t<int>{iInitUnk}, 
 		    CLoadRoot_t{pszInitRoot}, 
 		    CKV1Unk_t<bool>{bInitUnk}
+		{
+		}
+
+		CLoadFromKV1Text_Translated_t(CUtlString *psInitMessage, const I &aInitInput, const P &aInitProcessor, CKV1Unk_t<int> iInitUnk, const char *pszInitRoot, bool bInitUnk)
+		 :  CLoadFromKV1Text_Translated_t({}, psInitMessage, aInitInput, aInitProcessor, iInitUnk, pszInitRoot, bInitUnk)
 		{
 		}
 	}; // CLoadFromKV1Text_Translated_t<T, I, P>

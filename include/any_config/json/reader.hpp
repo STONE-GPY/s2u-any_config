@@ -47,6 +47,11 @@ namespace AnyConfig
 		{
 		}
 
+		CLoadFromJSON_t(CUtlString *psInitMessage, I aInitInput, const char *pszInitRoot)
+		 :  CLoadFromJSON_t({}, psInitMessage, aInitInput, pszInitRoot)
+		{
+		}
+
 		CLoadFromJSON_t(const CLoadFromJSON_t &aInit)
 		 :  CLoadFromJSON_t(aInit.m_aContext, aInit.m_psMessage, aInit.m_aData, aInit.m_pszName)
 		{
@@ -113,6 +118,11 @@ namespace AnyConfig
 		 :  CLoadTo_t<T>{aInitContext}, 
 		    CError_t{psInitMessage}, 
 		    CFileSystemPath_t{pszInitFilename, pszInitPathID}
+		{
+		}
+
+		CLoadFromJSONFile_t(CUtlString *psInitMessage, const char *pszInitFilename, const char *pszInitPathID)
+		 :  CLoadFromJSONFile_t(psInitMessage, pszInitFilename, pszInitPathID)
 		{
 		}
 	}; // CLoadFromJSONFile_t<T>

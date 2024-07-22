@@ -41,6 +41,11 @@ namespace AnyConfig
 		    COutput_t<O>{aInitOutput}
 		{
 		}
+
+		CSaveJSON_t(CUtlString *psInitMessage, const O &aInitOutput)
+		 :  CSaveJSON_t({}, psInitMessage, aInitOutput)
+		{
+		}
 	}; // CSaveJSON_t<T, O>
 
 	class ISaveJSON

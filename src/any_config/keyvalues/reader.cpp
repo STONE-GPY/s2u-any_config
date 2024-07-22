@@ -35,7 +35,7 @@ bool AnyConfig::LoadFromKV1File_t::LoadFromKV1File()
 }
 
 AnyConfig::LoadFromKV1File_NoContext_t::LoadFromKV1File_NoContext_t(const LoadFromFile_Generic_t::Base_t &aInit)
- :  Base_t({{}, aInit.m_psMessage, aInit.m_pszFilename, aInit.m_pszPathID, KV1TEXT_ESC_BEHAVIOR_UNK1})
+ :  Base_t({aInit.m_psMessage, aInit.m_pszFilename, aInit.m_pszPathID, KV1TEXT_ESC_BEHAVIOR_UNK1})
 {
 }
 
@@ -62,7 +62,7 @@ bool AnyConfig::LoadFromKV1Text_Translated_t::LoadFromKV1Text_Translated()
 }
 
 AnyConfig::LoadFromKV1Text_NoContext_t::LoadFromKV1Text_NoContext_t(const Load_Generic_t::Base_t &aInit)
- :  LoadFromKV1Text_NoContext_t({{}, aInit.m_psMessage, (const char *)aInit.m_aData->Base(), KV1TEXT_ESC_BEHAVIOR_UNK1, aInit.m_pszName, false})
+ :  LoadFromKV1Text_NoContext_t({aInit.m_psMessage, (const char *)aInit.m_aData->Base(), KV1TEXT_ESC_BEHAVIOR_UNK1, aInit.m_pszName, false})
 {
 }
 
