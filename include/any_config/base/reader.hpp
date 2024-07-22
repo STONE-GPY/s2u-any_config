@@ -338,9 +338,9 @@ namespace AnyConfig
 		CLoadNoHeader_t(const T &aInitContext, CUtlString *psInitMessage, I aInitData, const KV3ID_t &aInitFormat, const char *pszInitRoot)
 		 :  CLoadTo_t<T> {aInitContext}, 
 		    CError_t {psInitMessage}, 
-		    CInput_t<I> {aInitData}, 
-		    CFormat_t {aInitFormat}, 
-		    CLoadRoot_t {pszInitRoot}
+		    CInput_t<I>{aInitData}, 
+		    CFormat_t{aInitFormat}, 
+		    CLoadRoot_t{pszInitRoot}
 		{
 		}
 	}; // CLoadNoHeader_t<T, I>
