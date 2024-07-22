@@ -233,6 +233,8 @@ namespace AnyConfig
 	                    public IBaseWriter<Save_Generic_t>, 
 	                    public IBaseWriter<SaveToFile_Generic_t>
 	{
+	public:
+		virtual ~CWriterBase() = default;
 	}; // CWriterBase<T>
 
 	class CBaseWriter : public CWriterBase<CBase>

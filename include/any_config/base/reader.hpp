@@ -427,6 +427,8 @@ namespace AnyConfig
 	                    public IBaseReader<Load_Generic_t>, 
 	                    public IBaseReader<LoadFromFile_Generic_t>
 	{
+	public:
+		virtual ~CReaderBase() = default;
 	}; // CReaderBase<T>
 
 	class CBaseReader : public CReaderBase<CBase>
