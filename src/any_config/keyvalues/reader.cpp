@@ -80,8 +80,8 @@ bool AnyConfig::CKeyValuesReader::LoadFromKV1File(const LoadFromKV1File_NoContex
 {
 	return LoadKV3FromKV1File(Get(), 
 	                          aParams.m_psMessage, 
-	                          aParams.m_pszFilename, 
 	                          aParams.m_pszPathID, 
+	                          aParams.m_pszFilename, 
 	                          aParams.m_eBehavior);
 }
 

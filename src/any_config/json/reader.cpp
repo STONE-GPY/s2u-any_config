@@ -43,8 +43,8 @@ bool AnyConfig::LoadFromJSONFile_t::LoadFromJSONFile()
 {
 	return LoadKV3FromJSONFile(m_aContext, 
 	                           m_psMessage, 
-	                           m_pszFilename, 
-	                           m_pszPathID);
+	                           m_pszPathID, 
+	                           m_pszFilename);
 }
 
 bool AnyConfig::CJSONReader::Load(const Load_Generic_t &aParams)
