@@ -182,13 +182,15 @@ namespace AnyConfig
 	{
 	public:
 		using Base_t = LoadLegacy_Generic_t;
+		using GenericBase_t = Base_t::Base_t;
+		using NoContextBase_t = GenericBase_t::Base_t::Base_t;
 
-		Load_Generic_t(const Base_t::Base_t &aInit)
+		Load_Generic_t(const GenericBase_t &aInit)
 		 :  Base_t(aInit)
 		{
 		}
 
-		Load_Generic_t(const Base_t::Base_t::Base_t::Base_t &aInit)
+		Load_Generic_t(const NoContextBase_t &aInit)
 		 :  Base_t(aInit)
 		{
 		}
@@ -331,13 +333,15 @@ namespace AnyConfig
 	{
 	public:
 		using Base_t = LoadFromFileLegacy_Generic_t;
+		using GenericBase_t = Base_t::Base_t;
+		using NoContextBase_t = GenericBase_t::Base_t::Base_t;
 
-		LoadFromFile_Generic_t(const Base_t::Base_t &aInit)
+		LoadFromFile_Generic_t(const GenericBase_t &aInit)
 		 :  Base_t(aInit)
 		{
 		}
 
-		LoadFromFile_Generic_t(const Base_t::Base_t::Base_t::Base_t &aInit)
+		LoadFromFile_Generic_t(const NoContextBase_t &aInit)
 		 :  Base_t(aInit)
 		{
 		}

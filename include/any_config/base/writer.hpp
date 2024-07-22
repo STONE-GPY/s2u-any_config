@@ -121,13 +121,15 @@ namespace AnyConfig
 	{
 	public:
 		using Base_t = SaveLegacy_Generic_t;
+		using GenericBase_t = Base_t::Base_t;
+		using NoContextBase_t = GenericBase_t::Base_t::Base_t;
 
-		Save_Generic_t(const Base_t::Base_t &aInit)
+		Save_Generic_t(const GenericBase_t &aInit)
 		 :  Base_t(aInit)
 		{
 		}
 
-		Save_Generic_t(const Base_t::Base_t::Base_t::Base_t &aInit)
+		Save_Generic_t(const NoContextBase_t &aInit)
 		 :  Base_t(aInit)
 		{
 		}
@@ -212,13 +214,15 @@ namespace AnyConfig
 	{
 	public:
 		using Base_t = SaveToFileLegacy_Generic_t;
+		using GenericBase_t = Base_t::Base_t;
+		using NoContextBase_t = GenericBase_t::Base_t::Base_t;
 
-		SaveToFile_Generic_t(const Base_t::Base_t &aInit)
+		SaveToFile_Generic_t(const GenericBase_t &aInit)
 		 :  Base_t(aInit)
 		{
 		}
 
-		SaveToFile_Generic_t(const Base_t::Base_t::Base_t::Base_t &aInit)
+		SaveToFile_Generic_t(const NoContextBase_t &aInit)
 		 :  Base_t(aInit)
 		{
 		}
