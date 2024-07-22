@@ -25,6 +25,7 @@
 #pragma once
 
 #include <array>
+#include <cassert>
 #include <cstring>
 
 namespace AnyConfig
@@ -45,6 +46,8 @@ namespace AnyConfig
 		public: // ICheck
 			bool Check(const char *pszFilename)
 			{
+				assert(pszFilename);
+
 				for(const char *pszExtension : sm_aExtensions)
 				{
 					std::size_t nFilenameLength = std::strlen(pszFilename);
