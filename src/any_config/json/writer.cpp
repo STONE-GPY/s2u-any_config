@@ -26,9 +26,8 @@
 #include <tier0/utlstring.h>
 
 AnyConfig::SaveJSON_NoContext_t::SaveJSON_NoContext_t(const Save_Generic_t::Base_t &aInit)
+ :  SaveJSON_NoContext_t({{}, aInit.m_psMessage, aInit.COutput_t<CUtlBuffer *>::m_aData})
 {
-	m_psMessage = aInit.m_psMessage;
-	COutput_t<CUtlBuffer *>::m_aData = aInit.COutput_t<CUtlBuffer *>::m_aData;
 }
 
 bool AnyConfig::SaveJSON_t::SaveJSON()

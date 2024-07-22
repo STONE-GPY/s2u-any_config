@@ -34,11 +34,9 @@ bool AnyConfig::LoadFromJSON_t::LoadFromJSON()
 	                       m_pszName);
 }
 
-AnyConfig::LoadFromJSON_NoContext_t::LoadFromJSON_NoContext_t(const Load_Generic_t::Base_t &aInit)
+AnyConfig::LoadFromJSON_NoContext_t::LoadFromJSON_NoContext_t(const Load_Generic_t &aInit)
+ :  LoadFromJSON_NoContext_t({{}, aInit.m_psMessage, (const char *)aInit.m_aData->Base(), aInit.m_pszName})
 {
-	m_psMessage = aInit.m_psMessage;
-	m_aData = (const char *)aInit.m_aData->Base();
-	m_pszName = aInit.m_pszName;
 }
 
 bool AnyConfig::LoadFromJSONFile_t::LoadFromJSONFile()

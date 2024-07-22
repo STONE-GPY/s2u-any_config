@@ -128,6 +128,11 @@ namespace AnyConfig
 	{
 	public:
 		using Base_t = T;
+
+		CNoContextBase(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
 	}; // CNoContextBase<T>
 
 	template<class T>
@@ -143,6 +148,11 @@ namespace AnyConfig
 	{
 	public:
 		using Base_t = T;
+
+		CGenericBase(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
 
 		template<typename P>
 		P To() const

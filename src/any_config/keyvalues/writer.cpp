@@ -34,10 +34,8 @@ bool AnyConfig::SaveAsKV1Text_t::SaveAsKV1Text()
 }
 
 AnyConfig::SaveAsKV1Text_NoContext_t::SaveAsKV1Text_NoContext_t(const Save_Generic_t::Base_t &aInit)
+ :  SaveAsKV1Text_NoContext_t({{}, aInit.m_psMessage, aInit.COutput_t<CUtlBuffer *>::m_aData, KV1TEXT_ESC_BEHAVIOR_UNK1})
 {
-	m_psMessage = aInit.m_psMessage;
-	m_aData = aInit.COutput_t<CUtlBuffer *>::m_aData;
-	m_eBehavior = KV1TEXT_ESC_BEHAVIOR_UNK1;
 }
 
 bool AnyConfig::SaveAsKV1Text_Translated_t::SaveAsKV1Text_Translated()
@@ -67,7 +65,7 @@ bool AnyConfig::CKeyValuesWriter::Save(const SaveToFile_Generic_t &aParams)
 	return false;
 }
 
-bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text(const SaveAsKV1Text_NoContext_t &aParams)
+bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text(const SaveAsKV1Text_NoContext_t &aParams) const
 {
 	return SaveKV3AsKV1Text(Get(), 
 	                        aParams.m_psMessage, 
@@ -75,7 +73,7 @@ bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text(const SaveAsKV1Text_NoContext_t 
 	                        aParams.m_eBehavior);
 }
 
-bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text_Translated(const SaveAsKV1Text_Translated_NoContext_t &aParams)
+bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text_Translated(const SaveAsKV1Text_Translated_NoContext_t &aParams) const
 {
 	return SaveKV3AsKV1Text_Translated(Get(), 
 	                                   aParams.m_psMessage, 
