@@ -59,7 +59,10 @@ namespace AnyConfig
 						continue;
 					}
 
-					return !std::strcmp(pszFilename + nFilenameLength - nExtensionLength, pszExtension);
+					if(!std::strcmp(pszFilename + nFilenameLength - nExtensionLength, pszExtension))
+					{
+						return true;
+					}
 				}
 
 				return false;
