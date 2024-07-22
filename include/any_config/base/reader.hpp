@@ -329,7 +329,7 @@ namespace AnyConfig
 
 	using LoadFromFileLegacy_Generic_t = CGenericBase<LoadFromFile2_NoContext_t>;
 
-	class LoadFromFile_Generic_t : public CGenericBase<LoadFromFile2_NoContext_t>
+	class LoadFromFile_Generic_t : public LoadFromFileLegacy_Generic_t
 	{
 	public:
 		using Base_t = LoadFromFileLegacy_Generic_t;
