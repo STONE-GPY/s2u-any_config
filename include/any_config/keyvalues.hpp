@@ -27,10 +27,19 @@
 #include "keyvalues/reader.hpp"
 #include "keyvalues/writer.hpp"
 
+#include "file_extension/check.hpp"
+
 namespace AnyConfig
 {
 	class KeyValues : virtual public CKeyValuesReader, virtual public CKeyValuesWriter
 	{
+	public:
+		static constexpr const char sm_szFileExtensionPhrasesTXT[] = ".phrases.txt";
+		static constexpr const char sm_szFileExtensionGamesTXT[] = ".games.txt";
+		static constexpr const char sm_szFileExtensionKV[] = ".kv";
+		static constexpr const char sm_szFileExtensionVDF[] = ".vdf";
+
+		FileExtension::CCheck<sm_szFileExtensionPhrasesTXT, sm_szFileExtensionGamesTXT, sm_szFileExtensionKV, sm_szFileExtensionVDF> m_aCheckFileExtension;
 	}; // KeyValues
 }; // AnyConfig
 

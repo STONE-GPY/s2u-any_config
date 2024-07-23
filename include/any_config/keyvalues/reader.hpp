@@ -36,6 +36,18 @@ namespace AnyConfig
 	                            public CFileSystemPath_t, 
 	                            public CKV1TextEscape_t
 	{
+		CLoadFromKV1File_t(const T &aInitContext, CUtlString *psInitMessage, const char *pszInitFilename, const char *pszInitPathID, KV1TextEscapeBehavior_t eInitBehavior)
+		 :  CLoadTo_t<T>{aInitContext}, 
+		    CError_t{psInitMessage}, 
+		    CFileSystemPath_t{pszInitFilename, pszInitPathID}, 
+		    CKV1TextEscape_t{eInitBehavior}
+		{
+		}
+
+		CLoadFromKV1File_t(CUtlString *psInitMessage, const char *pszInitFilename, const char *pszInitPathID, KV1TextEscapeBehavior_t eInitBehavior)
+		 :  CLoadFromKV1File_t({}, psInitMessage, pszInitFilename, pszInitPathID, eInitBehavior)
+		{
+		}
 	}; // CLoadFromKV1File_t<T>
 
 	class ILoadFromKV1File
@@ -44,15 +56,48 @@ namespace AnyConfig
 		virtual bool LoadFromKV1File() = 0;
 	}; // ILoadFromKV1File
 
-	class LoadFromKV1File_t : public CLoadFromKV1File_t<KeyValues3 *>, 
-	                          public ILoadFromKV1File
+	
+	template<class T>
+	class CLoadFromKV1FileBase : public T, 
+	                             public ILoadFromKV1File
 	{
+	public:
+		using Base_t = T;
+
+		CLoadFromKV1FileBase(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+	}; // CLoadFromKV1FileBase<T>
+
+	using LoadFromKV1FileLegacy_t = CLoadFromKV1FileBase<CLoadFromKV1File_t<KeyValues3 *>>;
+
+	class LoadFromKV1File_t : public LoadFromKV1FileLegacy_t
+	{
+	public:
+		using Base_t = LoadFromKV1FileLegacy_t;
+
+		LoadFromKV1File_t(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
 	public: // ILoadFromKV1File
 		bool LoadFromKV1File();
 	}; // LoadFromKV1File_t
 
-	class LoadFromKV1File_NoContext_t : public CLoadFromKV1File_t<CEmpty_t>
+	using LoadFromKV1FileLegacy_NoContext_t = CNoContextBase<CLoadFromKV1File_t<CEmpty_t>>;
+
+	class LoadFromKV1File_NoContext_t : public LoadFromKV1FileLegacy_NoContext_t
 	{
+	public:
+		using Base_t = LoadFromKV1FileLegacy_NoContext_t;
+
+		LoadFromKV1File_NoContext_t(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
 	public:
 		LoadFromKV1File_NoContext_t(const LoadFromFile_Generic_t::Base_t &aInit);
 	}; // LoadFromKV1File_NoContext_t
@@ -65,7 +110,22 @@ namespace AnyConfig
 	                            public CLoadRoot_t, 
 	                            public CKV1Unk_t<bool>
 	{
-	}; // CLoadFromKV1Text_t<T>
+	public:
+		CLoadFromKV1Text_t(const T &aInitContext, CUtlString *psInitMessage, const I &aInitInput, KV1TextEscapeBehavior_t eInitBehavior, const char *pszInitRoot, bool bInitUnk)
+		 :  CLoadTo_t<T>{aInitContext}, 
+		    CError_t{psInitMessage}, 
+		    CInput_t<I>{aInitInput}, 
+		    CKV1TextEscape_t{eInitBehavior}, 
+		    CLoadRoot_t{pszInitRoot}, 
+		    CKV1Unk_t<bool>{bInitUnk}
+		{
+		}
+
+		CLoadFromKV1Text_t(CUtlString *psInitMessage, const I &aInitInput, KV1TextEscapeBehavior_t eInitBehavior, const char *pszInitRoot, bool bInitUnk)
+		 :  CLoadFromKV1Text_t({}, psInitMessage, aInitInput, eInitBehavior, pszInitRoot, bInitUnk)
+		{
+		}
+	}; // CLoadFromKV1Text_t<T, I>
 
 	class ILoadFromKV1Text
 	{
@@ -73,16 +133,48 @@ namespace AnyConfig
 		virtual bool LoadFromKV1Text() = 0;
 	}; // ILoadFromKV1Text
 
-	class LoadFromKV1Text_t : public CLoadFromKV1Text_t<KeyValues3 *, const char *>, 
-	                          public ILoadFromKV1Text
+	template<class T>
+	class CLoadFromKV1TextBase : public T, 
+	                             public ILoadFromKV1Text
 	{
+	public:
+		using Base_t = T;
+
+	public:
+		CLoadFromKV1TextBase(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+	}; // CLoadFromKV1TextBase<T>
+
+	using LoadFromKV1TextLegacy_t = CLoadFromKV1TextBase<CLoadFromKV1Text_t<KeyValues3 *, const char *>>;
+
+	class LoadFromKV1Text_t : public LoadFromKV1TextLegacy_t
+	{
+	public:
+		using Base_t = LoadFromKV1TextLegacy_t;
+
+		LoadFromKV1Text_t(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
 	public: // ILoadFromKV1Text
 		bool LoadFromKV1Text();
 	}; // LoadFromKV1Text_t
 
-	class LoadFromKV1Text_NoContext_t : public CLoadFromKV1Text_t<CEmpty_t, const char *>
+	using LoadFromKV1TextLegacy_NoContext_t = CNoContextBase<CLoadFromKV1Text_t<CEmpty_t, const char *>>;
+
+	class LoadFromKV1Text_NoContext_t : public LoadFromKV1TextLegacy_NoContext_t
 	{
 	public:
+		using Base_t = LoadFromKV1TextLegacy_NoContext_t;
+
+		LoadFromKV1Text_NoContext_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
 		LoadFromKV1Text_NoContext_t(const Load_Generic_t::Base_t &aInit);
 	}; // LoadFromKV1Text_NoContext_t
 
@@ -96,6 +188,21 @@ namespace AnyConfig
 	                                       public CLoadRoot_t, 
 	                                       public CKV1Unk_t<bool>
 	{
+		CLoadFromKV1Text_Translated_t(const T &aInitContext, CUtlString *psInitMessage, const I &aInitInput, const P &aInitProcessor, CKV1Unk_t<int> iInitUnk, const char *pszInitRoot, bool bInitUnk)
+		 :  CLoadTo_t<T>{aInitContext}, 
+		    CError_t{psInitMessage}, 
+		    CInput_t<I>{aInitInput}, 
+		    CKV1Proccessor_t<P>{aInitProcessor}, 
+		    CKV1Unk_t<int>{iInitUnk}, 
+		    CLoadRoot_t{pszInitRoot}, 
+		    CKV1Unk_t<bool>{bInitUnk}
+		{
+		}
+
+		CLoadFromKV1Text_Translated_t(CUtlString *psInitMessage, const I &aInitInput, const P &aInitProcessor, CKV1Unk_t<int> iInitUnk, const char *pszInitRoot, bool bInitUnk)
+		 :  CLoadFromKV1Text_Translated_t({}, psInitMessage, aInitInput, aInitProcessor, iInitUnk, pszInitRoot, bInitUnk)
+		{
+		}
 	}; // CLoadFromKV1Text_Translated_t<T, I, P>
 
 	class ILoadFromKV1Text_Translated
@@ -104,19 +211,49 @@ namespace AnyConfig
 		virtual bool LoadFromKV1Text_Translated() = 0;
 	}; // ILoadFromKV1Text_Translated
 
-	class LoadFromKV1Text_Translated_t : public CLoadFromKV1Text_Translated_t<KeyValues3 *, const char *, KV1ToKV3Translation_t *>, 
-	                                     public ILoadFromKV1Text_Translated
+	template<class T>
+	class CLoadFromKV1TextBase_Translated : public T, 
+	                                        public ILoadFromKV1Text_Translated
 	{
+	public:
+		using Base_t = T;
+
+		CLoadFromKV1TextBase_Translated(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+	}; // CLoadFromKV1TextBase_Translated<T>
+
+	using LoadFromKV1TextLegacy_Translated_t = CLoadFromKV1TextBase_Translated<CLoadFromKV1Text_Translated_t<KeyValues3 *, const char *, KV1ToKV3Translation_t *>>;
+
+	class LoadFromKV1Text_Translated_t : public LoadFromKV1TextLegacy_Translated_t
+	{
+	public:
+		using Base_t = LoadFromKV1TextLegacy_Translated_t;
+
+		LoadFromKV1Text_Translated_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
 	public: // ILoadFromKV1Text_Translated
 		bool LoadFromKV1Text_Translated();
 	}; // LoadFromKV1Text_Translated_t
 
-	class LoadFromKV1Text_Translated_NoContext_t : public CLoadFromKV1Text_Translated_t<CEmpty_t, const char *, KV1ToKV3Translation_t *>
+	using LoadFromKV1TextLegacy_Translated_NoContext_t = CNoContextBase<CLoadFromKV1Text_Translated_t<CEmpty_t, const char *, KV1ToKV3Translation_t *>>;
+
+	class LoadFromKV1Text_Translated_NoContext_t : public LoadFromKV1TextLegacy_Translated_NoContext_t
 	{
 	public:
+		using Base_t = LoadFromKV1TextLegacy_Translated_NoContext_t;
+
+		LoadFromKV1Text_Translated_NoContext_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
 	}; // LoadFromKV1Text_Translated_NoContext_t
 
-	class CKeyValuesReader : public CBaseReader
+	class CKeyValuesReader : public CReaderBase<CBase>
 	{
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);

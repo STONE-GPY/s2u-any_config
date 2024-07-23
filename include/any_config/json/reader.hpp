@@ -38,6 +38,24 @@ namespace AnyConfig
 	                         public CInput_t<I>, 
 	                         public CLoadRoot_t
 	{
+	public:
+		CLoadFromJSON_t(const T &aInitContext, CUtlString *psInitMessage, I aInitInput, const char *pszInitRoot)
+		 :  CLoadTo_t<T>{aInitContext}, 
+		    CError_t{psInitMessage}, 
+		    CInput_t<I>{aInitInput}, 
+		    CLoadRoot_t{pszInitRoot}
+		{
+		}
+
+		CLoadFromJSON_t(CUtlString *psInitMessage, I aInitInput, const char *pszInitRoot)
+		 :  CLoadFromJSON_t({}, psInitMessage, aInitInput, pszInitRoot)
+		{
+		}
+
+		CLoadFromJSON_t(const CLoadFromJSON_t &aInit)
+		 :  CLoadFromJSON_t(aInit.m_aContext, aInit.m_psMessage, aInit.m_aData, aInit.m_pszName)
+		{
+		}
 	}; // CLoadFromJSON_t<T, I>
 
 	class ILoadFromJSON
@@ -46,17 +64,48 @@ namespace AnyConfig
 		virtual bool LoadFromJSON() = 0;
 	}; // ILoadFromJSON
 
-	class LoadFromJSON_t : public CLoadFromJSON_t<KeyValues3 *, const char *>, 
-	                       public ILoadFromJSON
+	template<class T>
+	class CLoadFromJSONBase : public T, 
+	                          public ILoadFromJSON
 	{
+	public:
+		using Base_t = T;
+
+		CLoadFromJSONBase(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+	}; // CLoadFromJSONBase<T>
+
+	using LoadFromJSONLegacy_t = CLoadFromJSONBase<CLoadFromJSON_t<KeyValues3 *, const char *>>;
+
+	class LoadFromJSON_t : public LoadFromJSONLegacy_t
+	{
+	public:
+		using Base_t = LoadFromJSONLegacy_t;
+
+		LoadFromJSON_t(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
 	public: // ILoadFromJSON
 		bool LoadFromJSON();
 	}; // LoadFromJSON_t
 
-	class LoadFromJSON_NoContext_t : public CNoContextBase<CLoadFromJSON_t<CEmpty_t, const char *>>
+	using LoadFromJSONLegacy_NoContext_t = CNoContextBase<CLoadFromJSON_t<KeyValues3 *, const char *>>;
+
+	class LoadFromJSON_NoContext_t : public LoadFromJSONLegacy_NoContext_t
 	{
 	public:
-		LoadFromJSON_NoContext_t(const Load_Generic_t::Base_t &aInit);
+		using Base_t = LoadFromJSONLegacy_NoContext_t;
+
+		LoadFromJSON_NoContext_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
+		LoadFromJSON_NoContext_t(const Load_Generic_t &aInit);
 	}; // LoadFromJSON_NoContext_t
 
 	template<class T>
@@ -64,6 +113,18 @@ namespace AnyConfig
 	                             public CError_t, 
 	                             public CFileSystemPath_t
 	{
+	public:
+		CLoadFromJSONFile_t(const T &aInitContext, CUtlString *psInitMessage, const char *pszInitFilename, const char *pszInitPathID)
+		 :  CLoadTo_t<T>{aInitContext}, 
+		    CError_t{psInitMessage}, 
+		    CFileSystemPath_t{pszInitFilename, pszInitPathID}
+		{
+		}
+
+		CLoadFromJSONFile_t(CUtlString *psInitMessage, const char *pszInitFilename, const char *pszInitPathID)
+		 :  CLoadFromJSONFile_t(psInitMessage, pszInitFilename, pszInitPathID)
+		{
+		}
 	}; // CLoadFromJSONFile_t<T>
 
 	class ILoadFromJSONFile
@@ -72,19 +133,51 @@ namespace AnyConfig
 		virtual bool LoadFromJSONFile() = 0;
 	}; // ILoadFromJSONFile
 
-	class LoadFromJSONFile_t : public CLoadFromJSONFile_t<KeyValues3 *>, 
-	                           public ILoadFromJSONFile
+	template<class T>
+	class CLoadFromJSONFileBase : public T, 
+	                              public ILoadFromJSONFile
 	{
+	public:
+		using Base_t = T;
+
+		CLoadFromJSONFileBase(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+	}; // CLoadFromJSONFileBase<T>
+
+	using LoadFromJSONFileLegacy_t = CLoadFromJSONFileBase<CLoadFromJSONFile_t<KeyValues3 *>>;
+
+	class LoadFromJSONFile_t : public LoadFromJSONFileLegacy_t
+	{
+	public:
+		using Base_t = LoadFromJSONFileLegacy_t;
+
+		LoadFromJSONFile_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
 	public: // ILoadFromJSONFile
 		bool LoadFromJSONFile();
 	}; // LoadFromJSONFile_t
 
-	class LoadFromJSONFile_NoContext_t : public CNoContextBase<CLoadFromJSONFile_t<CEmpty_t>>
+	using LoadFromJSONFileLegacy_NoContext_t = CNoContextBase<CLoadFromJSONFile_t<CEmpty_t>>;
+
+	class LoadFromJSONFile_NoContext_t : public LoadFromJSONFileLegacy_NoContext_t
 	{
+	public:
+		using Base_t = LoadFromJSONFileLegacy_NoContext_t;
+
+		LoadFromJSONFile_NoContext_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
 	public:
 	}; // LoadFromJSONFile_NoContext_t
 
-	class CJSONReader : public CBaseReader
+	class CJSONReader : public CReaderBase<CBase>
 	{
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);

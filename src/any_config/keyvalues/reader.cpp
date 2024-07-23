@@ -34,12 +34,9 @@ bool AnyConfig::LoadFromKV1File_t::LoadFromKV1File()
 	                          m_eBehavior);
 }
 
-AnyConfig::LoadFromKV1File_NoContext_t::LoadFromKV1File_NoContext_t(const LoadFromFile_Generic_t::Base_t& aInit)
+AnyConfig::LoadFromKV1File_NoContext_t::LoadFromKV1File_NoContext_t(const LoadFromFile_Generic_t::Base_t &aInit)
+ :  Base_t({aInit.m_psMessage, aInit.m_pszFilename, aInit.m_pszPathID, KV1TEXT_ESC_BEHAVIOR_UNK1})
 {
-	m_psMessage = aInit.m_psMessage;
-	m_pszFilename = aInit.m_pszFilename;
-	m_pszPathID = aInit.m_pszPathID;
-	m_eBehavior = KV1TEXT_ESC_BEHAVIOR_UNK1;
 }
 
 bool AnyConfig::LoadFromKV1Text_t::LoadFromKV1Text()
@@ -57,7 +54,7 @@ bool AnyConfig::LoadFromKV1Text_Translated_t::LoadFromKV1Text_Translated()
 	return LoadKV3FromKV1Text_Translated(m_aContext, 
 	                                     m_psMessage, 
 	                                     CInput_t<const char *>::m_aData, 
-	                                     m_eBehavior, 
+	                                     m_eBehavior,
 	                                     CKV1Proccessor_t<KV1ToKV3Translation_t *>::m_aData, 
 	                                     CKV1Unk_t<int>::m_aValue, 
 	                                     m_pszName, 
@@ -65,12 +62,8 @@ bool AnyConfig::LoadFromKV1Text_Translated_t::LoadFromKV1Text_Translated()
 }
 
 AnyConfig::LoadFromKV1Text_NoContext_t::LoadFromKV1Text_NoContext_t(const Load_Generic_t::Base_t &aInit)
+ :  LoadFromKV1Text_NoContext_t({aInit.m_psMessage, (const char *)aInit.m_aData->Base(), KV1TEXT_ESC_BEHAVIOR_UNK1, aInit.m_pszName, false})
 {
-	m_psMessage = aInit.m_psMessage;
-	m_aData = (const char *)aInit.m_aData->Base();
-	m_eBehavior = KV1TEXT_ESC_BEHAVIOR_UNK1;
-	m_pszName = aInit.m_pszName;
-	m_aValue = false;
 }
 
 bool AnyConfig::CKeyValuesReader::Load(const Load_Generic_t &aParams)
@@ -87,8 +80,8 @@ bool AnyConfig::CKeyValuesReader::LoadFromKV1File(const LoadFromKV1File_NoContex
 {
 	return LoadKV3FromKV1File(Get(), 
 	                          aParams.m_psMessage, 
-	                          aParams.m_pszFilename, 
 	                          aParams.m_pszPathID, 
+	                          aParams.m_pszFilename, 
 	                          aParams.m_eBehavior);
 }
 

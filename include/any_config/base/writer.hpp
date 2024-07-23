@@ -35,6 +35,18 @@ namespace AnyConfig
 	                     public CError_t, 
 	                     public COutput_t<O>
 	{
+	public:
+		CSaveBase_t(const T &aInitInput, CUtlString *psInitMessage, const O &aInitOutput)
+		 :  CSaveFrom_t<T>{aInitInput}, 
+		    CError_t{psInitMessage}, 
+		    COutput_t<O>{aInitOutput}
+		{
+		}
+
+		CSaveBase_t(CUtlString *psInitMessage, const O &aInitOutput)
+		 :  CSaveBase_t({}, psInitMessage, aInitOutput)
+		{
+		}
 	}; // CSaveBase_t<T, O>
 
 	template<class T, class O>
@@ -43,6 +55,16 @@ namespace AnyConfig
 	                 public CSaveBase_t<T, O>, 
 	                 public CSaveText_t
 	{
+	public:
+		using Base_t = CSaveBase_t<T, O>;
+
+		CSave_t(const KV3ID_t &aInitEncode, const KV3ID_t &aInitFormat, const Base_t &aInitBase, unsigned int uFlags)
+		 :  CEncode_t{aInitEncode}, 
+		    CFormat_t{aInitFormat}, 
+		    Base_t{aInitBase}, 
+		    CSaveText_t{uFlags}
+		{
+		}
 	}; // CSave_t<T, O>
 
 	class ISave
@@ -51,22 +73,67 @@ namespace AnyConfig
 		virtual bool Save() = 0;
 	}; // ISave
 
-	class Save_t : public CSave_t<KeyValues3 *, CUtlBuffer *>, 
-	               public ISave
+	template<class T>
+	class CSaveBase : public T, 
+	                  public ISave
 	{
+	public:
+		using Base_t = T;
+
+		CSaveBase(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+	}; // CSaveBase<T>
+
+	using SaveLegacy_t = CSaveBase<CSave_t<KeyValues3 *, CUtlBuffer *>>;
+
+	class Save_t : public SaveLegacy_t
+	{
+	public:
+		using Base_t = SaveLegacy_t;
+
+		Save_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
 	public: // ISave
 		bool Save();
 	}; // Save_t
 
-	class Save_NoContext_t : public CNoContextBase<CSave_t<CEmpty_t, CUtlBuffer *>>
+	using SaveLegacy_NoContext_t = CNoContextBase<CSave_t<CEmpty_t, CUtlBuffer *>>;
+
+	class Save_NoContext_t : public SaveLegacy_NoContext_t
 	{
 	public:
+		using Base_t = SaveLegacy_NoContext_t;
+
+		Save_NoContext_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
 	}; // Save_NoContext_t
 
-	class Save_General_t : public CGenericBase<Save_NoContext_t>
+	using SaveLegacy_Generic_t = CGenericBase<Save_NoContext_t>;
+
+	class Save_Generic_t : public SaveLegacy_Generic_t
 	{
 	public:
-	}; // Save_General_t
+		using Base_t = SaveLegacy_Generic_t;
+		using GenericBase_t = Base_t::Base_t;
+		using NoContextBase_t = GenericBase_t::Base_t::Base_t;
+
+		Save_Generic_t(const GenericBase_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
+		Save_Generic_t(const NoContextBase_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+	}; // Save_Generic_t
 
 	template<class T>
 	struct CSaveToFile_t : public CEncode_t, 
@@ -76,38 +143,107 @@ namespace AnyConfig
 	                       public CFileSystemPath_t, 
 	                       public CSaveText_t
 	{
+	public:
+		CSaveToFile_t(const KV3ID_t &aInitEncode, const KV3ID_t &aInitFormat, const T &aInitInput, CUtlString *psInitMessage, const char *pszInitFilename, const char *pszInitPathID, unsigned int uFlags)
+		 :  CEncode_t{aInitEncode}, 
+		    CFormat_t{aInitFormat}, 
+		    CSaveFrom_t<T>{aInitInput}, 
+		    CError_t{psInitMessage}, 
+		    CFileSystemPath_t{pszInitFilename, pszInitPathID}, 
+		    CSaveText_t{uFlags}
+		{
+		}
+
+		CSaveToFile_t(const KV3ID_t &aInitEncode, const KV3ID_t &aInitFormat, CUtlString *psInitMessage, const char *pszInitFilename, const char *pszInitPathID, unsigned int uFlags)
+		 :  CSaveToFile_t(aInitEncode, aInitFormat, {}, psInitMessage, pszInitFilename, pszInitPathID, uFlags)
+		{
+		}
 	}; // CSaveToFile_t<T>
 
 	class ISaveToFile
 	{
 	public:
 		virtual bool SaveToFile() = 0;
-	};
+	}; // ISaveToFile
 
-	class SaveToFile_t : public CSaveToFile_t<KeyValues3 *>, 
-	                     public ISaveToFile
+	template<class T>
+	class CSaveToFileBase : public T, 
+	                        public ISaveToFile
 	{
+	public:
+		using Base_t = T;
+
+		CSaveToFileBase(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+	}; // CSaveToFileBase<T>
+
+	using SaveToFileLegacy_t = CSaveToFileBase<CSaveToFile_t<KeyValues3 *>>;
+
+	class SaveToFile_t : public SaveToFileLegacy_t
+	{
+	public:
+		using Base_t = SaveToFileLegacy_t;
+
+		SaveToFile_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
 	public: // ISaveToFile
 		bool SaveToFile();
 	}; // SaveToFile_t
 
-	class SaveToFile_NoContext_t : public CNoContextBase<CSaveToFile_t<CEmpty_t>>
+	using SaveToFileLegacy_NoContext_t = CNoContextBase<CSaveToFile_t<CEmpty_t>>;
+
+	class SaveToFile_NoContext_t : public SaveToFileLegacy_NoContext_t
 	{
+	public:
+		using Base_t = SaveToFileLegacy_NoContext_t;
+
+		SaveToFile_NoContext_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
 	}; // SaveToFile_NoContext_t
 
-	class SaveToFile_General_t : public CGenericBase<SaveToFile_NoContext_t>
-	{
-	}; // SaveToFile_General_t
+	using SaveToFileLegacy_Generic_t = CGenericBase<SaveToFile_NoContext_t>;
 
-	class CBaseWriter : public CBase, 
-	                    public IBaseWriter<Save_General_t>, 
-	                    public IBaseWriter<SaveToFile_General_t>
+	class SaveToFile_Generic_t : public SaveToFileLegacy_Generic_t
 	{
-	public: // IBaseWriter<Save_General_t>
-		bool Save(const Save_General_t &aParams);
+	public:
+		using Base_t = SaveToFileLegacy_Generic_t;
+		using GenericBase_t = Base_t::Base_t;
+		using NoContextBase_t = GenericBase_t::Base_t::Base_t;
 
-	public: // IBaseWriter<SaveToFile_General_t>
-		bool Save(const SaveToFile_General_t &aParams);
+		SaveToFile_Generic_t(const GenericBase_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
+		SaveToFile_Generic_t(const NoContextBase_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+	}; // SaveToFile_Generic_t
+
+	template<class T>
+	class CWriterBase : virtual public T, 
+	                    public IBaseWriter<Save_Generic_t>, 
+	                    public IBaseWriter<SaveToFile_Generic_t>
+	{
+	public:
+		virtual ~CWriterBase() = default;
+	}; // CWriterBase<T>
+
+	class CBaseWriter : public CWriterBase<CBase>
+	{
+	public: // IBaseWriter<Save_Generic_t>
+		bool Save(const Save_Generic_t &aParams);
+
+	public: // IBaseWriter<SaveToFile_Generic_t>
+		bool Save(const SaveToFile_Generic_t &aParams);
 
 	public:
 		//

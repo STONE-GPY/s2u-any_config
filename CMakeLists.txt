@@ -9,7 +9,7 @@ if(POLICY CMP0092)
 endif()
 
 project(any_config
-	VERSION 1.0.4
+	VERSION 1.0.5
 	DESCRIPTION "Any Config"
 	HOMEPAGE_URL "https://github.com/Wend4r/s2u-any_config"
 	LANGUAGES C CXX
@@ -44,6 +44,8 @@ set(SOURCE_FILES
 
 	${SOURCE_DIR}/any_config/keyvalues/reader.cpp
 	${SOURCE_DIR}/any_config/keyvalues/writer.cpp
+
+	${SOURCE_DIR}/any_config.cpp
 )
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})

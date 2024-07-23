@@ -19,25 +19,33 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef _INCLUDE_ANY_CONFIG_JSON_HPP_
-#define _INCLUDE_ANY_CONFIG_JSON_HPP_
+#ifndef _INCLUDE_ANY_CONFIG_HPP_
+#define _INCLUDE_ANY_CONFIG_HPP_
 
 #pragma once
 
-#include "json/reader.hpp"
-#include "json/writer.hpp"
-
-#include "file_extension/check.hpp"
+#include "any_config/base.hpp"
+#include "any_config/json.hpp"
+#include "any_config/keyvalues.hpp"
 
 namespace AnyConfig
 {
-	class JSON : virtual public CJSONReader, virtual public CJSONWriter
+	class Anyone : virtual public Base, 
+	               virtual public JSON, 
+	               virtual public KeyValues
 	{
-	public:
-		static constexpr const char sm_szFileExtensionJSON[] = ".json";
+	public: // IBaseReader<Load_Generic_t>
+		bool Load(const Load_Generic_t &aParams);
 
-		FileExtension::CCheck<sm_szFileExtensionJSON> m_aCheckFileExtension;
-	}; // JSON
+	public: // IBaseReader<LoadFromFile_Generic_t>
+		bool Load(const LoadFromFile_Generic_t &aParams);
+
+	public: // IBaseWriter<Save_Generic_t>
+		bool Save(const Save_Generic_t &aParams);
+
+	public: // IBaseWriter<SaveToFile_Generic_t>
+		bool Save(const SaveToFile_Generic_t &aParams);
+	}; // AnyConfig
 }; // AnyConfig
 
-#endif // _INCLUDE_ANY_CONFIG_JSON_HPP_
+#endif // _INCLUDE_ANY_CONFIG_HPP_

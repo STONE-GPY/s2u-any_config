@@ -21,13 +21,13 @@
 
 #include <any_config/json/writer.hpp>
 
+#include <tier0/bufferstring.h>
 #include <tier0/keyvalues3.h>
 #include <tier0/utlstring.h>
 
-AnyConfig::SaveJSON_NoContext_t::SaveJSON_NoContext_t(const Save_General_t::Base_t &aInit)
+AnyConfig::SaveJSON_NoContext_t::SaveJSON_NoContext_t(const Save_Generic_t::Base_t &aInit)
+ :  SaveJSON_NoContext_t({aInit.m_psMessage, aInit.COutput_t<CUtlBuffer *>::m_aData})
 {
-	m_psMessage = aInit.m_psMessage;
-	COutput_t<CUtlBuffer *>::m_aData = aInit.COutput_t<CUtlBuffer *>::m_aData;
 }
 
 bool AnyConfig::SaveJSON_t::SaveJSON()
@@ -44,24 +44,19 @@ bool AnyConfig::SaveJSON2_t::SaveJSON2()
 	                     COutput_t<CUtlString *>::m_aData);
 }
 
-bool AnyConfig::CJSONWriter::Save(const Save_General_t &aParams)
+bool AnyConfig::CJSONWriter::Save(const Save_Generic_t &aParams)
 {
 	return SaveJSON(aParams.To<SaveJSON_NoContext_t>());
 }
 
-bool AnyConfig::CJSONWriter::Save(const SaveToFile_General_t &aParams)
+bool AnyConfig::CJSONWriter::Save(const SaveToFile_Generic_t &aParams)
 {
-	CUtlString sError;
+	static const char *s_pszMessageConcat[] = {"<", "Save", "  JSON", " to file", ": ", "Not supported now", ">"};
 
-	sError = "<";
-	sError += "Save";
-	sError += " JSON";
-	sError += " to file";
-	sError += ": ";
-	sError += "not supported now";
-	sError += ">";
+	CBufferStringGrowable<256> sMessage;
 
-	aParams.m_psMessage->Set(sError.Get());
+	sMessage.AppendConcat(sizeof(s_pszMessageConcat) / sizeof(*s_pszMessageConcat), s_pszMessageConcat, NULL);
+	*aParams.m_psMessage = sMessage;
 
 	return false;
 }

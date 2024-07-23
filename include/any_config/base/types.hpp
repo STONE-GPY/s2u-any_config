@@ -37,6 +37,26 @@ namespace AnyConfig
 		CEmpty_t() {};
 	}; // CEmpty_t
 
+	template<typename T>
+	struct CConstExpr_t
+	{
+	private:
+		T m_aValue;
+
+	public:
+		constexpr CConstExpr_t(T aInit)
+		 :  m_aValue(aInit)
+		{
+		}
+
+		operator T() const
+		{
+			return m_aValue;
+		}
+	}; // CConstExpr_t<T>
+
+	using CString_t = CConstExpr_t<const char *>;
+
 	template<class T>
 	struct CLoadTo_t
 	{
@@ -108,6 +128,11 @@ namespace AnyConfig
 	{
 	public:
 		using Base_t = T;
+
+		CNoContextBase(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
 	}; // CNoContextBase<T>
 
 	template<class T>
@@ -123,6 +148,11 @@ namespace AnyConfig
 	{
 	public:
 		using Base_t = T;
+
+		CGenericBase(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
 
 		template<typename P>
 		P To() const

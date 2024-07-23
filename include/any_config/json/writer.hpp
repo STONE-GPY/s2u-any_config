@@ -35,6 +35,17 @@ namespace AnyConfig
 	                     public CError_t, 
 	                     public COutput_t<O>
 	{
+		CSaveJSON_t(const T &aInitInput, CUtlString *psInitMessage, const O &aInitOutput)
+		 :  CSaveFrom_t<T>{aInitInput}, 
+		    CError_t{psInitMessage}, 
+		    COutput_t<O>{aInitOutput}
+		{
+		}
+
+		CSaveJSON_t(CUtlString *psInitMessage, const O &aInitOutput)
+		 :  CSaveJSON_t({}, psInitMessage, aInitOutput)
+		{
+		}
 	}; // CSaveJSON_t<T, O>
 
 	class ISaveJSON
@@ -43,50 +54,86 @@ namespace AnyConfig
 		virtual bool SaveJSON() = 0;
 	}; // ISaveJSON
 
-	class SaveJSON_t : public CSaveJSON_t<KeyValues3 *, CUtlBuffer *>, 
-	                   public ISaveJSON
+	template<class T>
+	class CSaveJSONBase : public T, 
+	                      public ISaveJSON
 	{
+	public:
+		using Base_t = T;
+
+		CSaveJSONBase(const Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+	}; // CSaveJSONBase<T>
+
+	using SaveJSONLegacy_t = CSaveJSONBase<CSaveJSON_t<KeyValues3 *, CUtlBuffer *>>;
+
+	class SaveJSON_t : public SaveJSONLegacy_t
+	{
+	public:
+		using Base_t = SaveJSONLegacy_t;
+
+		SaveJSON_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
 	public: // ISaveJSON
 		bool SaveJSON();
 	}; // SaveJSON_t
 
-	class ISaveJSON2
+	using SaveJSON2Legacy_t = CSaveJSONBase<CSaveJSON_t<KeyValues3 *, CUtlString *>>;
+
+	class SaveJSON2_t : public SaveJSON2Legacy_t
 	{
 	public:
-		virtual bool SaveJSON2() = 0;
-	}; // ISaveJSON2
+		using Base_t = SaveJSON2Legacy_t;
 
-	class SaveJSON2_t : public CSaveJSON_t<KeyValues3 *, CUtlString *>
-	{
-	public: // ISaveJSON2
+		SaveJSON2_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
+	public: // ISaveJSON
 		bool SaveJSON2();
 	}; // SaveJSON2_t
 
-	class SaveJSON_NoContext_t : public CNoContextBase<CSaveJSON_t<CEmpty_t, CUtlBuffer *>>
+	using SaveJSONLegacy_NoContext_t = CNoContextBase<CSaveJSON_t<CEmpty_t, CUtlBuffer *>>;
+
+	class SaveJSON_NoContext_t : public SaveJSONLegacy_NoContext_t
 	{
 	public:
-		SaveJSON_NoContext_t(const Save_General_t::Base_t &aInit);
+		using Base_t = SaveJSONLegacy_NoContext_t;
+
+		SaveJSON_NoContext_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
+
+		SaveJSON_NoContext_t(const Save_Generic_t::Base_t &aInit);
 	}; // SaveJSON_NoContext_t
 
-	class SaveJSON2_NoContext_t : public CNoContextBase<CSaveJSON_t<CEmpty_t, CUtlString *>>
+	using SaveJSON2Legacy_NoContext_t = CNoContextBase<CSaveJSON_t<CEmpty_t, CUtlString *>>;
+
+	class SaveJSON2_NoContext_t : public SaveJSON2Legacy_NoContext_t
 	{
 	public:
+		using Base_t = SaveJSON2Legacy_NoContext_t;
+
+		SaveJSON2_NoContext_t(const Base_t::Base_t &aInit)
+		 :  Base_t(aInit)
+		{
+		}
 	}; // SaveJSON2_NoContext_t
 
-	class CJSONWriter : public CBaseWriter
+	class CJSONWriter : public CWriterBase<CBase>
 	{
-	public:
-		//
-		// Save ones (globals).
-		//
-		static bool _SaveJSON(const SaveJSON_t &aParams);
-		static bool _SaveJSON(const SaveJSON2_t &aParams);
+	public: // IBaseWriter<Save_Generic_t>
+		bool Save(const Save_Generic_t &aParams);
 
-	public: // IBaseWriter<Save_General_t>
-		bool Save(const Save_General_t &aParams);
-
-	public: // IBaseWriter<SaveToFile_General_t>
-		bool Save(const SaveToFile_General_t &aParams);
+	public: // IBaseWriter<SaveToFile_Generic_t>
+		bool Save(const SaveToFile_Generic_t &aParams);
 
 	public:
 		//

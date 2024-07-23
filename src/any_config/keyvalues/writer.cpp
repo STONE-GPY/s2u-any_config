@@ -21,6 +21,7 @@
 
 #include <any_config/keyvalues/writer.hpp>
 
+#include <tier0/bufferstring.h>
 #include <tier0/keyvalues3.h>
 #include <tier0/utlstring.h>
 
@@ -32,11 +33,9 @@ bool AnyConfig::SaveAsKV1Text_t::SaveAsKV1Text()
 	                        m_eBehavior);
 }
 
-AnyConfig::SaveAsKV1Text_NoContext_t::SaveAsKV1Text_NoContext_t(const Save_General_t::Base_t &aInit)
+AnyConfig::SaveAsKV1Text_NoContext_t::SaveAsKV1Text_NoContext_t(const Save_Generic_t::Base_t &aInit)
+ :  SaveAsKV1Text_NoContext_t({aInit.m_psMessage, aInit.COutput_t<CUtlBuffer *>::m_aData, KV1TEXT_ESC_BEHAVIOR_UNK1})
 {
-	m_psMessage = aInit.m_psMessage;
-	m_aData = aInit.COutput_t<CUtlBuffer *>::m_aData;
-	m_eBehavior = KV1TEXT_ESC_BEHAVIOR_UNK1;
 }
 
 bool AnyConfig::SaveAsKV1Text_Translated_t::SaveAsKV1Text_Translated()
@@ -49,29 +48,24 @@ bool AnyConfig::SaveAsKV1Text_Translated_t::SaveAsKV1Text_Translated()
 	                                   m_aValue);
 }
 
-bool AnyConfig::CKeyValuesWriter::Save(const Save_General_t &aParams)
+bool AnyConfig::CKeyValuesWriter::Save(const Save_Generic_t &aParams)
 {
 	return SaveAsKV1Text(aParams.To<SaveAsKV1Text_NoContext_t>());
 }
 
-bool AnyConfig::CKeyValuesWriter::Save(const SaveToFile_General_t &aParams)
+bool AnyConfig::CKeyValuesWriter::Save(const SaveToFile_Generic_t &aParams)
 {
-	CUtlString sError;
+	static const char *s_pszMessageConcat[] = {"<", "Save", " KeyValues", " to file", ": ", "Not supported now", ">"};
 
-	sError = "<";
-	sError += "Save";
-	sError += " KeyValues";
-	sError += " to file";
-	sError += ": ";
-	sError += "not supported now";
-	sError += ">";
+	CBufferStringGrowable<256> sMessage;
 
-	aParams.m_psMessage->Set(sError.Get());
+	sMessage.AppendConcat(sizeof(s_pszMessageConcat) / sizeof(*s_pszMessageConcat), s_pszMessageConcat, NULL);
+	*aParams.m_psMessage = sMessage;
 
 	return false;
 }
 
-bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text(const SaveAsKV1Text_NoContext_t &aParams)
+bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text(const SaveAsKV1Text_NoContext_t &aParams) const
 {
 	return SaveKV3AsKV1Text(Get(), 
 	                        aParams.m_psMessage, 
@@ -79,7 +73,7 @@ bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text(const SaveAsKV1Text_NoContext_t 
 	                        aParams.m_eBehavior);
 }
 
-bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text_Translated(const SaveAsKV1Text_Translated_NoContext_t &aParams)
+bool AnyConfig::CKeyValuesWriter::SaveAsKV1Text_Translated(const SaveAsKV1Text_Translated_NoContext_t &aParams) const
 {
 	return SaveKV3AsKV1Text_Translated(Get(), 
 	                                   aParams.m_psMessage, 

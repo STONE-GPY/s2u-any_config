@@ -44,12 +44,12 @@ bool AnyConfig::SaveToFile_t::SaveToFile()
 	                     m_uFlags);
 }
 
-bool AnyConfig::CBaseWriter::Save(const Save_General_t &aParams)
+bool AnyConfig::CBaseWriter::Save(const Save_Generic_t &aParams)
 {
-	return Save(aParams.ToBase());
+	return const_cast<const CBaseWriter *>(this)->Save(aParams.ToBase());
 }
 
-bool AnyConfig::CBaseWriter::Save(const SaveToFile_General_t &aParams)
+bool AnyConfig::CBaseWriter::Save(const SaveToFile_Generic_t &aParams)
 {
 	return SaveToFile(aParams.ToBase());
 }
