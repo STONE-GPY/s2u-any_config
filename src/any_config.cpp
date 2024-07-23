@@ -70,7 +70,7 @@ bool AnyConfig::Anyone::Save(const Save_Generic_t &aParams)
 {
 	AssertMsg(false, "Use an explicit conversion");
 
-	static const char *s_pszMessageConcat[] = {"<", "Save", "  Anyone", ": ", "Use an explicit conversion", ">"};
+	static const char *s_pszMessageConcat[] = {"<", "Save", " Anyone", ": ", "Use an explicit conversion", ">"};
 
 	CBufferStringGrowable<256> sMessage;
 
