@@ -22,6 +22,7 @@
 #include <any_config.hpp>
 
 #include <tier0/bufferstring.h>
+#include <tier0/commonmacros.h>
 #include <tier0/utlstring.h>
 
 bool AnyConfig::Anyone::Load(const Load_Generic_t &aParams)
@@ -32,7 +33,7 @@ bool AnyConfig::Anyone::Load(const Load_Generic_t &aParams)
 
 	CBufferStringGrowable<256> sMessage;
 
-	sMessage.AppendConcat(sizeof(s_pszMessageConcat) / sizeof(*s_pszMessageConcat), s_pszMessageConcat, NULL);
+	sMessage.AppendConcat(ARRAYSIZE(s_pszMessageConcat), s_pszMessageConcat, NULL);
 	*aParams.m_psMessage = sMessage;
 
 	return false;
@@ -59,7 +60,7 @@ bool AnyConfig::Anyone::Load(const LoadFromFile_Generic_t &aParams)
 
 	CBufferStringGrowable<256 + MAX_PATH> sMessage;
 
-	sMessage.AppendConcat(sizeof(pszMessageConcat) / sizeof(*pszMessageConcat), pszMessageConcat, NULL);
+	sMessage.AppendConcat(ARRAYSIZE(pszMessageConcat), pszMessageConcat, NULL);
 	*aParams.m_psMessage = sMessage;
 
 	return false;
@@ -73,7 +74,7 @@ bool AnyConfig::Anyone::Save(const Save_Generic_t &aParams)
 
 	CBufferStringGrowable<256> sMessage;
 
-	sMessage.AppendConcat(sizeof(s_pszMessageConcat) / sizeof(*s_pszMessageConcat), s_pszMessageConcat, NULL);
+	sMessage.AppendConcat(ARRAYSIZE(s_pszMessageConcat), s_pszMessageConcat, NULL);
 	*aParams.m_psMessage = sMessage;
 
 	return false;
@@ -100,7 +101,7 @@ bool AnyConfig::Anyone::Save(const SaveToFile_Generic_t &aParams)
 
 	CBufferStringGrowable<256 + MAX_PATH> sMessage;
 
-	sMessage.AppendConcat(sizeof(pszMessageConcat) / sizeof(*pszMessageConcat), pszMessageConcat, NULL);
+	sMessage.AppendConcat(ARRAYSIZE(pszMessageConcat), pszMessageConcat, NULL);
 	*aParams.m_psMessage = sMessage;
 
 	return false;
