@@ -82,6 +82,12 @@ namespace AnyConfig
 	template<class T>
 	struct CInput_t : public CIO_t<T>
 	{
+		using Base_t = CIO_t<T>;
+
+		CInput_t(const T &aInit)
+		 :  Base_t{aInit}
+		{
+		}
 	}; // CInput_t<T>
 
 	struct CFormat_t
@@ -103,11 +109,23 @@ namespace AnyConfig
 	template<class T>
 	struct CSaveFrom_t : public CIO_t<const T>
 	{
+		using Base_t = CIO_t<const T>;
+
+		CSaveFrom_t(const T &aInit)
+		 :  Base_t{aInit}
+		{
+		}
 	}; // CSaveFrom_t<T>
 
 	template<class T>
 	struct COutput_t : public CIO_t<T>
 	{
+		using Base_t = CIO_t<T>;
+
+		COutput_t(const T &aInit)
+		 :  Base_t{aInit}
+		{
+		}
 	}; // COutput_t<T>
 
 	struct CSaveText_t
