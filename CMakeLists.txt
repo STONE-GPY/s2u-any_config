@@ -21,7 +21,7 @@ string(TOUPPER "${PROJECT_NAME}" PROJECT_NAME_UPPER)
 set(PROJECT_OUTPUT_NAME "any_config")
 
 set(PROJECT_AUTHOR "Wend4r")
-set(PROJECT_DESCRIPTION_FULL "Source 2 util to read a config of any format")
+set(PROJECT_DESCRIPTION_FULL "Source 2 util to read/write a config of any format")
 set(PROJECT_LICENSE "GPLv3")
 string(TIMESTAMP PROJECT_BUILD_DATE "%Y-%m-%d")
 string(TIMESTAMP PROJECT_BUILD_TIME "%H:%M:%S")
