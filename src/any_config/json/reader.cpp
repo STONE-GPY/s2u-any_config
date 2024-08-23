@@ -39,12 +39,9 @@ AnyConfig::LoadFromJSON_NoContext_t::LoadFromJSON_NoContext_t(const Load_Generic
 {
 }
 
-bool AnyConfig::LoadFromJSONFile_t::LoadFromJSONFile()
+AnyConfig::LoadFromJSONFile_NoContext_t::LoadFromJSONFile_NoContext_t(const LoadFromFile_Generic_t::Base_t &aInit)
+ :  Base_t({aInit.m_psMessage, aInit.m_pszFilename, aInit.m_pszPathID})
 {
-	return LoadKV3FromJSONFile(m_aContext, 
-	                           m_psMessage, 
-	                           m_pszPathID, 
-	                           m_pszFilename);
 }
 
 bool AnyConfig::CJSONReader::Load(const Load_Generic_t &aParams)
@@ -54,14 +51,7 @@ bool AnyConfig::CJSONReader::Load(const Load_Generic_t &aParams)
 
 bool AnyConfig::CJSONReader::Load(const LoadFromFile_Generic_t &aParams)
 {
-	static const char *s_pszMessageConcat[] = {"<", "Load", "  JSON", " from file", ": ", "Not supported now", ">"};
-
-	CBufferStringGrowable<256> sMessage;
-
-	sMessage.AppendConcat(sizeof(s_pszMessageConcat) / sizeof(*s_pszMessageConcat), s_pszMessageConcat, NULL);
-	*aParams.m_psMessage = sMessage;
-
-	return false;
+	return LoadFromJSONFile(aParams.To<LoadFromJSONFile_NoContext_t>());
 }
 
 bool AnyConfig::CJSONReader::LoadFromJSON(const LoadFromJSON_NoContext_t &aParams)
@@ -76,6 +66,6 @@ bool AnyConfig::CJSONReader::LoadFromJSONFile(const LoadFromJSONFile_NoContext_t
 {
 	return LoadKV3FromJSONFile(Get(), 
 	                           aParams.m_psMessage, 
-	                           aParams.m_pszFilename, 
-	                           aParams.m_pszPathID);
+	                           aParams.m_pszPathID, 
+	                           aParams.m_pszFilename);
 }

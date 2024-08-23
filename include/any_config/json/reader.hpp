@@ -122,7 +122,7 @@ namespace AnyConfig
 		}
 
 		CLoadFromJSONFile_t(CUtlString *psInitMessage, const char *pszInitFilename, const char *pszInitPathID)
-		 :  CLoadFromJSONFile_t(psInitMessage, pszInitFilename, pszInitPathID)
+		 :  CLoadFromJSONFile_t({}, psInitMessage, pszInitFilename, pszInitPathID)
 		{
 		}
 	}; // CLoadFromJSONFile_t<T>
@@ -173,6 +173,8 @@ namespace AnyConfig
 		 :  Base_t(aInit)
 		{
 		}
+
+		LoadFromJSONFile_NoContext_t(const LoadFromFile_Generic_t::Base_t &aInit);
 
 	public:
 	}; // LoadFromJSONFile_NoContext_t
