@@ -1,4 +1,4 @@
-name: Build on Linux
+name: Build on macOS
 
 on:
   push:
@@ -32,6 +32,10 @@ env:
   CMAKE_RELEASE_CONFIG_NAME: Release
   CMAKE_RELEASE_OUTPUT_PATTERN: build/Release/*.a
 
+  DYNLIBUTILS_REPOSITORY: Wend4r/cpp-memory_utils
+  DYNLIBUTILS_BRANCH: main
+  DYNLIBUTILS_ROOT: external/memory_utils
+
   SOURCESDK_REPOSITORY: Wend4r/sourcesdk
   SOURCESDK_BRANCH: main
   SOURCESDK_ROOT: external/sourcesdk
@@ -39,8 +43,7 @@ env:
 jobs:
   build:
     name: ${{ matrix.compiler.name }}
-    runs-on: ubuntu-latest
-    container: registry.gitlab.steamos.cloud/steamrt/sniper/sdk
+    runs-on: macos-latest
 
     strategy:
       matrix:
@@ -50,11 +53,6 @@ jobs:
               name: Clang,
               cc: clang,
               cxx: clang++,
-            },
-            {
-              name: GCC,
-              cc: gcc-12,
-              cxx: g++-12,
             }
         ]
       fail-fast: false
@@ -68,8 +66,15 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y ninja-build ${{ matrix.compiler.cc }}
+        brew install ninja
+
+    - name: Set up environment variables
+      run: |
+        echo "ABSOLUTE_PATH=$(pwd)" >> $GITHUB_ENV
+        echo "REPOSITORY_NAME=$(basename ${GITHUB_REPOSITORY})" >> $GITHUB_ENV
+
+    - name: Configure Git to treat current directory as safe
+      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
     - name: Set up environment variables
       run: |
@@ -102,7 +107,6 @@ jobs:
         cmake --preset ${{ env.CMAKE_DEBUG_PRESET_NAME }}
         -DCMAKE_C_COMPILER=${{ matrix.compiler.cc }}
         -DCMAKE_CLANG_CXX_COMPILER=${{ matrix.compiler.cxx }}
-        -DDYNLIBUTILS_DIR=${{ env.DYNLIBUTILS_ROOT }}
         -DSOURCESDK_DIR=${{ env.SOURCESDK_ROOT }}
 
     - name: Debug - Build
@@ -120,7 +124,6 @@ jobs:
         cmake --preset ${{ env.CMAKE_RELEASE_PRESET_NAME }}
         -DCMAKE_C_COMPILER=${{ matrix.compiler.cc }}
         -DCMAKE_CLANG_CXX_COMPILER=${{ matrix.compiler.cxx }}
-        -DDYNLIBUTILS_DIR=${{ env.DYNLIBUTILS_ROOT }}
         -DSOURCESDK_DIR=${{ env.SOURCESDK_ROOT }}
 
     - name: Release - Build
