@@ -34,12 +34,12 @@ namespace AnyConfig
 	class KeyValues : virtual public CKeyValuesReader, virtual public CKeyValuesWriter
 	{
 	public:
-		static constexpr const char sm_szFileExtensionPhrasesTXT[] = ".phrases.txt";
-		static constexpr const char sm_szFileExtensionGamesTXT[] = ".games.txt";
+		static constexpr const char sm_szFileExtensionGameEvents[] = ".gameevents";
 		static constexpr const char sm_szFileExtensionKV[] = ".kv";
+		static constexpr const char sm_szFileExtensionTXT[] = ".txt";
 		static constexpr const char sm_szFileExtensionVDF[] = ".vdf";
 
-		FileExtension::CCheck<sm_szFileExtensionPhrasesTXT, sm_szFileExtensionGamesTXT, sm_szFileExtensionKV, sm_szFileExtensionVDF> m_aCheckFileExtension;
+		FileExtension::CCheck<sm_szFileExtensionGameEvents, sm_szFileExtensionKV, sm_szFileExtensionTXT, sm_szFileExtensionVDF> m_aCheckFileExtension;
 	}; // KeyValues
 }; // AnyConfig
 
