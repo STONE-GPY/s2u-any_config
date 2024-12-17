@@ -433,6 +433,9 @@ namespace AnyConfig
 
 	class CBaseReader : public CReaderBase<CBase>
 	{
+	public:
+		CBaseReader();
+
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);
 

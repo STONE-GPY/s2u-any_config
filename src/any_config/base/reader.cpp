@@ -77,6 +77,11 @@ bool AnyConfig::LoadNoHeader_t::LoadNoHeader()
 	                            m_pszName);
 }
 
+AnyConfig::CBaseReader::CBaseReader()
+ :  CBase()
+{
+}
+
 bool AnyConfig::CBaseReader::Load(const Load_Generic_t &aParams)
 {
 	return Load(aParams.ToBase());

@@ -25,6 +25,11 @@
 #include <tier0/commonmacros.h>
 #include <tier0/utlstring.h>
 
+AnyConfig::Anyone::Anyone()
+ :  CBase()
+{
+}
+
 bool AnyConfig::Anyone::Load(const Load_Generic_t &aParams)
 {
 	AssertMsg(false, "Use an explicit conversion");

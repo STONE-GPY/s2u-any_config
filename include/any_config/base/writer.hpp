@@ -239,6 +239,9 @@ namespace AnyConfig
 
 	class CBaseWriter : public CWriterBase<CBase>
 	{
+	public:
+		CBaseWriter();
+
 	public: // IBaseWriter<Save_Generic_t>
 		bool Save(const Save_Generic_t &aParams);
 

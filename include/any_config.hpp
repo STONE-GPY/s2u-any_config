@@ -34,6 +34,9 @@ namespace AnyConfig
 	               virtual public JSON, 
 	               virtual public KeyValues
 	{
+	public:
+		Anyone();
+
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);
 
