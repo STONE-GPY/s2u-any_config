@@ -30,9 +30,9 @@
 
 namespace AnyConfig
 {
-	class Anyone : virtual public Base, 
-	               virtual public JSON, 
-	               virtual public KeyValues
+	class Anyone final : virtual public Base, 
+	                     virtual public JSON, 
+	                     virtual public KeyValues
 	{
 	public:
 		Anyone();
