@@ -36,7 +36,7 @@ bool AnyConfig::Anyone::Load(const Load_Generic_t &aParams)
 
 	static const char *s_pszMessageConcat[] = {"<", "Load", " Anyone", ": ", "Use an explicit conversion", ">"};
 
-	CBufferStringGrowable<256> sMessage;
+	CBufferStringN<256> sMessage;
 
 	sMessage.AppendConcat(ARRAYSIZE(s_pszMessageConcat), s_pszMessageConcat, NULL);
 	*aParams.m_psMessage = sMessage;
@@ -63,7 +63,7 @@ bool AnyConfig::Anyone::Load(const LoadFromFile_Generic_t &aParams)
 
 	const char *pszMessageConcat[] = {"<", "Load", " Anyone", " from file", ": ", "Unknown file extension", " of ", "\"", pszFilename, "\"", ">"};
 
-	CBufferStringGrowable<256 + MAX_PATH> sMessage;
+	CBufferStringN<256 + MAX_PATH> sMessage;
 
 	sMessage.AppendConcat(ARRAYSIZE(pszMessageConcat), pszMessageConcat, NULL);
 	*aParams.m_psMessage = sMessage;
@@ -77,7 +77,7 @@ bool AnyConfig::Anyone::Save(const Save_Generic_t &aParams)
 
 	static const char *s_pszMessageConcat[] = {"<", "Save", " Anyone", ": ", "Use an explicit conversion", ">"};
 
-	CBufferStringGrowable<256> sMessage;
+	CBufferStringN<256> sMessage;
 
 	sMessage.AppendConcat(ARRAYSIZE(s_pszMessageConcat), s_pszMessageConcat, NULL);
 	*aParams.m_psMessage = sMessage;
@@ -104,7 +104,7 @@ bool AnyConfig::Anyone::Save(const SaveToFile_Generic_t &aParams)
 
 	const char *pszMessageConcat[] = {"<", "Save", "  Anyone", " to file", ": ", "Unknown file extension", " of ", "\"", pszFilename, "\"", ">"};
 
-	CBufferStringGrowable<256 + MAX_PATH> sMessage;
+	CBufferStringN<256 + MAX_PATH> sMessage;
 
 	sMessage.AppendConcat(ARRAYSIZE(pszMessageConcat), pszMessageConcat, NULL);
 	*aParams.m_psMessage = sMessage;

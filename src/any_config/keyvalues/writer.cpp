@@ -57,7 +57,7 @@ bool AnyConfig::CKeyValuesWriter::Save(const SaveToFile_Generic_t &aParams)
 {
 	static const char *s_pszMessageConcat[] = {"<", "Save", " KeyValues", " to file", ": ", "Not supported now", ">"};
 
-	CBufferStringGrowable<256> sMessage;
+	CBufferStringN<256> sMessage;
 
 	sMessage.AppendConcat(sizeof(s_pszMessageConcat) / sizeof(*s_pszMessageConcat), s_pszMessageConcat, NULL);
 	*aParams.m_psMessage = sMessage;
