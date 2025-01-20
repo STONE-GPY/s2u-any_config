@@ -89,12 +89,12 @@ namespace AnyConfig
 		}
 	};
 
-	using LoadLegacy_t = CLoadBase<CLoad_t<CKeyValues3Context *, CUtlBuffer *>>;
+	using LoadBase_t = CLoadBase<CLoad_t<CKeyValues3Context *, CUtlBuffer *>>;
 
-	class Load_t : public LoadLegacy_t
+	class Load_t : public LoadBase_t
 	{
 	public:
-		using Base_t = LoadLegacy_t;
+		using Base_t = LoadBase_t;
 
 		Load_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -105,12 +105,12 @@ namespace AnyConfig
 		bool Load();
 	}; // Load_t
 
-	using Load2Legacy_t = CLoadBase<CLoad_t<KeyValues3 *, CUtlBuffer *>>;
+	using Load2Base_t = CLoadBase<CLoad_t<KeyValues3 *, CUtlBuffer *>>;
 
-	class Load2_t : public Load2Legacy_t
+	class Load2_t : public Load2Base_t
 	{
 	public:
-		using Base_t = Load2Legacy_t;
+		using Base_t = Load2Base_t;
 
 		Load2_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -121,12 +121,12 @@ namespace AnyConfig
 		bool Load();
 	}; // Load2_t
 
-	using Load3Legacy_t = CLoadBase<CLoad_t<KeyValues3 *, const char *>>;
+	using Load3Base_t = CLoadBase<CLoad_t<KeyValues3 *, const char *>>;
 
-	class Load3_t : public Load3Legacy_t
+	class Load3_t : public Load3Base_t
 	{
 	public:
-		using Base_t = Load3Legacy_t;
+		using Base_t = Load3Base_t;
 
 		Load3_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -137,12 +137,12 @@ namespace AnyConfig
 		bool Load();
 	}; // Load3_t
 
-	using LoadLegacy_NoContext_t = CNoContextBase<CLoad_t<CEmpty_t, CUtlBuffer *>>;
+	using LoadBase_NoContext_t = CNoContextBase<CLoad_t<CEmpty_t, CUtlBuffer *>>;
 
-	class Load_NoContext_t : public LoadLegacy_NoContext_t
+	class Load_NoContext_t : public LoadBase_NoContext_t
 	{
 	public:
-		using Base_t = LoadLegacy_NoContext_t;
+		using Base_t = LoadBase_NoContext_t;
 
 		Load_NoContext_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -150,12 +150,12 @@ namespace AnyConfig
 		}
 	}; // Load_NoContext_t
 
-	using Load2Legacy_NoContext_t = CNoContextBase<CLoad_t<CEmpty_t, CUtlBuffer *>>;
+	using Load2Base_NoContext_t = CNoContextBase<CLoad_t<CEmpty_t, CUtlBuffer *>>;
 
-	class Load2_NoContext_t : public Load2Legacy_NoContext_t
+	class Load2_NoContext_t : public Load2Base_NoContext_t
 	{
 	public:
-		using Base_t = Load2Legacy_NoContext_t;
+		using Base_t = Load2Base_NoContext_t;
 
 		Load2_NoContext_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -163,12 +163,12 @@ namespace AnyConfig
 		}
 	}; // Load2_NoContext_t
 
-	using Load3Legacy_NoContext_t = CNoContextBase<CLoad_t<CEmpty_t, const char *>>;
+	using Load3Base_NoContext_t = CNoContextBase<CLoad_t<CEmpty_t, const char *>>;
 
-	class Load3_NoContext_t : public Load3Legacy_NoContext_t
+	class Load3_NoContext_t : public Load3Base_NoContext_t
 	{
 	public:
-		using Base_t = Load3Legacy_NoContext_t;
+		using Base_t = Load3Base_NoContext_t;
 
 		Load3_NoContext_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -176,12 +176,12 @@ namespace AnyConfig
 		}
 	}; // Load3_NoContext_t
 
-	using LoadLegacy_Generic_t = CGenericBase<Load2_NoContext_t>;
+	using LoadBase_Generic_t = CGenericBase<Load2_NoContext_t>;
 
-	class Load_Generic_t : public LoadLegacy_Generic_t
+	class Load_Generic_t : public LoadBase_Generic_t
 	{
 	public:
-		using Base_t = LoadLegacy_Generic_t;
+		using Base_t = LoadBase_Generic_t;
 		using GenericBase_t = Base_t::Base_t;
 		using NoContextBase_t = GenericBase_t::Base_t::Base_t;
 
@@ -202,7 +202,7 @@ namespace AnyConfig
 	                             public CFileSystemPath_t
 	{
 	public:
-		using Base_t = LoadLegacy_Generic_t;
+		using Base_t = LoadBase_Generic_t;
 
 	public:
 		CLoadFromFileBase_t(const T &aInitContext, CUtlString *psInitMessage, const char *pszFilename, const char *pszPathID)
@@ -242,12 +242,11 @@ namespace AnyConfig
 		}
 	}; // CLoadFromFile_t<T>
 
-	using LoadFromFileBaseLegacy_t = CLoadFromFileBase_t<KeyValues3 *>;
-
-	class LoadFromFileBase_t : public LoadFromFileBaseLegacy_t
+	template<class T>
+	class LoadFromFileBase_t : public CLoadFromFile_t<T>
 	{
 	public:
-		using Base_t = LoadFromFileBaseLegacy_t;
+		using Base_t = CLoadFromFile_t<T>;
 
 		LoadFromFileBase_t(const Base_t &aInit)
 		 :  Base_t(aInit)
@@ -274,12 +273,10 @@ namespace AnyConfig
 		}
 	}; // CLoadFromFileBase<T>
 
-	using LoadFromFileLegacy_t = CLoadFromFileBase<CLoadFromFile_t<CKeyValues3Context *>>;
-
-	class LoadFromFile_t : public LoadFromFileLegacy_t
+	class LoadFromFile_t : public LoadFromFileBase_t<CKeyValues3Context *>
 	{
 	public:
-		using Base_t = LoadFromFileLegacy_t;
+		using Base_t = LoadFromFileBase_t<CKeyValues3Context *>;
 
 		LoadFromFile_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -290,12 +287,12 @@ namespace AnyConfig
 		bool LoadFromFile();
 	}; // LoadFromFile_t
 
-	using LoadFromFile2Legacy_t = CLoadFromFileBase<CLoadFromFile_t<KeyValues3 *>>;
+	using LoadFromFile2Base_t = LoadFromFileBase_t<KeyValues3 *>;
 
-	class LoadFromFile2_t : public LoadFromFile2Legacy_t
+	class LoadFromFile2_t : public LoadFromFile2Base_t
 	{
 	public:
-		using Base_t = LoadFromFile2Legacy_t;
+		using Base_t = LoadFromFile2Base_t;
 
 		LoadFromFile2_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -306,12 +303,12 @@ namespace AnyConfig
 		bool LoadFromFile();
 	}; // LoadFromFile2_t
 
-	using LoadFromFileLegacy_NoContext_t = CLoadFromFileBase<CLoadFromFile_t<KeyValues3 *>>;
+	using LoadFromFileBase_NoContext_t = CLoadFromFileBase<CLoadFromFile_t<KeyValues3 *>>;
 
-	class LoadFromFile_NoContext_t : public LoadFromFileLegacy_NoContext_t
+	class LoadFromFile_NoContext_t : public LoadFromFileBase_NoContext_t
 	{
 	public:
-		using Base_t = LoadFromFileLegacy_NoContext_t;
+		using Base_t = LoadFromFileBase_NoContext_t;
 
 		LoadFromFile_NoContext_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -319,12 +316,12 @@ namespace AnyConfig
 		}
 	}; // LoadFromFile_NoContext_t
 
-	using LoadFromFile2Legacy_NoContext_t = CNoContextBase<CLoadFromFile_t<CEmpty_t>>;
+	using LoadFromFile2Base_NoContext_t = CNoContextBase<CLoadFromFile_t<CEmpty_t>>;
 
-	class LoadFromFile2_NoContext_t : public LoadFromFile2Legacy_NoContext_t
+	class LoadFromFile2_NoContext_t : public LoadFromFile2Base_NoContext_t
 	{
 	public:
-		using Base_t = LoadFromFile2Legacy_NoContext_t;
+		using Base_t = LoadFromFile2Base_NoContext_t;
 
 		LoadFromFile2_NoContext_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -332,12 +329,12 @@ namespace AnyConfig
 		}
 	}; // LoadFromFile2_NoContext_t
 
-	using LoadFromFileLegacy_Generic_t = CGenericBase<LoadFromFile2_NoContext_t>;
+	using LoadFromFileBase_Generic_t = CGenericBase<LoadFromFile2_NoContext_t>;
 
-	class LoadFromFile_Generic_t : public LoadFromFileLegacy_Generic_t
+	class LoadFromFile_Generic_t : public LoadFromFileBase_Generic_t
 	{
 	public:
-		using Base_t = LoadFromFileLegacy_Generic_t;
+		using Base_t = LoadFromFileBase_Generic_t;
 		using GenericBase_t = Base_t::Base_t;
 		using NoContextBase_t = GenericBase_t::Base_t::Base_t;
 
@@ -360,8 +357,8 @@ namespace AnyConfig
 	                         public CLoadRoot_t
 	{
 		CLoadNoHeader_t(const T &aInitContext, CUtlString *psInitMessage, I aInitData, const KV3ID_t &aInitFormat, const char *pszInitRoot)
-		 :  CLoadTo_t<T> {aInitContext}, 
-		    CError_t {psInitMessage}, 
+		 :  CLoadTo_t<T>{aInitContext}, 
+		    CError_t{psInitMessage}, 
 		    CInput_t<I>{aInitData}, 
 		    CFormat_t{aInitFormat}, 
 		    CLoadRoot_t{pszInitRoot}
@@ -393,12 +390,12 @@ namespace AnyConfig
 		}
 	}; // CLoadNoHeaderBase<T>
 
-	using LoadNoHeaderLegacy_t = CLoadNoHeaderBase<CLoadNoHeader_t<KeyValues3 *, const char *>>;
+	using LoadNoHeaderBase_t = CLoadNoHeaderBase<CLoadNoHeader_t<KeyValues3 *, const char *>>;
 
-	class LoadNoHeader_t : public LoadNoHeaderLegacy_t
+	class LoadNoHeader_t : public LoadNoHeaderBase_t
 	{
 	public:
-		using Base_t = LoadNoHeaderLegacy_t;
+		using Base_t = LoadNoHeaderBase_t;
 
 		LoadNoHeader_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -409,12 +406,12 @@ namespace AnyConfig
 		bool LoadNoHeader();
 	}; // LoadNoHeader_t
 
-	using LoadNoHeaderLegacy_NoContext_t = CNoContextBase<LoadNoHeader_t>;
+	using LoadNoHeaderBase_NoContext_t = CNoContextBase<LoadNoHeader_t>;
 
-	class LoadNoHeader_NoContext_t : public LoadNoHeaderLegacy_NoContext_t
+	class LoadNoHeader_NoContext_t : public LoadNoHeaderBase_NoContext_t
 	{
 	public:
-		using Base_t = LoadNoHeaderLegacy_NoContext_t;
+		using Base_t = LoadNoHeaderBase_NoContext_t;
 
 		LoadNoHeader_NoContext_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
