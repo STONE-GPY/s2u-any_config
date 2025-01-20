@@ -241,6 +241,7 @@ namespace AnyConfig
 	{
 	public:
 		CBaseWriter();
+		CBaseWriter(KeyValues3 *pRoot);
 
 	public: // IBaseWriter<Save_Generic_t>
 		bool Save(const Save_Generic_t &aParams);

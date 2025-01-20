@@ -432,6 +432,7 @@ namespace AnyConfig
 	{
 	public:
 		CBaseReader();
+		CBaseReader(KeyValues3 *pRoot);
 
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);

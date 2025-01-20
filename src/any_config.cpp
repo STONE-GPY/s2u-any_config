@@ -30,6 +30,11 @@ AnyConfig::Anyone::Anyone()
 {
 }
 
+AnyConfig::Anyone::Anyone(KeyValues3 *pRoot)
+ :  CBase(pRoot)
+{
+}
+
 bool AnyConfig::Anyone::Load(const Load_Generic_t &aParams)
 {
 	AssertMsg(false, "Use an explicit conversion");

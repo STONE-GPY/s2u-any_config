@@ -82,6 +82,11 @@ AnyConfig::CBaseReader::CBaseReader()
 {
 }
 
+AnyConfig::CBaseReader::CBaseReader(KeyValues3 *pRoot)
+ :  CBase(pRoot)
+{
+}
+
 bool AnyConfig::CBaseReader::Load(const Load_Generic_t &aParams)
 {
 	return Load(aParams.ToBase());

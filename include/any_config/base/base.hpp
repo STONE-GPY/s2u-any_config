@@ -39,6 +39,7 @@ namespace AnyConfig
 
 	public:
 		explicit CBase();
+		CBase(KeyValues3 *pData);
 		~CBase();
 
 	public:

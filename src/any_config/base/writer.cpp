@@ -49,6 +49,12 @@ AnyConfig::CBaseWriter::CBaseWriter()
 {
 }
 
+
+AnyConfig::CBaseWriter::CBaseWriter(KeyValues3 *pRoot)
+ :  CBase(pRoot)
+{
+}
+
 bool AnyConfig::CBaseWriter::Save(const Save_Generic_t &aParams)
 {
 	return const_cast<const CBaseWriter *>(this)->Save(aParams.ToBase());

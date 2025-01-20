@@ -28,6 +28,8 @@
 #include "any_config/json.hpp"
 #include "any_config/keyvalues.hpp"
 
+class KeyValues3;
+
 namespace AnyConfig
 {
 	class Anyone final : virtual public Base, 
@@ -36,6 +38,7 @@ namespace AnyConfig
 	{
 	public:
 		Anyone();
+		Anyone(KeyValues3 *pRoot);
 
 	public: // IBaseReader<Load_Generic_t>
 		bool Load(const Load_Generic_t &aParams);

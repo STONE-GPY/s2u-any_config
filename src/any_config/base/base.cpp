@@ -38,6 +38,11 @@ AnyConfig::CBase::CBase()
 {
 }
 
+AnyConfig::CBase::CBase(KeyValues3 *pRoot)
+ :  m_pRoot(pRoot)
+{
+}
+
 AnyConfig::CBase::~CBase()
 {
 	delete m_pRoot;
