@@ -273,10 +273,10 @@ namespace AnyConfig
 		}
 	}; // CLoadFromFileBase<T>
 
-	class LoadFromFile_t : public LoadFromFileBase_t<CKeyValues3Context *>
+	class LoadFromFile_t : public CLoadFromFileBase<LoadFromFileBase_t<CKeyValues3Context *>>
 	{
 	public:
-		using Base_t = LoadFromFileBase_t<CKeyValues3Context *>;
+		using Base_t = CLoadFromFileBase<LoadFromFileBase_t<CKeyValues3Context *>>;
 
 		LoadFromFile_t(const Base_t::Base_t &aInit)
 		 :  Base_t(aInit)
@@ -284,10 +284,10 @@ namespace AnyConfig
 		}
 
 	public: // ILoadFromFile
-		bool LoadFromFile();
+		bool LoadFromFile() override;
 	}; // LoadFromFile_t
 
-	using LoadFromFile2Base_t = LoadFromFileBase_t<KeyValues3 *>;
+	using LoadFromFile2Base_t = CLoadFromFileBase<LoadFromFileBase_t<KeyValues3 *>>;
 
 	class LoadFromFile2_t : public LoadFromFile2Base_t
 	{
@@ -300,7 +300,7 @@ namespace AnyConfig
 		}
 
 	public: // ILoadFromFile
-		bool LoadFromFile();
+		bool LoadFromFile() override;
 	}; // LoadFromFile2_t
 
 	using LoadFromFileBase_NoContext_t = CLoadFromFileBase<CLoadFromFile_t<KeyValues3 *>>;
@@ -403,7 +403,7 @@ namespace AnyConfig
 		}
 
 	public: // ILoadNoHeader
-		bool LoadNoHeader();
+		bool LoadNoHeader() override;
 	}; // LoadNoHeader_t
 
 	using LoadNoHeaderBase_NoContext_t = CNoContextBase<LoadNoHeader_t>;
