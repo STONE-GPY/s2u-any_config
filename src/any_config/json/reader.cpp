@@ -21,10 +21,10 @@
 
 #include <any_config/json/reader.hpp>
 
-#include <tier0/bufferstring.h>
-#include <tier0/keyvalues3.h>
-#include <tier0/utlbuffer.h>
-#include <tier0/utlstring.h>
+#include <tier1/bufferstring.h>
+#include <tier1/keyvalues3.h>
+#include <tier1/utlbuffer.h>
+#include <tier1/utlstring.h>
 
 bool AnyConfig::LoadFromJSON_t::LoadFromJSON()
 {
